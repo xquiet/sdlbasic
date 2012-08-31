@@ -1,0 +1,2 @@
+#define	exec_prefix @EXEC_PREFIX@
+#define	font_prefix @FONT_PREFIX@
