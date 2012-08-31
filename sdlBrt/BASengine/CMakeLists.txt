@@ -1,3 +1,9 @@
+###############
+# (C) 2012 by Matteo Pasotti <pasotti.matteo@gmail.com>
+# License: GPLv3
+###############
+
+
 INCLUDE_DIRECTORIES( ${GLIB_INCLUDE_DIR} )
 INCLUDE_DIRECTORIES( ${SDL_INCLUDE_DIR} )
 
