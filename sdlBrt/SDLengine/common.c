@@ -45,7 +45,7 @@ int stopkey()
     if (keystate[306] && keystate[99]){
 		error_description="ctrl+c pressed by the user\n";
 		error_type=2;
-		SDLerr(stderr,error_description);
+		SDLerr(stderr,"%s",error_description);
 	return -1;
     }
     //*
