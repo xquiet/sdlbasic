@@ -4,4 +4,4 @@
 ###############
 
 
-add_library(unzip inflate.c unzip.c)
+add_library(unzip STATIC inflate.c unzip.c)

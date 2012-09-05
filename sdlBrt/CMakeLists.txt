@@ -364,6 +364,10 @@ ELSE(UNIX)
 	add_definitions(-DUNIX=BOOL:0) 
 ENDIF (UNIX)
 
+IF (${CMAKE_SYSTEM_NAME})
+	add_definitions(-D${CMAKE_SYSTEM_NAME}=BOOL:1)
+ENDIF(${CMAKE_SYSTEM_NAME})
+
 #configure_file (
 #	"${PROJECT_SOURCE_DIR}/sdlbrtconfig.h.in"
 #	"${PROJECT_BINARY_DIR}/sdlbrtconfig.h"

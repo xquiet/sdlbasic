@@ -30,4 +30,4 @@ MESSAGE(STATUS "GLIB INCLUDE DIR: " ${GLIB_INCLUDE_DIR} )
 
 link_libraries ( ${SDL_LIBRARY} ${SDLTTF_LIBRARY} ${SDLNET_LIBRARY} ${SDLIMAGE_LIBRARY} ${SDLMIXER_LIBRARY} ${GLIB_LIBRARY} ${SMPEG_LIBRARIES} ${M_LIB} unzip )
 
-add_library(SDLengine SDLengine.c common.c SDL_extension.c screen.c graphics.c file_io.c image_manipulation.c blitting.c sprite_system.c bob_system.c text_draw.c print_screen.c sound.c cd_support.c video_mpeg.c keyboard.c joystick.c mouse.c time.c socket.c)
+add_library(SDLengine STATIC SDLengine.c common.c SDL_extension.c screen.c graphics.c file_io.c image_manipulation.c blitting.c sprite_system.c bob_system.c text_draw.c print_screen.c sound.c cd_support.c video_mpeg.c keyboard.c joystick.c mouse.c time.c socket.c)
