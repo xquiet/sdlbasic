@@ -39,6 +39,7 @@ int waitTime(int t)
 	 Uint32 ticks;
 	ticks=SDL_GetTicks()+t;
 	while(ticks>SDL_GetTicks()){
+		SDL_Delay(5);
 		getevent();
 		if (stopkey()==-1)return -1;
 	if (autotimer()!=0)return -1;

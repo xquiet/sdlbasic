@@ -1,9 +1,15 @@
+
 /*
     Name:       lexer.c
     Purpose:    Convert source wxBasic code into tokens
     Author:     David Cuny
     Copyright:  (c) 2001 David Cuny <dcuny@lanset.com>
     Licence:    LGPL
+
+    Modfied :   Claudio Daffra daffra.claudio@gmail.com
+                1) i have introduced syntax error for these operator -= += /= *= because they are not Basic
+                and in this way i have fixed a bug array[x] += array[x] 
+		
 */
 
 
@@ -506,17 +512,21 @@ int yylex()
     /* what are we parsing? */
     switch (c) {
 
+    // ********************************** ' commento stile basic
     case '\'':
         /* basic-style comment */
         strcpy( currtok, "end-of-line");
         lineBufferPos = -1;
         return '\n';
 
+    // *********************************** // /=
     case '/':
         c = getChar();
-        switch (c) {
+        switch (c) 
+        {
         case '=':
             yylval.iValue = OpDiv;
+	    ePrintf( Syntax, "Lexer failed parsing : /= not allowed"  );
             return IncrSelf;
         case '/':
             /* c++ style comment */
@@ -528,12 +538,19 @@ int yylex()
             return '/';
         }
 
+
+
+
+     // ******************************************* -=
      case '-':
         c = getChar();
-        switch (c) {
+        switch (c) 
+        {
         case '=':
 	    yylval.iValue = OpSub;
+	    ePrintf( Syntax, "Lexer failed parsing : -= not allowed"  );
             return IncrSelf;
+
         case '-':
             /* diector style comment */
             strcpy( currtok, "end-of-line");
@@ -543,6 +560,28 @@ int yylex()
             ungetChar();
             return '-';
         }
+      // ******************************************* +=
+     case '+':
+        c = getChar();
+        switch (c) 
+        {
+        case '=':
+	    yylval.iValue = OpSub;
+	    ePrintf( Syntax, "Lexer failed parsing : += not allowed"  );
+            return IncrSelf;
+
+        case '-':
+            /* diector style comment */
+            strcpy( currtok, "end-of-line");
+            lineBufferPos = -1;
+            return '\n';
+        default:
+            ungetChar();
+            return '+';
+        }
+
+
+
 
     case '\n':
         strcpy( currtok, "end-of-line");
@@ -553,6 +592,14 @@ int yylex()
     case EOF:
         strcpy( currtok, "end-of-file" );
         return 0;
+
+#if defined(GP2X)
+    /* end of file */
+    case 255:
+		/* ivanixcu: handle end-of-line on gp2x */
+        strcpy( currtok, "end-of-file" );
+        return 0;
+#endif
 
     /* integer */
     case '0':
@@ -725,18 +772,36 @@ int yylex()
 
     /* division is handled elsewhere */
     /* subtraction is handled elsewhere */
-    case '+':
+ 
     case '*':
     case '\\':
     case '%':
     case '&':
 
-        switch (c){
-        case '+':   yylval.iValue = OpAdd;
-                    break;
+        switch (c)
+        {
+ 
 
-        case '*':   yylval.iValue = OpMul;
-                    break;
+        // ******************************************** case *=
+        case '*':   
+
+        yylval.iValue = OpMul;
+                     
+
+        c = getChar();
+        switch (c) 
+        {
+        case '=':
+            yylval.iValue = OpMul;
+	    ePrintf( Syntax, "Lexer failed parsing : *= not allowed"  );
+            return IncrSelf;
+ 
+        default:
+            ungetChar();
+            return '*';
+        }
+
+
 
         /* /= is handled elsewhere, with // */
 

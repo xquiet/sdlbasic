@@ -129,6 +129,23 @@ int setdisplay(int w,int h, int bpp, int mode)
 		}
 		break;
 
+	case 4:
+		/* Open the display device window */
+		SDLdisplay = SDL_SetVideoMode(w, h, bpp, SDL_HWSURFACE|SDL_NOFRAME|SDL_DOUBLEBUF|SDL_ANYFORMAT|SDL_HWPALETTE|SDL_SRCALPHA);//|SDL_ASYNCBLIT
+		if ( SDLdisplay == NULL ) {
+			display_mode=1;
+			SAFERES();
+			autoback(25);
+			error_description="SDLengine error - setDisplay: Can't set requested video mode ";
+			error_type=1;
+			SDLerr(stderr, "SDLengine error - setDisplay: Can't set video mode: %d ", mode);
+			return -1;
+
+		}
+		break;
+		
+		
+		
 	default:
 		display_mode=1;
 		error_description="SDLengine error - setDisplay: invalid video mode ";
@@ -798,7 +815,10 @@ int screenswap()
 
 	/* the negative mode of screenswap (autoback(-15))*/
 	if (SDLautoback<0){
-		while (chrono()<SDLautobacktime)getevent();
+		while (chrono()<SDLautobacktime){
+			SDL_Delay(5);			
+			getevent();
+		}
 		SDLautobacktime=chrono()+abs(SDLautoback);
 	}
 
@@ -1265,7 +1285,10 @@ int waitvbl()
 	if (autoback(-1)>0){
 
 		vbl=1;
-		while(vbl!=0)if (autotimer()!=0)return -1;
+		while(vbl!=0){
+			SDL_Delay(5);
+			if (autotimer()!=0)return -1;
+			}
 	}
 	return 0;
 }

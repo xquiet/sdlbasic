@@ -66,11 +66,13 @@ int waitkey(int keycode)
 {
 	if (keycode==0)
 		while(inkey()==0){
-		    if (autotimer()!=0)return -1;
+			SDL_Delay(5);
+			if (autotimer()!=0)return -1;
 		}
 	else
 		while(inkey()!=keycode){
-		    if (autotimer()!=0)return -1;
+			SDL_Delay(5);
+			if (autotimer()!=0)return -1;
 		}
 	return 0;
 }

@@ -58,6 +58,7 @@ extern Symbol  *currentType;           /* type being referenced */
 extern int     me;                     /* pointer to object for current method */
 extern int     wxAppIndex;         /* handle to wxApp */
 
+extern int 	nodebug;			/* disable debugger, for production code */
 extern int 	debug;			/* step mode */
 
 extern Stack *argCountStack;           /* arg count in parser */

@@ -113,7 +113,7 @@ char *left(char *string,int pos)
     }
 
     newLen = (pos);
-    left = (char *) malloc(newLen+1);
+    left = (char *) eMalloc(newLen+1);
     for (pos=newLen;pos>0;pos--)left[pos]='\0';
     strncpy(left,string,newLen);
     left[newLen] = '\0';
@@ -150,15 +150,18 @@ char *mid(char *string,int i,int n)
 {
     int     j,len;
     char    *buffer;
-
+	
     if (n<=0)
 	n=strlen(string)+1-i;
 
     /* early outs */
     len = strlen( string ) - i;
     if ( i < 1 || len < 0 ) {
-        return "";
+	buffer = (char *)malloc(2);    
+	buffer[0] = '\0';
+        return buffer;
     }
+
 
     buffer = (char *)malloc(len+2);
     for ( j = 0; j < n; j++ ) {
@@ -406,7 +409,7 @@ char *ucase(char *string)
 //_______________________________________________________________________________________________________________________
 
 /* val: returns closest numeric representation of number */
-int val(char *string)
+double val(char *string)
 {
     return( atof(string) );
 }

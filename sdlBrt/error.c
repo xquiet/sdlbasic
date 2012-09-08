@@ -104,7 +104,7 @@ void ePrintf( int errType, char *fmt, ... )
         }
     }
 
-    fprintf( stderr,"%s", message );
+    fprintf( stderr, message );
     //printf( message );
 
     /* open the error file */
@@ -114,14 +114,16 @@ void ePrintf( int errType, char *fmt, ... )
 	errFile =NULL;
 
     if (errFile != NULL) {
-        fprintf( errFile,"%s", message );
+        fprintf( errFile, message );
         fclose( errFile );
     }
 
     debug=1;
     if (error_type!=2 && errType!=2 )
 	error_type=errType;
-    if (errType!=Init) { screendebug(); }
+    if (errType!=Init) { 
+			screendebug(); 
+	 }
     //eShutdown(2); /* conventional for failed execution */
 }
 
@@ -137,7 +139,7 @@ void eConsole( char *fmt, ... )
     va_end(args);
 
 
-    fprintf( stdout, "%s", buffer );
+    fprintf( stdout, buffer );
 
     free(buffer);
 }
@@ -304,7 +306,7 @@ void screendebug()
     Array *arr;
 
 
-    while(stopkey()!=0);
+  	 while(stopkey()!=0);
 
     oldautoback=autoback(-1);
     oldscreen=screen(-1);
@@ -400,7 +402,7 @@ void screendebug()
 	    screenswap();
 
 	    strcpy(inputvar,"");
-	    inputs(">",inputvar);
+	    inputS(">",inputvar);
 
 	    i=0;
 	    while(i<strlen(inputvar) && inputvar[i]!='[')i++;
@@ -448,7 +450,7 @@ void screendebug()
 			else{
 			    do{
 				strcpy(indexvar,"");
-				inputs(":select element of array >",indexvar);
+				inputS(":select element of array >",indexvar);
 				if (strlen(indexvar)!=0)
 				    strcpy(stackstring[i],indexvar);
 				i++;
@@ -491,7 +493,7 @@ void screendebug()
 			else{
 			    for (i=0;i<arr->indexes;i++){
 				strcpy(indexvar,"");
-				inputs(":select element of array >",indexvar);
+				inputS(":select element of array >",indexvar);
 				strcpy(stackstring[i],indexvar);
 				//pushNumber(atof(indexvar));
 			    }

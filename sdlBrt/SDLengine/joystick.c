@@ -36,7 +36,7 @@ ________________________________________________________________________________
 //numjoysticks 								: Count available joysticks.
 int numjoysticks()
 {
-    return SDL_NumJoysticks();
+    return num_joystick;
 }
 //_________________________________________________________________________________________________________________________
 
@@ -51,13 +51,11 @@ char *namejoystick(int index)
 int numaxesjoystick(int index)
 {
     int ret;
-    SDLjoy=SDL_JoystickOpen(index);
     SDL_JoystickUpdate();
-    if (SDLjoy)
-	ret= SDL_JoystickNumAxes(SDLjoy);
+    if (SDLjoy[index])
+	ret= SDL_JoystickNumAxes(SDLjoy[index]);
     else
 	ret=-1;
-    SDL_JoystickClose(SDLjoy);
     return ret;
 }
 //_________________________________________________________________________________________________________________________
@@ -66,13 +64,11 @@ int numaxesjoystick(int index)
 int numballsjoystick(int index)
 {
     int ret;
-    SDLjoy=SDL_JoystickOpen(index);
     SDL_JoystickUpdate();
-    if (SDLjoy)
-	ret= SDL_JoystickNumBalls(SDLjoy);
+    if (SDLjoy[index])
+	ret= SDL_JoystickNumBalls(SDLjoy[index]);
     else
 	ret=-1;
-    SDL_JoystickClose(SDLjoy);
     return ret;
 
 }
@@ -82,13 +78,11 @@ int numballsjoystick(int index)
 int numhatsjoystick(int index)
 {
     int ret;
-    SDLjoy=SDL_JoystickOpen(index);
     SDL_JoystickUpdate();
-    if (SDLjoy)
-	ret= SDL_JoystickNumHats(SDLjoy);
+    if (SDLjoy[index])
+	ret= SDL_JoystickNumHats(SDLjoy[index]);
     else
 	ret=-1;
-    SDL_JoystickClose(SDLjoy);
     return ret;
 }
 //_________________________________________________________________________________________________________________________
@@ -97,13 +91,11 @@ int numhatsjoystick(int index)
 int numbuttonsjoystick(int index)
 {
     int ret;
-    SDLjoy=SDL_JoystickOpen(index);
     SDL_JoystickUpdate();
-    if (SDLjoy)
-	ret= SDL_JoystickNumButtons(SDLjoy);
+    if (SDLjoy[index])
+	ret= SDL_JoystickNumButtons(SDLjoy[index]);
     else
 	ret=-1;
-    SDL_JoystickClose(SDLjoy);
     return ret;
 }
 //_________________________________________________________________________________________________________________________
@@ -112,13 +104,11 @@ int numbuttonsjoystick(int index)
 int getaxisjoystick(int index,int axis)
 {
     int ret;
-    SDLjoy=SDL_JoystickOpen(index);
     SDL_JoystickUpdate();
-    if (SDLjoy)
-	ret= SDL_JoystickGetAxis(SDLjoy,axis);
+    if (SDLjoy[index])
+	ret= SDL_JoystickGetAxis(SDLjoy[index],axis);
     else
 	ret=0;
-    SDL_JoystickClose(SDLjoy);
     return ret;
 }
 //_________________________________________________________________________________________________________________________
@@ -127,13 +117,11 @@ int getaxisjoystick(int index,int axis)
 int gethatjoystick(int index,int hat)
 {
     int ret;
-    SDLjoy=SDL_JoystickOpen(index);
     SDL_JoystickUpdate();
-    if (SDLjoy)
-	ret= SDL_JoystickGetHat(SDLjoy,hat);
+    if (SDLjoy[index])
+	ret= SDL_JoystickGetHat(SDLjoy[index],hat);
     else
 	ret=-1;
-    SDL_JoystickClose(SDLjoy);
     return ret;
 }
 //_________________________________________________________________________________________________________________________
@@ -142,13 +130,11 @@ int gethatjoystick(int index,int hat)
 int getbuttonjoystick(int index,int button)
 {
     int ret;
-    SDLjoy=SDL_JoystickOpen(index);
     SDL_JoystickUpdate();
-    if (SDLjoy)
-	ret= SDL_JoystickGetButton(SDLjoy,button);
+    if (SDLjoy[index])
+	ret= SDL_JoystickGetButton(SDLjoy[index],button);
     else
 	ret=-1;
-    SDL_JoystickClose(SDLjoy);
     return ret;
 }
 
@@ -159,13 +145,11 @@ int xgetballjoystick(int index,int ball)
 {
     int x,y;
     int ret;
-    SDLjoy=SDL_JoystickOpen(index);
     SDL_JoystickUpdate();
-    if (SDLjoy)
-	ret= SDL_JoystickGetBall(SDLjoy,ball,&x,&y);
+    if (SDLjoy[index])
+	ret= SDL_JoystickGetBall(SDLjoy[index],ball,&x,&y);
     else
 	ret=-1;
-    SDL_JoystickClose(SDLjoy);
     if (ret!=-1)
 	return x;
     else
@@ -179,13 +163,11 @@ int ygetballjoystick(int index,int ball)
 {
     int x,y;
     int ret;
-    SDLjoy=SDL_JoystickOpen(index);
     SDL_JoystickUpdate();
-    if (SDLjoy)
-	ret= SDL_JoystickGetBall(SDLjoy,ball,&x,&y);
+    if (SDLjoy[index])
+	ret= SDL_JoystickGetBall(SDLjoy[index],ball,&x,&y);
     else
 	ret=-1;
-    SDL_JoystickClose(SDLjoy);
     if (ret!=-1)
 	return y;
     else
@@ -199,25 +181,23 @@ int joy(int index)
 {
     int ret,tmp;
     if (index>=SDL_NumJoysticks())return -1;
-    SDLjoy=SDL_JoystickOpen(index);
     SDL_JoystickUpdate();
     ret=0;
-    if (SDLjoy && SDL_JoystickNumAxes(SDLjoy)>=2 ){
-	tmp= SDL_JoystickGetAxis(SDLjoy,0);
+    if (SDLjoy[index] && SDL_JoystickNumAxes(SDLjoy[index])>=2 ){
+	tmp= SDL_JoystickGetAxis(SDLjoy[index],0);
 	if (tmp<0)
 	    ret+=1;
 	if (tmp>0)
 	    ret+=2;
-	tmp= SDL_JoystickGetAxis(SDLjoy,1);
+	tmp= SDL_JoystickGetAxis(SDLjoy[index],1);
 	if (tmp<0)
 	    ret+=4;
 	if (tmp>0)
 	    ret+=8;
     }
-    if (SDLjoy && SDL_JoystickNumHats(SDLjoy)>0 ){
-	ret+=SDL_JoystickGetHat(SDLjoy,0);
+    if (SDLjoy[index] && SDL_JoystickNumHats(SDLjoy[index])>0 ){
+	ret+=SDL_JoystickGetHat(SDLjoy[index],0);
     }
-    SDL_JoystickClose(SDLjoy);
     if (autotimer()!=0)return -1;
     return ret;
 }
@@ -230,13 +210,11 @@ int bjoy(int index)
     if (index>=SDL_NumJoysticks())return emulate_bjoy(index);
     ret=0;
     a=1;
-    SDLjoy=SDL_JoystickOpen(index);
     SDL_JoystickUpdate();
-    for(i=0;i<SDL_JoystickNumButtons(SDLjoy);i++){
-	if(SDL_JoystickGetButton(SDLjoy,i))ret+=a;
+    for(i=0;i<SDL_JoystickNumButtons(SDLjoy[index]);i++){
+	if(SDL_JoystickGetButton(SDLjoy[index],i))ret+=a;
 	a*=2;
     }
-    SDL_JoystickClose(SDLjoy);
     if (autotimer()!=0)return -1;
     return ret;
 }
@@ -308,13 +286,13 @@ int emulate_bjoy(int index)
 //_________________________________________________________________________________________________________________________
 
 //waitbjoy									: wait the pression of a joystick button (or emulate in keyboard)
-int waitbjoy(int jbutton){
+int waitbjoy(int joy,int jbutton){
 	if (jbutton==0)
-		while(bjoy(0)==0){
+		while(bjoy(joy)==0){
 		    if (autotimer()!=0)return -1;
 		}
 	else
-		while(bjoy(0)!=jbutton){
+		while(bjoy(joy)!=jbutton){
 		    if (autotimer()!=0)return -1;
 		}
 	return 0;

@@ -47,6 +47,7 @@ int     me;                     /* pointer to object for current method */
 int     wxAppIndex = 0;         /* handle to wxApp */
 
 int 	debug;			/* step mode */
+int 	nodebug=0;			/* disable debugger screen for prod code */
 
 Stack *argCountStack;           /* arg count in parser */
 Stack *blockStack;              /* block type */

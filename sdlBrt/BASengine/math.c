@@ -66,10 +66,9 @@ double rnd(int upper)
     int result;
 
     result = rand();
-    if (upper>0) {
-        result = (result % (upper-1))+1;
-    }
-    return( (float)result );
+    result = (result % (upper-1))+1;
+
+    return( (result ) );
 }
 //_______________________________________________________________________________________________________________________
 

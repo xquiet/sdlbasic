@@ -258,7 +258,6 @@ void basAsc()
 {
     char    *string;
     string = popString();
-//    pushNumber( (unsigned char)string[0] );
     pushNumber( asc(string));
     eFree( string );
 }
@@ -267,10 +266,10 @@ void basAsc()
 /* basChr: return string corresponding to ascii key value */
 void basChr()
 {
-    char    *buffer = (char *)eMalloc(sizeof(char)*2);
-    buffer[0] = (char)popNumber();
-    buffer[1] = '\0';
-    pushString( buffer );
+	char    *buffer = (char *)eMalloc(sizeof(char)*2);
+	buffer[0] = (char)popNumber();
+	buffer[1] = '\0';
+	pushString( buffer );
 }
 //_______________________________________________________________________________________________________________________
 
@@ -285,26 +284,17 @@ void basFormat()
 /* basInsert: insert source string to target at index */
 void basInsert()
 {
-    char    *source, *target;
-    //*,dest;
-    int     i;
+	char    *source, *target;
+	int     i;
 
-    i = (int)popNumber();
-    target = popString();
-    source = popString();
+	i = (int)popNumber();
+	target = popString();
+	source = popString();
 
-	//dest = (char *) eMalloc(strlen(source)+strlen(target)+1);
-
-	//strcpy(dest,"");
-	//strncpy(dest,source,i);
-	//strcpy(&dest[i],target);
-	//strcat(dest,source+i);
-	//pushStringCopy(dest);
 
 	pushString((char *)insert(source,target,i));
-    //eFree(dest);
-    eFree(source);
-    eFree(target);
+	eFree(source);
+	eFree(target);
 }
 //_______________________________________________________________________________________________________________________
 
@@ -327,25 +317,6 @@ void basInstr()
         start = 0;
     }
 
-    //searchLen = strlen( search );
-    //findLen = strlen( find );
-
-    /* searching for empty string? */
-    //if (searchLen == 0 || findLen == 0) {
-    //    pushNumber( 0 );
-    //    return;
-    //}
-
-    //start = (int)floor( start );
-    //for ( i = start; i < searchLen; i++ ) {
-    //    if (strncmp( search+i, find, findLen ) == 0) {
-    //        pushNumber( i+1 );
-    //        return;
-    //    }
-    //}
-
-    /* not found */
-    //pushNumber( 0 );
 
     pushNumber(instr(start,find, search));
 
@@ -358,60 +329,32 @@ void basInstr()
 /* basLCase: convert string to lower case */
 void basLCase()
 {
-    //int     len, i;
     char    *string;
 
     string = popString();
     pushString(lcase(string));
 
-    //len = strlen( string );
-    //for ( i = 0; i<len; i++){
-    //    string[i] = (char)tolower( (int)string[i] );
-    //}
-    //pushStringCopy( string );
-    //eFree(string);
 }
 //_______________________________________________________________________________________________________________________
 
 /* basLeft: returns leftmost chars in string */
 void basLeft()
 {
-    //int len, newLen;
-    //char    *left;
 
     int     pos;
     char    *string;
+    char *dest;
 
 
     pos = (int)popNumber();
     string = popString();
 
-    pushString(left(string,pos));
+    dest=left(string,pos);
+    pushStringCopy(dest);
+	
+    eFree(string);	
+    eFree(dest);
 
-    /*
-    len = strlen(string);
-    if (pos > len-1) {
-        pushStringCopy( string );
-	eFree(string);
-        return;
-    }
-
-    if (pos < 1) {
-        eFree( string );
-        pushStringCopy( "" );
-        return;
-    }
-
-    newLen = (pos);
-    left = (char *) eMalloc(newLen+1);
-    for (pos=newLen;pos>0;pos--)left[pos]='\0';
-    //memcpy(left,string,newLen);
-    strncpy(left,string,newLen);
-    left[newLen] = '\0';
-    eFree( string );
-    pushStringCopy( left );
-    eFree(left);
-    */
 }
 //_______________________________________________________________________________________________________________________
 
@@ -419,46 +362,37 @@ void basLeft()
 void basLen()
 {
     char    *string;
+	
     string = popString();
     pushNumber(len(string));
-    /*
-    pushNumber( strlen( string ) );
-    eFree( string );
-    */
 }
 //_______________________________________________________________________________________________________________________
 
 /* basLTrim: returns string with left whitespace removed */
 void basLTrim()
 {
-    //char    *trimmed;
     char    *string;
+    char *dest;
 
     string = popString();
-    pushString(ltrim(string));
-
-    /*
-    trimmed = string;
-    while ( trimmed[0] != '\0' ) {
-        if (!isspace(trimmed[0])) {
-            break;
-        }
-        trimmed++;
-    }
-    pushStringCopy( trimmed );
-    eFree( string );
-    */
+	
+    dest=ltrim(string);	
+    pushStringCopy(dest);
+	
+    eFree(dest);    
+    eFree(string);    
+	
 }
 //_______________________________________________________________________________________________________________________
 
 /* basMid: returns string with chars 1..n from source */
 void basMid()
 {
-    //int j,len;
-    //char    *buffer;
 
-    int     i,n;
+    int     i,n,len;
     char    *string;
+    char    *dest;
+	
 
     n=0;
     /* get args */
@@ -468,41 +402,30 @@ void basMid()
     i = (int)popNumber();
     string = popString();
 
+    len=strlen(string);
+    
     if (argCount!=3)
-	n=strlen(string)+1-i;
+	n=len+1-i;
 
-    pushString(mid(string, i, n));
-
-    /* early outs
-    len = strlen( string ) - i;
-    if ( i < 1 || len < 0 ) {
-        pushStringCopy("");
-	eFree( string );
-        return;
+    
+    if ( i < 1 || len < 0 ||  i >len ) {
+	    ePrintf( Runtime, "BASengine Error \n");
     }
-
-    buffer = (char *)eMalloc(len+2);
-    for ( j = 0; j < n; j++ ) {
-        if (string[i+j-1] == '\0' ) {
-            break;
-        }
-        buffer[j] = string[i+j-1];
-    }
-    buffer[j] = '\0';
-    pushStringCopy( buffer );
-    eFree( string );
-    */
+    dest=mid(string, i, n);
+    pushStringCopy(dest);
+    
+    eFree(dest);    
+    eFree(string);
 }
 //_______________________________________________________________________________________________________________________
 
 /* basReplace: replace string from source with replace starting at index */
 void basReplace()
 {
-    //int     a;
-    //char    *dest;
 
     int     i;
     char    *src, *rep;
+    char *dest;
 
     rep = popString();
     src = popString();
@@ -510,32 +433,23 @@ void basReplace()
 	i = (int)popNumber();
     else
 	i = 0;
+    dest=replace(src, rep, i);
+    pushStringCopy(dest);
+    
+    eFree(src);    
+    eFree(rep);    
+    eFree(dest);    
 
-    pushString(replace(src, rep, i));
-
-    /*
-    dest=eCopyString(src);
-    for(a=0;a<strlen(rep);a++){
-	if ((a+i)>=strlen(dest))break;
-	dest[i+a]=rep[a];
-    }
-
-
-    pushString(dest);
-    eFree(rep);
-    eFree(src);
-    */
 }
 //_______________________________________________________________________________________________________________________
 
 /* basReplaceSubStr: replace substring in source with withstring */
 void basReplaceSubStr()
 {
-    //unsigned int i;
-    //char    *dest;
     int start;
     char *source, *replace, *with;
-
+    char *dest;
+	
     with = popString();
     replace = popString();
     source = popString();
@@ -544,104 +458,51 @@ void basReplaceSubStr()
     else
 	start=0;
 
-    pushString(replacesubstr(start, source, replace, with));
-
-    /*
-    i=0;
-    while (i<strlen(source)){
-		if (strncmp(source+i,replace,strlen(replace))==0){
-			dest = (char *) eMalloc( strlen(source)+ strlen(with)+1 );
-			strcpy(dest,"");
-			strncpy(dest,source,i);
-			dest[i] = '\0';
-			strcat(dest,with);
-			strcat(dest,source+i+strlen(replace));
-			eFree(source);
-			source = (char *) eMalloc(strlen(dest)+1);
-			strcpy(source,dest);
-			eFree(dest);
-			i+=strlen(with);
-		}
-		i++;
-	}
-    eFree( with );
-    eFree( replace );
-    pushStringCopy(source);
-    eFree( source );
-    */
+    dest=replacesubstr(start, source, replace, with);
+    pushStringCopy(dest);
+    
+    eFree(dest);    
 }
 //_______________________________________________________________________________________________________________________
 
 /* basReverse: reverse a string */
 void basReverse()
 {
-    //int     len, i, j;
-    //char    *buffer;
     char    *string;
+    char *dest;	
 
     string = popString();
-    pushString(reverse(string));
+    dest=reverse(string);
+    pushStringCopy(dest);
 
-    /*
-    len = strlen( string );
-
-    buffer = (char *)eMalloc(len+1);
-    j = len-1;
-    for( i = 0; i < len; i++ ) {
-        buffer[j--] = string[i];
-    }
-    buffer[len] = '\0';
-
-    pushString(buffer);
-    eFree( string );
-    */
+    eFree(string);
+    eFree(dest);	
 }
 //_______________________________________________________________________________________________________________________
 
 /* basRight: returns rightmost chars in string */
 void basRight()
 {
-    //int     len, newLen;
-    //char    *right;
 
     int     pos;
     char    *string;
+    char    *dest;	
 
     pos = (int)popNumber();
     string = popString();
-    pushString(right(string,pos));
+	
+    dest=	right(string,pos);
+    pushStringCopy(dest);
+	
+    eFree(string);
+    eFree(dest);
 
-    /*
-    len = strlen(string);
-
-    if (pos >= len) {
-        pushStringCopy( string );
-	eFree( string );
-        return;
-    }
-
-    if (pos < 1) {
-        eFree( string );
-        pushStringCopy( "" );
-        return;
-    }
-
-    newLen = pos+1;
-    right = (char *)eMalloc((newLen+1));
-    memcpy(right,string+(len-pos),newLen);
-    right[newLen]=0;
-    pushStringCopy( right );
-
-    eFree( right );
-    eFree( string );
-    */
 }
 //_______________________________________________________________________________________________________________________
 
 /* basRInstr: reverse Instr function, search from end to start */
 void basRInstr()
 {
-    //int     searchLen, findLen, i;
 
     int     start;
     char    *find, *search;
@@ -652,84 +513,37 @@ void basRInstr()
     /* optional starting position */
     if (argCount==3) {
         start = (int)popNumber()-1;
-        //if (start > searchLen ) {
-        //    start = searchLen-1;
-        //}
     } else {
 	start=-1;
-        //start = searchLen-1;
     }
 
     pushNumber(rinstr( search, find, start));
 
-    /*
-    findLen = strlen( find );
-    searchLen = strlen( search );
-
-
-    // searching for empty string?
-    if (searchLen == 0 || findLen == 0) {
-        pushNumber( 0 );
-        return;
-    }
-
-
-    // search
-    for ( i = start; i >= 0; i-- ) {
-        if (strncmp( search+i, find, findLen ) == 0) {
-            pushNumber( i+1 );
-            return;
-        }
-    }
-
-    // not found
-    pushNumber( 0 );
-   */
 }
 //_______________________________________________________________________________________________________________________
 
 /* basRTrim: right trim string */
 void basRTrim()
 {
-    //int     len, i;
-
-    char    *string;
+    char *string;
+    char *dest;
+	
     string = popString();
-    pushString(rtrim(string));
-
-    /*
-    len = strlen(string);
-    for ( i = len-1; i > -1; i-- ) {
-        if (!isspace(string[i])) {
-            string[i+1] = '\0';
-            pushString( string );
-            return;
-        }
-    }
-    string[0] = '\0';
-    pushString( string );
-    */
+    dest = rtrim(string);	
+    pushStringCopy(dest);
+	
+    eFree(string);
+    eFree(dest);
 }
 //_______________________________________________________________________________________________________________________
 
 /* basSpace: return string with n spaces in it */
 void basSpace()
 {
-    //char    *string;
     int     n;
     n = (int)popNumber();
     pushString(space(n));
 
-    /*
-    if (n<0) {
-        n = 0;
-    }
-
-    string = (char *)eMalloc((unsigned int)n+1);
-    memset(string,' ',n);
-    string[n] = '\0';
-    pushString(string);
-    */
 }
 //_______________________________________________________________________________________________________________________
 
@@ -756,8 +570,6 @@ void basStrF()
 /* basString: returns string m chars wide with n in it */
 void basString()
 {
-    //int     l,i;
-    //char    *buffer;
 
     int     n;
     char    *_string;
@@ -766,24 +578,12 @@ void basString()
     n = (int)popNumber();
     pushString(string( n, _string));
 
-    /*
-    l=strlen(string)+1;
-
-    buffer = (char *)eMalloc((l*n)+1);
-    strcpy(buffer,"");
-    for (i=0;i<n;i++)
-	strcat(buffer,string);
-    buffer[(l*n)] = '\0';
-    pushStringCopy( buffer );
-    eFree (buffer);
-    */
 }
 //_______________________________________________________________________________________________________________________
 
 /* basTally:  returns number of occurances of matchstring */
 void basTally()
 {
-    //int	    i,ret;
     int     start;
     char    *src, *sub;
 
@@ -800,54 +600,21 @@ void basTally()
     }
     pushNumber(tally( src, sub, start));
 
-    /*
-    ret=0;
-    for(i=start;i<strlen(src);i++)
-        if (strncmp(src+i,sub,strlen(sub))==0)
-            ret++;
-
-	eFree(src);
-	eFree(sub);
-    pushNumber(ret);
-    */
 }
 //_______________________________________________________________________________________________________________________
 
 /* basTrim: returns string with left and right whitespace removed */
 void basTrim()
 {
-    //  int     len, i;
-    //  char *trimmed;
-
-      char    *string;
+      char *string;
+      char *dest;
 
     string = popString();
-    pushString(trim( string));
+	
+    dest=trim( string);		
+    pushStringCopy(dest);
 
-    /*
-    len = strlen(string);
-    for ( i = len-1; i > -1; i-- ) {
-        if (!isspace(string[i])) {
-            string[i+1] = '\0';
-            //pushString( string );
-            break;
-        }
-    }
-
-    if (i==0)
-	    string[0] = '\0';
-
-    trimmed=string;
-    while ( trimmed[0] != '\0' ) {
-        if (!isspace(trimmed[0])) {
-            break;
-        }
-        trimmed++;
-    }
-
-    pushStringCopy( trimmed );
-    eFree( string );
-    */
+    eFree(string);
 }
 //_______________________________________________________________________________________________________________________
 
@@ -882,19 +649,11 @@ void basTypeOf()
 /* basUCase: convert string to upper case */
 void basUCase()
 {
-    //int     len, i;
     char    *string;
 
     string = popString();
     pushString(ucase(string));
 
-    /*
-    len = strlen( string );
-    for ( i = 0; i<len; i++){
-        string[i] = toupper( string[i] );
-    }
-    pushString( string );
-    */
 }
 //_______________________________________________________________________________________________________________________
 
@@ -1048,16 +807,17 @@ void basRandomize()
 /* basRnd: return an random number */
 void basRnd()
 {
-    int upper, result;
+    int upper;
 
-    result = rand();
-    if (argCount==1) {
-        upper = (int)popNumber();
-        result = (result % (upper-1))+1;
-    }
-    pushNumber( (Number)result );
+    if (argCount==1)
+        upper =popNumber();
+    else
+	upper=-1;
+
+    pushNumber( (Number)rnd(upper));
+
 }
-//_______________________________________________________________________________________________________________________
+//________________________________________________cd dev*_______________________________________________________________________
 
 /* basRound: round to nearest integer */
 void basRound()
@@ -3675,7 +3435,7 @@ void basInputs()
 	txt=popString();
 	strcpy(defs,txt);
 	request=popString();
-	inputs(request,defs);
+	inputS(request,defs);
 	pushStringCopy(defs);
 	eFree(txt);
 
@@ -4298,120 +4058,6 @@ void basTrackOffsetCD()
     if (ret==-1) ePrintf( Runtime, "SDLengine Error \n");
     pushNumber(ret);
 }
-//_______________________________________________________________________________________________________________________
-//
-// Video mpeg
-//_________________________________________________________________________________________________________________________
-
-//loadmpeg(fname,usesound)		: load a mpeg video
-
-void basLoadMpeg()
-{
-    char *fname;
-    int usesound;
-    int ret;
-
-    usesound=popNumber();
-    fname=popString();
-
-    ret=loadmpeg(fname,usesound);
-    if (ret==-1) ePrintf( Runtime, "SDLengine Error \n");
-    pushNumber(ret);
-}
-//_________________________________________________________________________________________________________________________
-
-//plaympeg(optional loop)		: play a mpeg1 video
-void basPlayMpeg()
-{
-    int loop;
-    int ret;
-
-    if (argCount==1)
-	loop=popNumber();
-    else
-	loop=0;
-
-    ret=plaympeg(loop);
-    if (ret==-1) ePrintf( Runtime, "SDLengine Error \n");
-    pushNumber(ret);
-}
-//_________________________________________________________________________________________________________________________
-
-//stopmpeg()				: terminate the video play
-void basStopMpeg()
-{
-    int ret;
-    ret=stopmpeg();
-    if (ret==-1) ePrintf( Runtime, "SDLengine Error \n");
-    pushNumber(ret);
-}
-//_________________________________________________________________________________________________________________________
-
-//deletempeg()				: unload mpeg video
-void basDeleteMpeg()
-{
-    int ret;
-    ret=deletempeg();
-    if (ret==-1) ePrintf( Runtime, "SDLengine Error \n");
-    pushNumber(ret);
-}
-//_________________________________________________________________________________________________________________________
-
-//pausempeg()				: Pause/Resume playback of an SMPEG object
-void basPauseMpeg()
-{
-    int ret;
-    ret=pausempeg();
-    if (ret==-1) ePrintf( Runtime, "SDLengine Error \n");
-    pushNumber(ret);
-}
-//_________________________________________________________________________________________________________________________
-
-//rewindmpeg()				: Rewind the play position of an SMPEG object to the beginning of the MPEG
-void basRewindMpeg()
-{
-    int ret;
-    ret=rewindmpeg();
-    if (ret==-1) ePrintf( Runtime, "SDLengine Error \n");
-    pushNumber(ret);
-}
-
-//_________________________________________________________________________________________________________________________
-
-//seekmpeg(p)				: Seek 'bytes' bytes in the MPEG stream
-void basSeekMpeg()
-{
-    int p;
-    int ret;
-    p=popNumber();
-    ret=seekmpeg(p);
-    if (ret==-1) ePrintf( Runtime, "SDLengine Error \n");
-    pushNumber(ret);
-}
-
-//_________________________________________________________________________________________________________________________
-
-//skipmpeg(s)				: Skip 'seconds' seconds in the MPEG stream
-void basSkipMpeg()
-{
-    double p;
-    int ret;
-    p=popNumber();
-    ret=skipmpeg(p);
-    if (ret==-1) ePrintf( Runtime, "SDLengine Error \n");
-    pushNumber(ret);
-}
-//_________________________________________________________________________________________________________________________
-
-//statusmpeg()				: return 1 if plaympeg work or 0 in other case
-void basStatusMpeg()
-{
-    int ret;
-    ret=statusmpeg();
-    if (ret==-1) ePrintf( Runtime, "SDLengine Error \n");
-    pushNumber(ret);
-}
-
 
 //_______________________________________________________________________________________________________________________
 //
@@ -4726,12 +4372,16 @@ void basBJoy()
 //waitbjoy					: wait joystick button pressed
 void basWaitBJoy()
 {
-    int i,ret;
-    if (argCount==1)
-	i=popNumber();
+    int j,b,ret;
+    if (argCount==2)
+	j=popNumber();
     else
-	i=0;
-    ret=waitbjoy(i);
+	j=0;
+
+    b=popNumber();
+
+
+    ret=waitbjoy(b,j);
     if (ret==-1) ePrintf( Runtime, "SDLengine Error \n");
     pushNumber(ret);
 }
@@ -4758,261 +4408,20 @@ void basTimer()
 {
 	pushNumber( chrono());
 }
-//_______________________________________________________________________________________________________________________
-//
-// SOCKET
-//_________________________________________________________________________________________________________________________
 
-//isenabledsock()				: return 1 if sdlnet was enabled
-void basIsEnabledSock()
-{
-    int ret;
-    ret=isenabledsock();
-    if (ret==-1) ePrintf( Runtime, "SDLengine socket Error \n");
-    pushNumber( ret);
-}
+/*--- builtin API ----------------------------------------------------------*/
 
-//_______________________________________________________________________________________________________________________
+#ifdef VIDEOMPEG_SUPPORT
+#include "builtin/videompeg.c"
+#endif
 
-//sock=getfreesock()			: return the first free sock in sdlSocket array
-void basGetFreeSock()
-{
-    int ret;
-    ret=getfreesock();
-    if (ret==-1) ePrintf( Runtime, "SDLengine socket Error \n");
-    pushNumber( ret);
-}
-//_______________________________________________________________________________________________________________________
+#ifdef SOCKET_SUPPORT
+#include "builtin/socket.c"
+#endif
 
-/*sock=OpenSock(port) 			: Server side socket sock is the stream. in sdlBasic there are 256 stream and \
-					  sintax is very similar of file open close.*/
-void basOpenSock()
-{
-    int port;
-    int ret;
-
-    port= popNumber();
-    ret=opensock(port);
-    if (ret==-1) ePrintf( Runtime, "SDLengine socket Error \n");
-    pushNumber( ret);
-}
-//_______________________________________________________________________________________________________________________
-
-//clientsock=AcceptSock(serversock)	: Accept the client connection
-void basAcceptSock()
-{
-    int serversock;
-    int ret;
-
-    serversock= popNumber();
-    ret=acceptsock(serversock);
-    if (ret==-1) ePrintf( Runtime, "SDLengine socket Error \n");
-    pushNumber( ret);
-}
-
-//_______________________________________________________________________________________________________________________
-
-//IsServerReady(Sock)			: True/False if server is sending data    
-void basIsServerReady()
-{
-    int sock;
-    int ret;
-
-    sock= popNumber();
-    ret=isserverready(sock);
-    if (ret==-1) ePrintf( Runtime, "SDLengine socket Error \n");
-    pushNumber( ret);
-}
-
-//_______________________________________________________________________________________________________________________
-
-//sock=ConnectSock(ServerName,port)	: client side socket connection
-void basConnectSock()
-{
-    int port;
-    char *servername;
-    int ret;
-
-    port= popNumber();
-    servername=popString();
-    ret=connectsock(servername,port);
-    //if (ret==-1) ePrintf( Runtime, "SDLengine socket Error \n");
-    pushNumber( ret);
-}
-
-//_______________________________________________________________________________________________________________________
-
-//*ConnectionReadySock(sock)		: the server have accepted the connection
-/*
-void ConnectionReadySock()
-{
-    int sock;
-    int ret;
-
-    sock= popNumber();
-    ret=connectionready(sock);
-    if (ret==-1) ePrintf( Runtime, "SDLengine socket Error \n");
-    pushNumber( ret);
-}
-*/
-//_______________________________________________________________________________________________________________________
-
-//IsClientReady(Sock)			: True/False if client is sending data
-void basIsClientReady()
-{
-    int sock;
-    int ret;
-
-    sock= popNumber();
-    ret=isclientready(sock);
-    if (ret==-1) ePrintf( Runtime, "SDLengine socket Error \n");
-    pushNumber( ret);
-}
-//_______________________________________________________________________________________________________________________
-
-//CloseSock(sock)				: Close the socket connection. Works for client and server
-void basCloseSock()
-{
-    int sock;
-    int ret;
-
-    sock= popNumber();
-    ret=closesock(sock);
-    if (ret==-1) ePrintf( Runtime, "SDLengine socket Error \n");
-    pushNumber( ret);
-}
-
-//_______________________________________________________________________________________________________________________
-
-//*PeekSock(Sock, NumBytes)		: Peek information coming from socket, but do not clear.
-/*
-void basPeekSock(void)
-{
-    int sock,numbytes;
-
-    char *ret;
-
-    numbytes= popNumber();
-    sock= popNumber();
-    ret=peeksock(sock,numbytes);
-    if (ret==NULL) ePrintf( Runtime, "SDLengine socket Error \n");
-    pushString(ret);
-}
-*/
-//_______________________________________________________________________________________________________________________
-
-//ReadSock(Sock, NumBytes)		: Read NumBytes
-void basReadSock()
-{
-    int sock,numbytes;
-
-    numbytes= popNumber();
-    sock= popNumber();
-    pushString(readsock(sock,numbytes));
-}
-
-//_______________________________________________________________________________________________________________________
-
-//ReadByteSock(Sock)			: Read a single byte      
-void basReadByteSock()
-{
-    int sock;
-    int ret;
-
-    sock= popNumber();
-    ret=readbytesock(sock);
-    if (ret==-1) ePrintf( Runtime, "SDLengine socket Error \n");
-    pushNumber( ret);
-}
-//_______________________________________________________________________________________________________________________
-
-//ReadLineSock(Sock)			: Read complete line
-void basReadLineSock()
-{
-    int sock;
-
-    sock= popNumber();
-    pushString(readlinesock(sock));
-}
-//_______________________________________________________________________________________________________________________
-
-//WriteSock(Sock, Message, NumBytes)	: Sends NumBytes from Message
-void basWriteSock()
-{
-    int sock,numbytes;
-    char *message;
-    int ret;
-
-    numbytes= popNumber();
-    message=popString();
-    sock= popNumber();
-    ret=writesock(sock,message,numbytes);
-    if (ret==-1) ePrintf( Runtime, "SDLengine socket Error \n");
-    pushNumber(ret);
-}
-//_______________________________________________________________________________________________________________________
-
-//WriteByteSock(Sock, Byte)		: Sends a single byte
-void basWriteByteSock()
-{
-    int sock;
-    char byte;
-    int ret;
-
-    byte=popNumber();
-    sock= popNumber();
-    ret=writebytesock(sock,byte);
-    if (ret==-1) ePrintf( Runtime, "SDLengine socket Error \n");
-    pushNumber(ret);
-}
-//_______________________________________________________________________________________________________________________
-
-//WriteLineSock(Sock, Message)		: Send Message
-void basWriteLineSock()
-{
-    int sock;
-    char *message;
-    int ret;
-
-    message=popString();
-    sock= popNumber();
-    ret=writelinesock(sock,message);
-    if (ret==-1) ePrintf( Runtime, "SDLengine socket Error \n");
-    pushNumber(ret);
-}
-//_______________________________________________________________________________________________________________________
-
-//getremoteip(sock)			: return the ip address of remote client connetted
-void basGetRemoteIp()
-{
-    int sock;
-
-    sock= popNumber();
-    pushString(getremoteip(sock));
-}
-//_______________________________________________________________________________________________________________________
-
-//getremoteport(sock)			: return the port address of remote client connetted
-void basGetRemotePort()
-{
-    int sock;
-    int ret;
-
-    sock= popNumber();
-    ret=getremoteport(sock);
-    if (ret==-1) ePrintf( Runtime, "SDLengine socket Error \n");
-    pushNumber( ret);
-}
-
-//_______________________________________________________________________________________________________________________
-
-//getlocalip()				: return the local ip
-void basGetLocalIp()
-{
-    pushString(getlocalip());
-}
-
-//_______________________________________________________________________________________________________________________
+#ifdef SQLITE_SUPPORT
+#include "builtin/sqlite.c"
+#endif
 
 /*--- end ---------------------------------------------------------------*/
 

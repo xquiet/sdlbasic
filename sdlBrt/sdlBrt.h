@@ -54,6 +54,10 @@ extern void yyerror( char* );
 #include "BASengine/BASengine.h" 	/* BASic rutines			*/
 //#include "GLengine/GLengine.h"	/* GL rutines unimplemented yet 	*/
 
+#if defined(SQLITE_SUPPORT)
+#include "sqlite3/wrap.h"
+#endif
+
 
 #include "shared.h"         		/* shared routines                      */
 #include "trace.h"          		/* tracing code                         */

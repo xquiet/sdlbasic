@@ -124,7 +124,7 @@ char *string(int n, char *string);
 int tally(char *src,char *sub,int start);
 char *trim( char *string);
 char *ucase(char *string);
-int val(char *string);
+double val(char *string);
 
 
 #ifdef __cplusplus

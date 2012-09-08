@@ -371,6 +371,7 @@ MESSAGE( STATUS )
 #set ( EXEC_PREFIX ${CMAKE_INSTALL_PREFIX}/bin )
 
 add_definitions( -DFONT_PREFIX="${CMAKE_INSTALL_PREFIX}/share/fonts/ttf" )
+add_definitions( -DSOCKET_SUPPORT=BOOL:1 )
 
 IF (UNIX)
 	add_definitions(-DUNIX=BOOL:1) 
@@ -404,6 +405,10 @@ add_subdirectory ( SDLengine )
 include_directories ("${PROJECT_SOURCE_DIR}/unzip")
 add_subdirectory ( unzip ) 
 
+include_directories ("${PROJECT_SOURCE_DIR}/sqlite3")
+add_subdirectory ( sqlite3 ) 
+
+
 include_directories( ${SDL_INCLUDE_DIR} )
  
 # add the executable
@@ -413,7 +418,7 @@ MESSAGE( STATUS "GLIB LIBRARY:      " ${GLIB_LIBRARY} )
 MESSAGE( STATUS "GLIB PKG LIB DIRS: " ${GLIB_PKG_LIBRARY_DIRS} )
 
 #target_link_libraries (sdlBrt ${SDL_LIBRARY} ${SDLTTF_LIBRARY} ${SDLNET_LIBRARY} ${SDLIMAGE_LIBRARY} ${SDLMIXER_LIBRARY} BASengine SDLengine unzip ${GLIB_LIBRARY} ${SMPEG_LIBRARIES} ${M_LIB})
-target_link_libraries ( sdlBrt ${SDL_LIBRARY} ${SDLTTF_LIBRARY} ${SDLNET_LIBRARY} ${SDLIMAGE_LIBRARY} ${SDLMIXER_LIBRARY} ${GLIB_LIBRARY} ${SMPEG_LIBRARIES} ${M_LIB} BASengine SDLengine unzip )
+target_link_libraries ( sdlBrt ${SDL_LIBRARY} ${SDLTTF_LIBRARY} ${SDLNET_LIBRARY} ${SDLIMAGE_LIBRARY} ${SDLMIXER_LIBRARY} ${GLIB_LIBRARY} ${SMPEG_LIBRARIES} ${M_LIB} BASengine SDLengine unzip sqlite3 )
 
 install(TARGETS sdlBrt DESTINATION ${INSTALL_DIR_BIN})
 #install(FILES   ${DOC_FILES} DESTINATION   ${DOC_INSTALL_DIR})

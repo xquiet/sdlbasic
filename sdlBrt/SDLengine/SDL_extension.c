@@ -204,6 +204,59 @@ SDL_Surface *Load_zip_Image(char *zipfile,char *datafile, int transparent)
 	    return(NULL);
 }
 //________________________________________________________________________________________________________________________________________
+SDL_Surface *Map_blob_Image(unsigned char *blob, int bsize, int transparent)
+{
+	SDL_RWops *src;
+	int bpp;
+	Uint32 oldck;
+	SDL_Surface *image, *surface;
+
+	src=SDL_RWFromMem(blob, bsize);
+	image=SDL_DisplayFormat(IMG_Load_RW(src, 0));
+	if ( image == NULL ) {
+		error_description="Can't map image \n";
+		error_type=1;
+		SDLerr(stderr, "\n Map_zip_Image: Can't map image: %s \n", IMG_GetError());
+
+		return(NULL);
+	}
+	if ( transparent ) {
+		bpp = image->format->BytesPerPixel;
+		oldck=colorkey;
+
+		if (SDL_MUSTLOCK(image) )
+		{
+		    SDL_LockSurface(image);
+		}
+
+		switch(bpp) {
+		    case 1:
+			if (colorkey==-1)colorkey=*(Uint8 *)image->pixels;
+			SDL_SetColorKey(image, (SDL_SRCCOLORKEY|SDL_RLEACCEL),(Uint8) colorkey);//*(Uint8 *)image->pixels
+			break;
+		    case 2:
+			if (colorkey==-1)colorkey=*(Uint16 *)image->pixels;
+			SDL_SetColorKey(image, (SDL_SRCCOLORKEY|SDL_RLEACCEL),(Uint16)colorkey);//*(Uint16 *)image->pixels
+			break;
+		    case 3:
+			if (colorkey==-1)colorkey=*(Uint32 *)image->pixels;
+			SDL_SetColorKey(image, (SDL_SRCCOLORKEY|SDL_RLEACCEL),(Uint32)colorkey);//*(Uint32 *)image->pixels
+			break;
+		    case 4:
+			if (colorkey==-1)colorkey=*(Uint32 *)image->pixels;
+			SDL_SetColorKey(image, (SDL_SRCCOLORKEY|SDL_RLEACCEL),(Uint32)colorkey);//*(Uint32 *)image->pixels
+			break;
+		    }
+		    if (SDL_MUSTLOCK(image) )
+			SDL_UnlockSurface(image);
+		    colorkey=oldck;
+	    }
+
+	    surface = SDL_DisplayFormat(image);
+	    SDL_FreeSurface(image);
+	    return(surface);
+}
+//________________________________________________________________________________________________________________________________________
 
 
 //Save_Image(filename,image) 	: save the image using sdl rutines you can save only in bmp format
@@ -2088,8 +2141,10 @@ void _input(char *instring,int x, int y,int displen)
 
 	locate(x+strlen(dispstring),y);
 	if(n==0)fprints(" ");
-	if (n!=0 && stx[c_screen]==0 && sty[c_screen]+2>(screenheight()/(PRINT_SIZE)))y--;
-
+	if (n!=0 && stx[c_screen]==0 && (sty[c_screen]+2)>(screenheight()/(PRINT_SIZE))){
+	    prints(" ");
+	    y=y-2;
+	}
 
 	i=0;
 	locate(x,y);

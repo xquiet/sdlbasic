@@ -915,7 +915,9 @@ void eval( Node *node )
         n2 = popNumber();
         n1 = popNumber();
 
-        pushNumber( (long)n1 % (long)n2 );
+        //pushNumber( (long)n1 % (long)n2 );
+        pushNumber( fmod(n1,n2) );
+        
         break;
 
     case OpMul:

@@ -30,11 +30,11 @@ ________________________________________________________________________________
 #include <time.h>
 #include <string.h>
 
-#include <SDL.h>
-#include <SDL_mixer.h>
-#include <SDL_image.h>
-#include <SDL_ttf.h>
-#include <SDL_net.h>
+#include "SDL.h"
+#include "SDL_mixer.h"
+#include "SDL_image.h"
+#include "SDL_ttf.h"
+#include "SDL_net.h"
 #include "../unzip/unzip.h"
 
 #ifndef __APPLE__
@@ -64,8 +64,9 @@ ________________________________________________________________________________
 
 #define NUM_CD		8
 
+#if defined(SOCKET_SUPPORT)
 #define NUM_SOCKS	1024
-
+#endif
 
 
 #ifndef M_PI
@@ -83,6 +84,8 @@ ________________________________________________________________________________
 //DECLARATIONS
 
 //- SCREEN --------------------------------------------------------------------------------------------------------------
+
+extern int nodebug;
 
 extern SDL_Surface *SDLdisplay;
 //extern int GL_display;
@@ -199,9 +202,11 @@ extern SDL_CD *SDLcd[NUM_CD];
 
 //- VIDEO MPEG ---------------------------------------------------------------------------------------------------------------------
 
+#if defined(VIDEOMPEG_SUPPORT)
 extern SMPEG *mpeg;
 extern SMPEG_Info info;
 extern int mpeg_audio;
+#endif
 
 //------------------------------------------------------------------------------------------------------------------------
 
@@ -244,14 +249,16 @@ extern int mousestate;
 
 //- JOYSTICK ------------------------------------------------------------------------------------------------------
 
-extern SDL_Joystick *SDLjoy;
+extern int num_joystick;
+extern SDL_Joystick *SDLjoy[16];
 
 //------------------------------------------------------------------------------------------------------------------------
 
 //- SOCKS ----------------------------------------------------------------------------------------------------------------
-
+#if defined(SOCKET_SUPPORT)
 extern int enabledsock;
 extern TCPsocket SDLsock[NUM_SOCKS];
+#endif
 
 //------------------------------------------------------------------------------------------------------------------------
 /*----- Error system ---*/
@@ -555,6 +562,10 @@ int loadimage(char *filename,int n);
 //loadzipimage(zipfile,filename,opt n)					: load a graphics file stored in a zip archive in a slot n if n=-1 use the first free and return as n
 int loadzipimage(char *zipfile,char *filename,int n);
 
+// map image(blob) from memory
+int mapblobimage(unsigned char *blob, int bsize, int n);
+SDL_Surface *Map_blob_Image(unsigned char *blob, int bsize, int transparent);
+
 //saveimage(filename,n)							: save slot n in a graphics file(only bmp)
 int saveimage(char *filename,int n);
 
@@ -769,7 +780,7 @@ int curson();
 int cursoff();
 
 //inputs(prompt,defs)							: return the string insert to keyboard(default is default text)
-int inputs(char *request,char *defs);
+int inputS(char *request,char *defs);
 
 //zoneinputs(x,y,l,default)						: return the string insert to keyboard in  x,y coordinates with l lenght
 int zoneinputs(int x,int y,int l,char defs[255]);
@@ -912,6 +923,7 @@ int trackoffsetcd(int n,int t);
 //_________________________________________________________________________________________________________________________
 
 // VIDEO MPEG
+#if defined(VIDEOMPEG_SUPPORT)
 
 //loadmpeg(fname,usesound)		: load a mpeg video
 int loadmpeg(char *filename,int useaudio);
@@ -940,6 +952,7 @@ int skipmpeg(int s);
 //statusmpeg()				: return 1 if plaympeg work or 0 in other case
 int statusmpeg();
 
+#endif
 //_________________________________________________________________________________________________________________________
 
 // KEYBOARD
@@ -1033,8 +1046,8 @@ int bjoy(int index);
 //emulate_bjoy								: return emulate joystick buttons in keyboard keys
 int emulate_bjoy(int index);
 
-//waitbjoy								: wait the pression of a joystick button (or emulate in keyboard)
-int waitbjoy(int jbutton);
+//waitbjoy (joy,jbutton)								: wait the pression of a joystick button (or emulate in keyboard)
+int waitbjoy(int joy,int jbutton);
 
 //_________________________________________________________________________________________________________________________
 
@@ -1048,6 +1061,7 @@ int chrono();
 //_________________________________________________________________________________________________________________________
 
 //SOCKET
+#if defined(SOCKET_SUPPORT)
 
 //isenabledsock()							: return 1 if sdlnet was enabled
 int isenabledsock();
@@ -1109,6 +1123,7 @@ int getremoteport(int sock);
 //getlocalip()								: return the local ip
 char *getlocalip();
 
+#endif
 //_________________________________________________________________________________________________________________________
 
 #ifdef __cplusplus

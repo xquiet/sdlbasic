@@ -114,6 +114,8 @@ int textrender (char *testo,int s,int n, int option)
 	SDL_Color bg;
 	int w,h;
 
+	if (strlen(testo)==0)strcpy(testo," ");//bugfix if string are empty does not work
+
 
 	if (n==-1)
 		n=getfreeimage();

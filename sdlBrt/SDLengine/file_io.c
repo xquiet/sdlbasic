@@ -119,6 +119,38 @@ int loadzipimage(char *zipfile,char *filename,int n)
 	}
 	return n;
 }
+//-----------------------------------------------------------------------------
+int mapblobimage(unsigned char *blob, int bsize, int n)
+{
+    if(n==-1)n=getfreeimage();
+    if(n<0)return -1;
+
+    if(n>NUM_IMAGES){
+
+		error_description="SDLengine error - mapblobimage: specified slot exceed image slots maximum number";
+		error_type=1;
+		SDLerr(stderr,"SDLengine error - mapblobimage: slot %d exceed image slots maximum number ",n);
+	return -1;
+    }
+
+	if ( SDLimage[n] != NULL ) {
+		SDL_FreeSurface(SDLimage[n]);
+		SDL_FreeSurface(SDLimageCC[n]);
+	}
+
+	SDLimage[n]= Map_blob_Image(blob,bsize, 0);
+	SDLimageCC[n]=Map_blob_Image(blob,bsize, 1);
+	if (SDLimage[n]==NULL){
+		    error_description="SDLengine error - mapblobimage";
+		    error_type=1;
+		    SDLerr(stderr,"SDLengine error - mapblobimage");
+		    return -1;
+	}
+	SDL_hsx[n]=0;
+	SDL_hsy[n]=0;
+
+	return n;
+}
 //_______________________________________________________________________________________________________________________
 
 //saveimage(filename,n)							: save slot n in a graphics file(only bmp)

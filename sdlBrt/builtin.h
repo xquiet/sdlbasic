@@ -360,19 +360,6 @@ void basTrackTypeCD(void);
 void basTrackLengthCD(void);
 void basTrackOffsetCD(void);
 
-//________________________________________________________________________________________________________________________
-// Video mpeg
-
-void basLoadMpeg(void);
-void basPlayMpeg(void);
-void basStopMpeg(void);
-void basDeleteMpeg(void);
-void basPauseMpeg(void);
-void basRewindMpeg(void);
-void basSeekMpeg(void);
-void basSkipMpeg(void);
-void basStatusMpeg(void);
-
 //_________________________________________________________________________________________________________________________
 // Keyboard
 void basKey(void);
@@ -411,29 +398,24 @@ void basWaitBJoy(void);
 // SDLtime
 void basWait(void);
 void basTimer(void);
-//_________________________________________________________________________________________________________________________
-// Socket
+//-----------------------------------------------------------------------------------------
 
-void basIsEnabledSock(void);
-void basGetFreeSock(void);
-void basOpenSock(void);
-void basAcceptSock(void);
-void basIsServerReady(void);
-void basConnectSock(void);
-//void ConnectionReadySock(void);
-void basIsClientReady(void);
-void basCloseSock(void);
-//void basPeekSock(void);
-void basReadSock(void);
-void basReadByteSock(void);
-void basReadLineSock(void);
-void basWriteSock(void);
-void basWriteByteSock(void);
-void basWriteLineSock(void);
-void basGetRemoteIp(void);
-void basGetRemotePort(void);
-void basGetLocalIp(void);
+#ifdef VIDEOMPEG_SUPPORT
+#include "builtin/videompeg.h"
+#endif
+
+#ifdef SOCKET_SUPPORT
+#include "builtin/socket.h"
+#endif
+
+#ifdef SQLITE_SUPPORT
+#include "builtin/sqlite.h"
+#endif
 //_________________________________________________________________________________________________________________
+
+
+
+
 void addBuiltin( char *name, void (*routine)(void), int args, int optargs );
 void initBuiltins(void);
 
@@ -855,16 +837,6 @@ static struct {     /* builtin routines */
     {"trackoffsetcd",   basTrackOffsetCD,    2,  0},
     {"cdtrackoffset",   basTrackOffsetCD,    2,  0},
 
-//   Video mpeg
-    {"loadmpeg",   	basLoadMpeg,         2,  0},
-    {"plaympeg",   	basPlayMpeg,         0,  1},
-    {"stopmpeg",   	basStopMpeg,         0,  0},
-    {"deletempeg",   	basDeleteMpeg,       0,  0},
-    {"pausempeg",	basPauseMpeg,        0,  0},
-    {"rewindmpeg",	basRewindMpeg,       0,  0},
-    {"seekmpeg",	basSeekMpeg,         1,  0},
-    {"skipmpeg",	basSkipMpeg,         1,  0},
-    {"statusmpeg",	basStatusMpeg,       0,  0},
 
 //    Keyboard
     {"key",           	basKey,             1,  0},
@@ -909,33 +881,24 @@ static struct {     /* builtin routines */
     {"bjoy",          	basBJoy,            1,  0},
     {"joybuttons",     	basBJoy,            1,  0},
     {"fire",          	basBJoy,            1,  0},
-    {"waitbjoy",      	basWaitBJoy,        0,  1},
+    {"waitbjoy",      	basWaitBJoy,        1,  1},
 
 //    SDLtime
     {"wait",          	basWait,            1,  0},
     {"timer",         	basTimer,           0,  0},
 
-// Socket
-    {"isenabledsock",   basIsEnabledSock,   0,  0},
 
-    {"getfreesock",     basGetFreeSock,     0,  0},
-    {"opensock",        basOpenSock,        1,  0},
-    {"acceptsock",      basAcceptSock,      1,  0},
-    {"isserverready",   basIsServerReady,   1,  0},
-    {"connectsock",     basConnectSock,     2,  0},
-  //{"connectionreadysock",basConnectionReadySock,1,  0},
-    {"isclientready",   basIsClientReady,   1,  0},
-    {"closesock",       basCloseSock,       1,  0},
-  //{"peeksock",        basPeekSock,        2,  0},
-    {"readsock",        basReadSock,        2,  0},
-    {"readbytesock",    basReadByteSock,    1,  0},
-    {"readlinesock",    basReadLineSock,    1,  0},
-    {"writesock",       basWriteSock,       3,  0},
-    {"writebytesock",   basWriteByteSock,   2,  0},
-    {"writelinesock",   basWriteLineSock,   2,  0},
-    {"getremoteip",     basGetRemoteIp,     1,  0},
-    {"getremoteport",   basGetRemotePort,   1,  0},
-    {"getlocalip",     	basGetLocalIp,      0,  0},
+#ifdef VIDEOMPEG_SUPPORT
+#include "builtin/struct-videompeg.h"
+#endif
+
+#ifdef SOCKET_SUPPORT
+#include "builtin/struct-socket.h"
+#endif
+
+#ifdef SQLITE_SUPPORT
+#include "builtin/struct-sqlite.h"
+#endif
 
     {NULL,              NULL,               0,  0}
 };

@@ -180,6 +180,12 @@ int main(int argc, char **argv)
     for (r=0;r<argc;r++){
 	cmdArgv[r1]=eCopyString(argv[r]);
 #ifdef UNIX
+	if (strcasecmp(cmdArgv[r1],"--nodebug")==0)
+	{
+		printf("debugger disabled\n");
+	    nodebug=1;
+	}
+
 	if (strcasecmp(cmdArgv[r1],"--nodefaults")==0)
 	    defaults=0;
 	if (strcasecmp(cmdArgv[r1],"--nosound")==0)
@@ -282,7 +288,7 @@ int main(int argc, char **argv)
     	//printf(" font:%s| \n",fontPath); //Debug
 #else
 	fontPath=(char *) malloc(256);
-	strcpy(fontPath,font_prefix);
+	strcpy(fontPath,FONT_PREFIX);
 	strcat(fontPath,"/dejavu/DejaVuSans.ttf\0");
 	if (!fileExist(fontPath))fontPath="./DejaVuSans.ttf";
 #endif

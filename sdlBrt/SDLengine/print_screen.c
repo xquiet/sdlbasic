@@ -511,7 +511,7 @@ int cursoff()
 //_______________________________________________________________________________________________________________________
 
 //inputs(prompt,defs)							: return the string insert to keyboard(default is default text)
-int inputs(char *request,char *defs)
+int inputS(char *request,char *defs)
 {
     int oldautoback;
     oldautoback=autoback(-1);
@@ -556,6 +556,7 @@ int inputs(char *request,char *defs)
 	if (autotimer()!=0)return -1;
 	return 0;
 }
+
 //_______________________________________________________________________________________________________________________
 
 //zoneinputs(x,y,l,default)						: return the string insert to keyboard in  x,y coordinates with l lenght

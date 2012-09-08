@@ -13,18 +13,25 @@ ifndef $(OS)
 OS=$(os)
 endif
 
+ifdef $(VIDEOMPEG_SUPPORT)
+VIDEO_MPEG=video_mpeg
+endif
+
+ifdef $(SOCKET_SUPPORT)
+SOCKET=socket
+endif
+
 
 SDLENGINE_SRC= SDLengine.c common.c SDL_extension.c screen.c graphics.c file_io.c image_manipulation.c \
-blitting.c sprite_system.c bob_system.c text_draw.c print_screen.c sound.c cd_support.c video_mpeg.c \
-keyboard.c joystick.c mouse.c time.c socket.c
-
+blitting.c sprite_system.c bob_system.c text_draw.c print_screen.c sound.c cd_support.c  \
+keyboard.c joystick.c mouse.c time.c $(SOCKET).c $(VIDEO_MPEG).c
 
 SRC =  $(SDLENGINE_SRC)
 
 
 SDLENGINE_OBJ= SDLengine.o common.o SDL_extension.o screen.o graphics.o file_io.o image_manipulation.o \
-blitting.o sprite_system.o bob_system.o text_draw.o print_screen.o sound.o cd_support.o video_mpeg.o \
-keyboard.o joystick.o mouse.o time.o socket.o
+blitting.o sprite_system.o bob_system.o text_draw.o print_screen.o sound.o cd_support.o  \
+keyboard.o joystick.o mouse.o time.o $(SOCKET).o $(VIDEO_MPEG).o
 OBJECT= $(SDLENGINE_OBJ)
 
 

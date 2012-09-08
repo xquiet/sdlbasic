@@ -45,20 +45,28 @@ int stopkey()
     if (keystate[306] && keystate[99]){
 		error_description="ctrl+c pressed by the user\n";
 		error_type=2;
-		SDLerr(stderr,"%s",error_description);
+		SDLerr(stderr,error_description);
 	return -1;
     }
     //*
     #if defined(GP2X)
-    SDLjoy=SDL_JoystickOpen(0);
-    SDL_JoystickUpdate();
-    if (SDL_JoystickGetButton(SDLjoy, 16) && SDL_JoystickGetButton(SDLjoy, 17)){
+
+// ivanixcu: remove debugger for commercial games
+
+		if ( nodebug )
+		{
+    		return 0;
+		}
+
+   	// SDLjoy=SDL_JoystickOpen(0);
+    	SDL_JoystickUpdate();
+  	if (SDL_JoystickGetButton(SDLjoy[0], 16) && SDL_JoystickGetButton(SDLjoy[0], 17)){
 		error_description="vol+ vol- pressed by the user\n";
 		error_type=2;
 		SDLerr(stderr,error_description);
-	return -1;
-    }
-    SDL_JoystickClose(SDLjoy);
+		return -1;
+ 	}
+    	//SDL_JoystickClose(SDLjoy);
 
     #endif
     //*/

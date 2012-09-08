@@ -169,9 +169,11 @@ SDL_CD *SDLcd[NUM_CD];
 
 //- VIDEO MPEG ---------------------------------------------------------------------------------------------------------------------
 
+#if defined(VIDEOMPEG_SUPPORT)
 SMPEG *mpeg;
 SMPEG_Info info;
 int mpeg_audio;
+#endif
 
 //------------------------------------------------------------------------------------------------------------------------
 
@@ -214,15 +216,17 @@ int mousestate;
 //------------------------------------------------------------------------------------------------------------------------
 
 //- JOYSTICK ------------------------------------------------------------------------------------------------------
-
-SDL_Joystick *SDLjoy;
+int num_joystick;
+SDL_Joystick *SDLjoy[16];
 
 //------------------------------------------------------------------------------------------------------------------------
 
 //- SOCKS ----------------------------------------------------------------------------------------------------------------
 
+#if defined(SOCKET_SUPPORT)
 int enabledsock;
 TCPsocket SDLsock[NUM_SOCKS];
+#endif
 
 //------------------------------------------------------------------------------------------------------------------------
 
@@ -278,6 +282,15 @@ int initialize(int audio,int socket,int defaults)
 		enabledsound=0;
 	}
 
+
+	//joystick
+	num_joystick=SDL_NumJoysticks();
+	if (num_joystick!=0){
+	    for (i=0;i<num_joystick;i++){
+		    SDLjoy[i]=SDL_JoystickOpen(i);
+	    }
+	}
+
 #if defined(WIN32)
 	fontPath=(char *)malloc(256);
 	strcpy(fontPath,getenv("WINDIR"));
@@ -314,7 +327,7 @@ int initialize(int audio,int socket,int defaults)
 		SDL_EnableKeyRepeat(SDL_DEFAULT_REPEAT_DELAY,SDL_DEFAULT_REPEAT_INTERVAL);
 	}
 
-
+#if defined(SOCKET_SUPPORT)
 	if (socket!=0){
 	    /* net initializing */
 	    if ( SDLNet_Init() != 0 ) {
@@ -328,7 +341,9 @@ int initialize(int audio,int socket,int defaults)
 	else{
 	    enabledsock=0;
 	}
-
+#endif
+	
+	
 	for (i=0;i<NUM_SCREENS;i++){
 	    fadeflag[i]=0;
 	    crossfadeflag[i]=0;
@@ -446,8 +461,18 @@ int terminate()
 {
 	/* close all socks opens */
         int i;
+	
+#if defined(SOCKET_SUPPORT)	
 	for (i=1;i<NUM_SOCKS;i++)
 	    closesock(i);
+#endif
+	
+	/* close the joystic opens */
+	if (num_joystick!=0){
+	    for (i=0;i<num_joystick;i++){
+		SDL_JoystickClose(SDLjoy[i]);
+	    }
+	}
 
 	SDLNet_Quit();
 	TTF_Quit();

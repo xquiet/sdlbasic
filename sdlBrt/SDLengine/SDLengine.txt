@@ -282,7 +282,7 @@ ygetballjoystick(i,a) 			: get relative y trackball motion
 joy(i)					: return joystick boolean coordinate
 bjoy(i)					: return joystick buttons pressed in boolean expression
 emulate_bjoy				: return emulate joystick buttons in keyboard keys
-waitbjoy				: wait the pression of a joystick button (or emulate in keyboard)
+waitbjoy(joy,jbutton)			: wait the pression of a joystick button (or emulate in keyboard)
 
 _________________________________________________________________________________________________________________________
 Time
