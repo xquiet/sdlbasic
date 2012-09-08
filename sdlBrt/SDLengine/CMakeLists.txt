@@ -1,5 +1,5 @@
 ###############
-# (C) 2012 by Matteo Pasotti <pasotti.matteo@gmail.com>
+# (C) 2012 by Matteo Pasotti <matteo.pasotti@gmail.com>
 # License: GPLv3
 ###############
 
