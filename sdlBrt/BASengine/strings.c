@@ -108,12 +108,12 @@ char *left(char *string,int pos)
         return string;
     }
 
-    if (pos < 1) {
+    if (pos < 1 || len <1) {
         return "";
     }
 
     newLen = (pos);
-    left = (char *) eMalloc(newLen+1);
+    left = (char *) malloc(newLen+1);
     for (pos=newLen;pos>0;pos--)left[pos]='\0';
     strncpy(left,string,newLen);
     left[newLen] = '\0';

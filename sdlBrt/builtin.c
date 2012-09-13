@@ -353,7 +353,7 @@ void basLeft()
     pushStringCopy(dest);
 	
     eFree(string);	
-    eFree(dest);
+    //eFree(dest);
 
 }
 //_______________________________________________________________________________________________________________________
@@ -379,7 +379,7 @@ void basLTrim()
     dest=ltrim(string);	
     pushStringCopy(dest);
 	
-    eFree(dest);    
+    //eFree(dest);    
     eFree(string);    
 	
 }
@@ -436,9 +436,9 @@ void basReplace()
     dest=replace(src, rep, i);
     pushStringCopy(dest);
     
-    eFree(src);    
-    eFree(rep);    
-    eFree(dest);    
+    //eFree(src);    
+    //eFree(rep);    
+    //eFree(dest);    
 
 }
 //_______________________________________________________________________________________________________________________
@@ -461,7 +461,10 @@ void basReplaceSubStr()
     dest=replacesubstr(start, source, replace, with);
     pushStringCopy(dest);
     
-    eFree(dest);    
+    //eFree(source);    
+    //eFree(replace);
+    //eFree(with);        
+    //eFree(dest);    
 }
 //_______________________________________________________________________________________________________________________
 
@@ -533,7 +536,7 @@ void basRTrim()
     pushStringCopy(dest);
 	
     eFree(string);
-    eFree(dest);
+    //eFree(dest);
 }
 //_______________________________________________________________________________________________________________________
 

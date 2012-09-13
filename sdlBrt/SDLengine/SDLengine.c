@@ -298,7 +298,7 @@ int initialize(int audio,int socket,int defaults)
 	if (!fileExist(fontPath))fontPath=".\\DejaVuSans.ttf";
 #else
 	fontPath=(char *) malloc(256);
-	strcpy(fontPath,FONT_PREFIX);
+	strcpy(fontPath,font_prefix);
 	strcat(fontPath,"/dejavu/DejaVuSans.ttf\0");
 	if (!fileExist(fontPath))fontPath="./DejaVuSans.ttf";
 #endif

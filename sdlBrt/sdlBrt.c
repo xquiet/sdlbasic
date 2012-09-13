@@ -269,7 +269,7 @@ int main(int argc, char **argv)
 	if (!fileExist(fontPath))fontPath=".\\DejaVuSans.ttf";
 #else
 	fontPath=(char *) malloc(256);
-	strcpy(fontPath,FONT_PREFIX);
+	strcpy(fontPath,font_prefix);
 	strcat(fontPath,"/dejavu/DejaVuSans.ttf\0");
 	if (!fileExist(fontPath))fontPath="./DejaVuSans.ttf";
 #endif
@@ -288,7 +288,7 @@ int main(int argc, char **argv)
     	//printf(" font:%s| \n",fontPath); //Debug
 #else
 	fontPath=(char *) malloc(256);
-	strcpy(fontPath,FONT_PREFIX);
+	strcpy(fontPath,font_prefix);
 	strcat(fontPath,"/dejavu/DejaVuSans.ttf\0");
 	if (!fileExist(fontPath))fontPath="./DejaVuSans.ttf";
 #endif

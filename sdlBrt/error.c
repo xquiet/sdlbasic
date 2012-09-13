@@ -104,7 +104,7 @@ void ePrintf( int errType, char *fmt, ... )
         }
     }
 
-    fprintf( stderr,"%s", message );
+    fprintf( stderr, message );
     //printf( message );
 
     /* open the error file */
@@ -114,7 +114,7 @@ void ePrintf( int errType, char *fmt, ... )
 	errFile =NULL;
 
     if (errFile != NULL) {
-        fprintf( errFile,"%s", message );
+        fprintf( errFile, message );
         fclose( errFile );
     }
 
@@ -139,7 +139,7 @@ void eConsole( char *fmt, ... )
     va_end(args);
 
 
-    fprintf( stdout,"%s", buffer );
+    fprintf( stdout, buffer );
 
     free(buffer);
 }
