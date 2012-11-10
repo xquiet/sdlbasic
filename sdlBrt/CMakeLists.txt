@@ -370,7 +370,7 @@ MESSAGE( STATUS )
 #set ( FONT_PREFIX ${CMAKE_INSTALL_PREFIX}/share/fonts/ttf )
 #set ( EXEC_PREFIX ${CMAKE_INSTALL_PREFIX}/bin )
 
-add_definitions( -DFONT_PREFIX="${CMAKE_INSTALL_PREFIX}/share/fonts/ttf" )
+add_definitions( -Dfont_prefix="${CMAKE_INSTALL_PREFIX}/share/fonts/ttf" )
 add_definitions( -DSOCKET_SUPPORT=BOOL:1 )
 
 IF (UNIX)
