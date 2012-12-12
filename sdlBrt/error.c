@@ -159,7 +159,7 @@ void eAddMemLinkDebug( void *p, int n )
     }
 
     /* set values */
-    link->start = (int)p;
+    link->start = (intptr_t)p;
     link->end = link->start+(n-1);
     link->next = lastMemLink;
     lastMemLink = link;
@@ -178,7 +178,7 @@ void eRemoveMemLinkDebug( void *address )
 
     prev = NULL;
     for ( link = lastMemLink; link != NULL; link = link->next ) {
-        if (link->start == (int)address) {
+        if (link->start == (intptr_t)address) {
 
             if (prev == NULL) {
                 lastMemLink = link->next;
@@ -198,7 +198,7 @@ MemLink *lookupMemLink( void *p )
     MemLink *link = lastMemLink;
 
     for ( ; link != NULL; link = link->next ) {
-        if ((int)p >= link->start && (int)p <= link->end) {
+        if ((intptr_t)p >= link->start && (intptr_t)p <= link->end) {
             return link;
         }
     }
@@ -441,7 +441,7 @@ void screendebug()
 					strncpy(indexvar,&binputvar[ba],a-ba);
 					indexvar[a-ba]='\0';
 				    }
-				    printf("indexvar:%s - a:%d - ba:%d - i:%d -len:%d   \n",indexvar,a,ba,i,strlen(binputvar));
+				    printf("indexvar:%s - a:%d - ba:%d - i:%d -len:%zd   \n",indexvar,a,ba,i,strlen(binputvar));
 				    strcpy(stackstring[i],indexvar);
 				}
 				i++;

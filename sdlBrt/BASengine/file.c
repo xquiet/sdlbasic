@@ -82,7 +82,7 @@ void fileOpen( char *name, int mode, int handle )
         ePrintf( Runtime, "fileOpen: unknown file mode" );
     }
 
-    if ((int)(fileHandles[handle-1] ) == EOF) {
+    if (!fileHandles[handle-1]) {
         ePrintf( Runtime, "fileOpen: Error opening file #%d", handle );
     }
 }

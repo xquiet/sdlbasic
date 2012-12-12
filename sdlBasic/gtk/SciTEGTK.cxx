@@ -2219,7 +2219,7 @@ gint SciTEGTK::QuitSignal(GtkWidget *, GdkEventAny *, SciTEGTK *scitew) {
 }
 
 void SciTEGTK::ButtonSignal(GtkWidget *, gpointer data) {
-	instance->Command((guint)data);
+	instance->Command((intptr_t)data);
 }
 
 void SciTEGTK::MenuSignal(SciTEGTK *scitew, guint action, GtkWidget *) {

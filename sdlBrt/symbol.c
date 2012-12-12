@@ -28,7 +28,7 @@ Symbol *maskIfHidden( Symbol *s ) {
         }
 
         /* visible if not shared */
-        if (inStack(sharedStack, (int)s )) {
+        if (inStack(sharedStack, (intptr_t)s )) {
             return s;
         }
     }

@@ -941,7 +941,7 @@ void SciTEBase::SaveToPDF(const char *saveName) {
 			// PDF1.4Ref(p38) EOL marker preceding endstream not counted
 			char *textObj = new char[pageData.length() + 100];
 			// concatenate stream within the text object
-			sprintf(textObj, "<</Length %d>>\nstream\n%s"
+			sprintf(textObj, "<</Length %zd>>\nstream\n%s"
 					 "ET\nendstream\n",
 					 pageData.length() - 1 + 3,
 					 pageData.c_str());

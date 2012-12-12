@@ -13,7 +13,7 @@ Stack *newStack( int size )
 
     /* allocate stack */
     stack = (Stack *)eMalloc( sizeof( Stack ) +
-                (sizeof(int) * (size)) );
+                (sizeof(intptr_t) * (size)) );
 
     stack->tos = -1;
     stack->size = size;
@@ -21,7 +21,7 @@ Stack *newStack( int size )
 }
 
 /* push an item on the stack */
-void pushStack( Stack *stack, int value )
+void pushStack( Stack *stack, intptr_t value )
 {
     if (stack->tos == stack->size) {
         ePrintf( Runtime, "pushStack: stack overflow");
@@ -31,13 +31,13 @@ void pushStack( Stack *stack, int value )
 }
 
 /* incrStack: increment the value on the stack */
-void incrStack( Stack *stack, int value )
+void incrStack( Stack *stack, intptr_t value )
 {
     stack->data[stack->tos] += value;
 }
 
 /* decrStack: decrement the value on the stack */
-void decrStack( Stack *stack, int value )
+void decrStack( Stack *stack, intptr_t value )
 {
     stack->data[stack->tos] -= value;
 }
@@ -46,7 +46,7 @@ void decrStack( Stack *stack, int value )
 /* swapStack: swap top two stack items */
 void swapStack( Stack *stack  )
 {
-    int tmp;
+    intptr_t tmp;
 
     if (stack->tos < 1) {
         ePrintf( Runtime, "swapStack: stack underflow");
@@ -71,7 +71,7 @@ void dupStack( Stack *stack  )
 
 
 /* return copy of top stack item */
-int peekStack( Stack *stack  )
+intptr_t peekStack( Stack *stack  )
 {
     if (stack->tos < 0) {
         ePrintf( Runtime, "peekStack: underflow" );
@@ -81,7 +81,7 @@ int peekStack( Stack *stack  )
 
 
 /* pop an item off the stack */
-int popStack( Stack *stack  )
+intptr_t popStack( Stack *stack  )
 {
     if (stack->tos < 0) {
         ePrintf( Runtime, "popStack: underflow" );
@@ -98,7 +98,7 @@ int isEmptyStack( Stack *stack  )
 }
 
 /* inStack: return true if item is in the stack */
-int inStack( Stack *stack, int val  )
+intptr_t inStack( Stack *stack, intptr_t val  )
 {
     int     i;
     for ( i = stack->tos; i > -1; i-- ) {

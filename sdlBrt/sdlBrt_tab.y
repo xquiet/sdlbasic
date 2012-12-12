@@ -438,7 +438,7 @@ command:
         {   if (currentScope == NULL) {
                 ePrintf( Syntax, "Shared illegal outside Sub or Function");
             }
-            pushStack(blockStack, (int)currentScope );
+            pushStack(blockStack, (intptr_t)currentScope );
             currentScope = NULL; }
         sharedList sep
         {   currentScope = (Symbol *)popStack(blockStack);
@@ -824,7 +824,7 @@ command:
         {   if (currentScope == NULL) {
                 ePrintf( Syntax, "Shared illegal outside Sub or Function");
             }
-            pushStack(blockStack, (int)currentScope );
+            pushStack(blockStack, (intptr_t)currentScope );
             currentScope = NULL; }
         sharedList sep
         {   currentScope = (Symbol *)popStack(blockStack);

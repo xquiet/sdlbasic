@@ -6,13 +6,14 @@
                 The Practice of Programming
 */
 
+#include <stdint.h>
 
 typedef struct MemLink MemLink;
 
 
 struct MemLink {
-    int     start;     /* start of allocated block */
-    int     end;       /* end of allocated block */
+    intptr_t     start;     /* start of allocated block */
+    intptr_t     end;       /* end of allocated block */
     MemLink *next;      /* in list */
 };
 

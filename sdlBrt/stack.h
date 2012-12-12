@@ -13,14 +13,14 @@ struct Stack {
 };
 
 Stack *newStack( int size );
-void pushStack( Stack *stack, int value );
-void incrStack( Stack *stack, int value );
-void decrStack( Stack *stack, int value );
+void pushStack( Stack *stack, intptr_t value );
+void incrStack( Stack *stack, intptr_t value );
+void decrStack( Stack *stack, intptr_t value );
 void swapStack( Stack *stack  );
 void dupStack( Stack *stack  );
-int peekStack( Stack *stack  );
-int popStack( Stack *stack  );
+intptr_t peekStack( Stack *stack  );
+intptr_t popStack( Stack *stack  );
 int isEmptyStack( Stack *stack  );
-int inStack( Stack *stack, int val  );
+intptr_t inStack( Stack *stack, intptr_t val  );
 void clearStack( Stack *stack  );
 void freeStack( Stack *stack );
