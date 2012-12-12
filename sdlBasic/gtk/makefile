@@ -26,7 +26,7 @@ endif
 # "h@h@" is printed here when gnome-config unavailable. Seems harmless.
 ifdef GTK2
 CONFIGFLAGS=pkg-config --cflags gtk+-2.0
-CONFIGLIB=pkg-config --libs gtk+-2.0 gthread-2.0
+CONFIGLIB=pkg-config --libs gtk+-2.0 gthread-2.0 gmodule-2.0
 CONFIGTHREADS=
 gnomeprefix:=$(shell pkg-config --variable=prefix gtk+-2.0 2>/dev/null)
 else
@@ -58,12 +58,12 @@ vpath %.cxx ../src
 
 #CXXFLAGS= -g -DGTK -DSCI_LEXER -DSYSCONF_PATH=\"$(SYSCONF_PATH)\" -Wwrite-strings
 INCLUDEDIRS=-I ../scintilla/include -I ../src
-CXXBASEFLAGS=-W -Wall -DGTK -DSCI_LEXER -DPIXMAP_PATH=\"$(pixmapdir)\" -DSYSCONF_PATH=\"$(SYSCONF_PATH)\" $(INCLUDEDIRS)
+CXXBASEFLAGS=-W -Wall -DGTK -DSCI_LEXER -DPIXMAP_PATH=\"$(pixmapdir)\" -DSYSCONF_PATH=\"$(SYSCONF_PATH)\" -DBINDIR_PATH=\"$(bindir)\" $(INCLUDEDIRS)
 
 ifdef DEBUG
-CXXTFLAGS=-DDEBUG -g $(CXXBASEFLAGS)
+CXXTFLAGS=-DDEBUG $(OPTFLAGS) $(CXXBASEFLAGS)
 else
-CXXTFLAGS=-DNDEBUG -Os $(CXXBASEFLAGS)
+CXXTFLAGS=-DNDEBUG $(OPTFLAGS) $(CXXBASEFLAGS)
 endif
 CXXFLAGS=$(CXXTFLAGS) -DNO_LUA
 ifeq ($(shell uname), Darwin)
