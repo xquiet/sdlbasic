@@ -1,0 +1,771 @@
+<!doctype html public '-//w3c//dtd html 4.0 transitional//en'>
+<!-- $id: htmlconvert.sdlbas,v 1.2 2005/07/09 22:52:22 vroby exp $ -->
+<html>
+<head>
+<link href='style.css' rel='stylesheet' type='text/css'>
+<meta http-equiv='content-type' content='text/html; charset=iso-8859-1'>
+<title>sdlbasic quickhelp</title>
+</head>
+
+<body bgcolor='#ffffff' background='pattern.png'>
+<a href='http://sourceforge.net/'><img src='motd.png' border=0 alt='[sourceforge]' align=left /></a>
+<a href='http://sdlbasic.sourceforge.net/'><img src='logo.jpg' border=0 alt='[sdlbasic]' align=middle /></a>
+<h1><center>sdlbasic quick help</center></h1>
+<hr>
+ sdlBasic un piccolo basic per fare semplici giochi in 2d<br />
+<br />
+ Questo basic al momento funziona su<br />
+    linux(versioni ragionevolmente nuove)<br />
+    windows(sia 9x che Nt based)<br />
+    MacOsX<br />
+    FreeBSD<br />
+    NetBSD<br />
+    MorphOS<br />
+    AmigaOS<br />
+<br />
+ Questo basic e' una dimostrazione lampante della forza della licenza GPL<br />
+ L'interprete basic e' il wxbasic di David Cuny ("http://wxbasic.sourceforge.net") distribuito sotto licenza lGPL<br />
+ le librerie Grafiche SDL ("http://www.libsdl.org")sono distribuite sotto licenza lGPL<br />
+ il motore grafico e' derivato dal mini gioco aliens ("http://www.libsdl.org/projects/aliens")scritto in c e<br />
+ distribuito sotto licenza lGPL<br />
+ le rutine putpixel getpixel sono derivate direttamente dal tutorial delle SDL e migliorate su suggerimento di Gigi Davassi<br />
+ la rutine line e stata estratta e adattata direttamente dal sorgente di Alvyn Basic con l'autorizzazione dell'autore<br />
+<br />
+ Ho usato anche i sorgenti della libreria sdldraw ("http://sdl-draw.sourceforge.net/")<br />
+<br />
+ Il sottoscritto non ha fatto altro che tagliare incollare e adattare sorgenti altrui distribuiti tutti sotto licenza lGPL.<br />
+ Questo prodotto e' ovviamente soggetto alla licenza lGPL ed e' gratuito come tutti i programmi<br />
+ sopra citati.<br />
+<br />
+<hr /><br />
+<b></b><br />
+ sdlBasic elenco comandi e sintassi<br />
+<br />
+ suggerisco di scaricare wxbasic per le istruzioni specifiche<br />
+<br />
+ sezioni:<br />
+    Run time<br />
+    Sub and function<br />
+    Control structures<br />
+    Operator<br />
+    Array<br />
+    Strings<br />
+    Maths<br />
+    Files<br />
+    Dirs<br />
+    Data function<br />
+    console output<br />
+    Date and time<br />
+    Memory Bank<br />
+<br />
+    Screen<br />
+    Graphics<br />
+    File graphics input output<br />
+    Image manipulation<br />
+    Blitting<br />
+    Sprite system<br />
+    Bob system<br />
+    Text draw<br />
+    Print screen<br />
+    Sounds and music<br />
+    CD support<br />
+    Video Mpeg<br />
+    Keyboard<br />
+    Mouse<br />
+    Joystick<br />
+    SDLtime<br />
+    Socket<br />
+<hr /><br />
+<b></b><br />
+ note:<br />
+<table bgcolor='#ff0000' width='100%'><tr><td> * 	 non funziona</td></tr></table><br />
+<table bgcolor='#ff8000' width='100%'><tr><td> ** 	 non funziona e da testare</td></tr></table><br />
+<table bgcolor='#ffff00' width='100%'><tr><td> ? 	 non funziona bene ci sono bachi non risolti</td></tr></table><br />
+<table bgcolor='#ff00ff' width='100%'><tr><td> -> 	 da eliminare</td></tr></table><br />
+<br />
+<hr /><br />
+<b> Run Time</b><br />
+<br />
+ argomenti di run da linea di comando<br />
+<b> --nodefaults	:</b> disabilita i parametri di default del display<br />
+<b> --nosound  	:</b> disabilita il suono<br />
+<b> --nosocket 	:</b> disabilita il supporto socket<br />
+<b> --debug    	:</b> lancia sdlBasic in modo passo passo<br />
+<b> --version  	:</b> visualizza la versione (iso date)<br />
+<b> --license  	:</b> visualizza la licenza<br />
+<b> --copyright	:</b> visualizza copyright ( ;-) assolutamente free software )<br />
+<b> --help	:</b> visualizza la lista delle opzioni di avvio<br />
+<br />
+<br />
+<b>const					:</b> dichiarazione di costante numerica<br />
+<b>option explicit				:</b> dichiarazione variabile obligatoria<br />
+<b>option qbasic				:</b> permette di usare le rutine dichiarandole all'inizio del file<br />
+<b>include(filename)			:</b> inclusione file sorgente esterno<br />
+<b>argc					:</b> ritorna il numero di argomenti della riga di comando<br />
+<b>argv					:</b> ritorna gli argomenti della riga di comando<br />
+<b>command[param] 				:</b> ritorna gli argomenti della riga di comando<br />
+<b>command$[param]				:</b> ritorna gli argomenti della riga di comando<br />
+<b>argument$(optional n)			:</b> ritorna gli argomenti mandatia una sub/function con n=0 o senza parametri ritorna il numero argomenti<br />
+<b><table bgcolor='#ffff00' width='100%'><tr><td>?setenv(varname,value)			:</b> carica una variabile d'ambiente nel os corrente se esiste e' sovrascritta</td></tr></table><br />
+<b>getenv(varname)				:</b> ritorna il valore di una variabile d'ambiente<br />
+<b><table bgcolor='#ff0000' width='100%'><tr><td>*run					:</b> esegue un commando in multitasking</td></tr></table><br />
+<b>shell					:</b> esegue un commando, e attende il termine di questo comando per proseguire l'esecuzione<br />
+<b>end					:</b> termina il programma e esce<br />
+<b>stop					:</b> ferma l'esecuzione e avvia il debug<br />
+<br />
+<b>os					:</b> restituisce il nome del sistema operativo (win32 linux osx o fbsd)<br />
+<b>isfbsd					:</b> restituisce 1 se il sistema operativo usato e' FreeBSD<br />
+<b>isosx					:</b> restituisce 1 se il sistema operativo usato e' MacOSX<br />
+<b>islinux					:</b> restituisce 1 se il sistema operativo usato e' linux<br />
+<b>iswin32					:</b> restituisce 1 se il sistema operativo usato e' windows<br />
+<b>ismos					:</b> restituisce 1 se il sistema operativo usato e' MorphOS<br />
+<b>isnetbsd				:</b> restituisce 1 se il sistema operativo usato e' NetBSD<br />
+<b>isamigaos				:</b> restituisce 1 se il sistema operativo usato e' AmigaOS<br />
+<br />
+ debug viene avviato con l'opzione -debug all'avvio o quando premi ctrl+c durante l'esecuzione di un programma scritto in basic<br />
+ se tu premi F5 sdlbasic ripredera' la normale esecuzione<br />
+ con F6 il modo passo passo<br />
+ con F4 puoi interrogare lo stato di una variabile. Pe interrogare lo stato di un array devi indicare il nome senza<br />
+ le parentesi quadre e dare il valore degli indici quando richiesti.<br />
+<br />
+<hr /><br />
+<b> Sub and function</b><br />
+<br />
+<b>declare	[sub | function][name]		:</b> dichiara una subrutine/function in modo qbasic<br />
+<b>sub[name](args...)			:</b> inizia una subrutine<br />
+<b>exit sub 				:</b> interrompe una subrutine<br />
+<b>end sub					:</b> termina una subrutine<br />
+<b>function[name](args...)			:</b> inizia una funzione<br />
+<b>exit function				:</b> interrompe una function<br />
+<b>end function				:</b> termina una function<br />
+<b>return[value | variable]		:</b> setta il valore di ritorno di una function (come nomefunc=x)<br />
+<br />
+<hr /><br />
+<b> Control structures</b><br />
+<br />
+<b>while					:</b> inizia il ciclo while<br />
+<b>exit while				:</b> interrompe il ciclo while<br />
+<b>end while				:</b> termina il ciclo while<br />
+<b>wend					:</b> termina il ciclo while<br />
+<b>continue				:</b> finisce il ciclo while poi esce<br />
+<br />
+<b>if [condition expression]		:</b> il controllo di flusso if in sdlBasic ha alcune particolarita:			:<br />
+<b>then					:</b> then deve essere seguito o da un : o il coice deve passare alla linea successiva<br />
+<b>else					:</b> lo stesso discorso vale per else<br />
+<b>elseif					:</b> e' supportato elseif che tuttavia si comporta come if<br />
+<b>end if					:</b> deve essere sempre presente e deve essere separato da altri comandi da a capo o :<br />
+<br />
+<b>select case [condition expression]	:</b> il controllo select case permette di fare una scelta multipla in base a una condizione<br />
+<b>case					:</b> viene usato per determinare una condizione<br />
+<b>case else				:</b> viene usato come condizione di default<br />
+<b>end select				:</b> deve essere inserito alla fine del ciclo select case<br />
+<br />
+<b>for[var]=[val1]to[val2][step[vals]]	:</b> il classico ciclo for-next e' implementato molto bene<br />
+<b>for each [var] in [array]		:</b> supporta anche il meno classico for each x in array attenzione riporta l'indice dell'array non il valore<br />
+<b>continue				:</b> forza l'uscita da un ciclo for next (funziona solo con for each)<br />
+<b>exit for				:</b> forza l'uscita da un ciclo for next<br />
+<b>next					:</b> la fine del ciclo<br />
+<b>end for					:</b> la fine del ciclo<br />
+<br />
+<br />
+<b>do 1					:</b> inizia un ciclo do-loop<br />
+<b>loop					:</b> termina un ciclo do-loop<br />
+<b>exit do					:</b> esce da un ciclo do-loop<br />
+<br />
+<b><table bgcolor='#ff0000' width='100%'><tr><td>*repeat					:</b> il ciclo repeat non e' al momento supportato</td></tr></table><br />
+<b><table bgcolor='#ff0000' width='100%'><tr><td>*until					:</b> non supportato</td></tr></table><br />
+<br />
+<b>or					:</b> espressione logica "or" usata come condizione di flusso<br />
+<b>and					:</b> espressione logica "and" usata come condizione di flusso<br />
+<b>xor					:</b> espressione logica "xor" usata come condizione di flusso<br />
+<b>not					:</b> espressione logica "not" usata come condizione di flusso<br />
+<br />
+<hr /><br />
+<b> Operator</b><br />
+<br />
+<b>[+]					:</b> operatore di addizione<br />
+<b>[-]					:</b> operatore di sottrazione<br />
+<b>[*]					:</b> operatore di moltiplicazione<br />
+<b>[/]					:</b> operatore di divisione<br />
+<b>[^]					:</b> operatore di elevazione a potenza<br />
+<b>mod					:</b> operatore di resto di una divisione<br />
+<b>shl					:</b> shift left slittamento dei bit a sinistra<br />
+<b>shr					:</b> shift right slittamento dei bit a destra<br />
+<br />
+<hr /><br />
+<b> Array</b><br />
+<br />
+<b>dim [name][[index of array]]		:</b> dichiara un array nota: gli array usano [] come parentesi<br />
+<b><table bgcolor='#ff0000' width='100%'><tr><td>*redim [name][[index of array]]		:</b> redichiarazione di un array</td></tr></table><br />
+<b>shared [variable]			:</b> dichiara un variable esterna in una subrutine<br />
+<b>common	[variable]			:</b> dichiara variable o un array globale<br />
+<b>lbound	[array]				:</b> ritorna l'indirizzo piu' basso di un array<br />
+<b><table bgcolor='#ff0000' width='100%'><tr><td>*quicksort [array]			:</b> riordina un array</td></tr></table><br />
+<b>ubound [array]				:</b> l'indirizzo piu' alto di un array<br />
+<b>erase [array]				:</b> libera un array<br />
+<br />
+<hr /><br />
+<b> Strings</b><br />
+<br />
+<b>asc(char)				:</b> ritorna il valore ascii del primo carattere nella stringa char<br />
+<b>chr(v)					:</b> ritorna la stringa corrispondente al valore ascii v<br />
+<b>chr$(v)					:</b> ritorna la stringa corrispondente al valore ascii v<br />
+<b><table bgcolor='#ff0000' width='100%'><tr><td>*format()				:</b> ritorna una stringa formattata con gli argomenti inclusi</td></tr></table><br />
+<b><table bgcolor='#ff0000' width='100%'><tr><td>*format$()				:</b> ritorna una stringa formattata con gli argomenti inclusi</td></tr></table><br />
+<b>insert(source$,target$,position)	:</b> inserisce la stringa source nella string target alla posizione index<br />
+<b>insert$(source$,target$,position)	:</b> inserisce la stringa source nella string target alla posizione index<br />
+<b>instr(optional start,source$,target$)	:</b> ritorna la posizione in source che ha la stringa target<br />
+<b>lcase(string$)				:</b> converte la stringa in minuscolo<br />
+<b>lcase$(string$)				:</b> converte la stringa in minuscolo<br />
+<b>left(string$,number)			:</b> ritorna i number caratteri piu a sinistra nella stringa<br />
+<b>left$(string$,number)			:</b> ritorna i number caratteri piu a sinistra nella stringa<br />
+<b>len(string$)				:</b> ritorna la lunghezza della stringa<br />
+<b>length(string$)				:</b> ritorna la lunghezza della stringa<br />
+<b>ltrim(string$)				:</b> ritorna la stringa senza gli spazzi a sinistra<br />
+<b>ltrim$(string$)				:</b> ritorna la stringa senza gli spazzi a sinistra<br />
+<b>mid(string$,start,optional end)		:</b> ritorna string with chars 1..n from source<br />
+<b>mid$(string$,start,optional end)	:</b> ritorna string with chars 1..n from source<br />
+<b>replace(opt index,source$,replace$)	:</b> replace string from source with replace starting at index<br />
+<b>replace$(opt index,source$,replace$)	:</b> replace string from source with replace starting at index<br />
+<b>replacesubstr(source$,rep$)		:</b> replace substring in source with withstring ritorna the new string<br />
+<b>replacesubstr$(source$,rep$)		:</b> replace substring in source with withstring ritorna the new string<br />
+<b>reverse(string$)			:</b> reverse a string ritorna the new string<br />
+<b>reverse$(string$)			:</b> reverse a string ritorna the new string<br />
+<b>right(string$,number)			:</b> ritorna rightmost chars in string<br />
+<b>right$(string$,number)			:</b> ritorna rightmost chars in string<br />
+<b>rinstr(optional start,source$,target$)	:</b> reverse Instr function, search from end to start<br />
+<b>rtrim(string$)				:</b> right trim string<br />
+<b>rtrim$(string$)				:</b> right trim string<br />
+<b>space(n)				:</b> ritorna string with n spaces in it<br />
+<b>space$(n)				:</b> ritorna string with n spaces in it<br />
+<b>str(value)				:</b> ritorna string representation of numeric expression<br />
+<b>str$(value)				:</b> ritorna string representation of numeric expression<br />
+<b>strf(value)				:</b> converts a floating point or number value to a string<br />
+<b>strf$(value)				:</b> converts a floating point or number value to a string<br />
+<b>string(n,string$)			:</b> ritorna string m chars wide with n in it<br />
+<b>string$(n,string$)			:</b> ritorna string m chars wide with n in it<br />
+<b>tally(src$,sub$)			:</b> ritorna number of occurances of matchstring<br />
+<b>trim(string$)				:</b> trim string<br />
+<b>trim$(string$)				:</b> trim string<br />
+<b>typeof(variable)			:</b> ritorna string with datatype<br />
+<b>typeof$(variable)			:</b> ritorna string with datatype<br />
+<b>ucase(string$)				:</b> convert string to upper case<br />
+<b>ucase$(string$)				:</b> convert string to upper case<br />
+<b>val(string$)				:</b> ritorna closest numeric representation of number<br />
+<br />
+<hr /><br />
+<b> Maths</b><br />
+<br />
+<b>abs(value)				:</b> ritorna absolute value of number<br />
+<b>acos(value)				:</b> ritorna arccos of number<br />
+<b>asin(value)				:</b> ritorna arcsin of number<br />
+<b>atan(value)				:</b> ritorna arctan of number<br />
+<b>bin(value)				:</b> ritorna la rappresentazione binaria del numero<br />
+<b>bin$(value)				:</b> ritorna la rappresentazione binaria del numero<br />
+<b>cos(value)				:</b> ritorna cos of number<br />
+<b>exp(value)				:</b> ritorna exponential function<br />
+<b>fix(value)				:</b> truncate fractional number, rounding down towards zero<br />
+<b>floor(value)				:</b> truncate fractional number, rounding down towards zero<br />
+<b>frac(value)				:</b> ritorna fractional portion of number<br />
+<b>hex(value)				:</b> ritorna hexidecimal representation of number<br />
+<b>hex$(value)				:</b> ritorna hexidecimal representation of number<br />
+<b>int(value)				:</b> convert to 32 bit integer, truncating decimals<br />
+<b>log(value)				:</b> ritorna natural log of expression<br />
+<b>randomize(value)			:</b> reseed the random number generator<br />
+<b>rnd(optional upper)			:</b> ritorna an random number<br />
+<b>round(value)				:</b> round to nearest integer<br />
+<b>sgn(value)				:</b> ritorna sign of numeric expression<br />
+<b>sin(value)				:</b> ritorna sine of given angle in radians<br />
+<b>sqr(value)				:</b> ritorna square root - make sure it's non-negative<br />
+<b>tan(value)				:</b> ritorna tanget of given angle in radians<br />
+<b>min(value1,value2)			:</b> ritorna min number of the operands<br />
+<b>max(value1,value2)			:</b> ritorna max number of the operands<br />
+<b>bitwiseand(value1,value2)		:</b> ritorna the logic and of the operands<br />
+<b>andbit(value1,value2)			:</b> ritorna the logic and of the operands<br />
+<b>bitwiseor(value1,value2)		:</b> ritorna the logic or of the operands<br />
+<b>orbit(value1,value2)			:</b> ritorna the logic or of the operands<br />
+<b>bitwisexor(value1,value2)		:</b> ritorna the logic xor of the operands<br />
+<b>xorbit(value1,value2)			:</b> ritorna the logic xor of the operands<br />
+<br />
+<hr /><br />
+<b> Files</b><br />
+<br />
+<b>open[filename]for{input|output|append}as[stream]:</b> open file stream<br />
+<b>file input [stream]			:</b> read a line from file stream<br />
+<b>input [stream]				:</b> read a line from file stream<br />
+<b>file output [stream]			:</b> print a line in file stream<br />
+<b>print [stream]				:</b> print a line in file stream<br />
+<b>close [stream]				:</b> close file stream<br />
+<br />
+<b>eof(stream)				:</b> ritorna nonzero if Eof<br />
+<b>fileexists(filename)			:</b> ritorna true if the file exists<br />
+<b>filecopy(source,dest)			:</b> copy a file<br />
+<b>filemove(source,dest)			:</b> move a file<br />
+<b>filerename(filename,newname)		:</b> rename a file<br />
+<b>freefile()				:</b> ritorna the handle of the next free file<br />
+<b>kill(filename)				:</b> delete filename. filename can be then path+filename<br />
+<b>loc(stream)				:</b> ritorna position in file<br />
+<b>lof(stream)				:</b> ritorna length of file<br />
+<b>readbyte(stream)			:</b> ritorna a byte from the file<br />
+<b>rename(filename,newname)		:</b> rename file<br />
+<b>seek(stream)				:</b> seek file position/ritorna current file position<br />
+<b>writebyte(stream,byte)			:</b> write a byte in the file<br />
+<br />
+<hr /><br />
+<b> Dirs</b><br />
+<br />
+<b>chdir(path)				:</b> cambia directory<br />
+<b>dir dir$				:</b> ritorna current path<br />
+<b>direxists(path)				:</b> ritorna true if directory exists<br />
+<b>dirfirst(path)				:</b> ritorna first entry in path dir<br />
+<b>dirnext					:</b> ritorna next entry in path dir<br />
+<b>mkdir(path)				:</b> create a new directory<br />
+<b>rmdir(path)				:</b> remove directory<br />
+<br />
+<hr /><br />
+<b> Data Function</b><br />
+<br />
+<b>data(optional 0-255 param)		:</b> legge la data<br />
+<b>read(optional pointer)			:</b> senza parametri restituisce il valore della data corrente e sposta il puntatore alla successiva: con un valore sposta il puntatore<br />
+<br />
+<hr /><br />
+<b> Console Output</b><br />
+<br />
+<b>print [text|variable|number]		:</b> Stampa in standard output un espressione (lo uso per il debug output)<br />
+<br />
+<hr /><br />
+<b> Date and Time</b><br />
+<br />
+<b>date() 					:</b> ritorna la data in formato MM-DD-YYYY<br />
+<b>date$()					:</b> ritorna la data in formato MM-DD-YYYY<br />
+<b>time() 					:</b> ritorna l'ora in formato HH:MM:SS<br />
+<b>time$()					:</b> ritorna l'ora in formato HH:MM:SS<br />
+<b>ticks()					:</b> ritorna il tempo trascorso dall'avvio in millesimi di secondo<br />
+<br />
+<hr /><br />
+<b> Memory Bank</b><br />
+ in questa release il numero di banchi e' di 256<br />
+<br />
+<b>reservebank(bank,size)			:</b> crea un banco di memoria raw (da 0 a 255)<br />
+<b>baseimage(bank,image)			:</b> collega un banco di memoria alla bitmap di un immagine caricata<br />
+<b>baseimageCC(bank,image)			:</b> collega un banco di memoria alla bitmap di un immagine caricata con la trasparenza<br />
+<b>basescreen(bank,image)			:</b> collega un banco di memoria alla bitmap di uno screen aperto<br />
+<b>basesound(bank,sound)			:</b> collega un banco di memoria con un banco degli suoni caricati<br />
+<br />
+<b>freebase(bank)				:</b> scollega un banco di memoria a una image o a uno screen<br />
+<b>freebank(bank)				:</b> dealloca un banco di memoria<br />
+<br />
+<b>copybank(s,d)				:</b> copia il banco s in d<br />
+<br />
+<b>loadbank(filename,optional bank)	:</b> carica un file nel banco di memoria bank (se omesso il corrente )<br />
+<b>savebank(filename,optional bank)	:</b> salva un banco di memoria in un file<br />
+<br />
+<b>setbank(optional bank)			:</b> setta il banco di memoria corrente (se omesso ritorna il corrente)<br />
+<b>currentbank(optional bank)		:</b> setta il banco di memoria corrente (se omesso ritorna il corrente)<br />
+<b>sizebank(optional bank)			:</b> ritorna la dimensione del banco di memoria (se omesso il corrente)<br />
+<b>banksize(optional bank)			:</b> ritorna la dimensione del banco di memoria (se omesso il corrente)<br />
+<br />
+<br />
+<b>poke(optional bank,address,value)	:</b> scrive un byte nel banco di memoria all'indirizzo<br />
+<b>doke(optional bank,address,value)       :</b> scrive un valore a 16 bit nel banco di memoria all'indirizzo<br />
+<b>loke(optional bank,address,value)	:</b> scrive un valore a 32 bit nel banco di memoria all'indirizzo<br />
+<br />
+<b>peek(optional bank,address)		:</b> legge un byte nel banco di memoria all'indirizzo<br />
+<b>deek(optional bank,address)		:</b> legge un valore a 16 bit nel banco di memoria all'indirizzo<br />
+<b>leek(optional bank,address)		:</b> legge un valore a 32 bit nel banco di memoria all'indirizzo<br />
+<br />
+<b>memcopy(sbank,s,dbank,d,size)		:</b> copia una parte della memoria dela banco s nel banco d<br />
+<br />
+<hr /><br />
+<b> Screen</b><br />
+<br />
+<b>setdisplay(w,h,bpp,m)		 	:</b> apre lo schermo/finestra in double buffer in modo 0=fullscreen|1=window|2=resize|3=fullscreen software (temporaneo)<br />
+<b>setcaption(title)			:</b> cambia il nome della finestra display<br />
+<b>setalphachannel(v)			:</b> attiva disattiva il canale alpha delle trasparenze<br />
+<b>caption()				:</b> riporta il nome corrente della finestra display<br />
+<b>displaymode				:</b> restituisce il modo video del display<br />
+<b>displaywidth				:</b> restituisce la larghezza del display<br />
+<b>displayheight				:</b> restituisce l'altezza del display<br />
+<b>displaybpp				:</b> restituisce la profondita di colore del display<br />
+<br />
+<b>screen(n)				:</b> attiva lo schermo logico n senza parametri ritorna lo schermo corrente<br />
+<b>screenz(n,z)				:</b> setta lo zorder di uno schermo se z =-1 restituisce z position corrente<br />
+<b>lastscreen				:</b> restituisce l'ultimo screen aperto<br />
+<b>directscreen 				:</b> apre direttamente il display come screen(piu veloce ma gli sprite e screen offset non funzionano correttamente)<br />
+<b>screenopen(n,w,h,dx,dy,dw,dh,flag)	:</b> apre lo schermo logico n di dimensione w,h nelle coordinate dx,dy,dw,dh, del display<br />
+<b>screenclose(n)				:</b> chiude lo schermo logico n<br />
+<br />
+<b>screenclone(n,s,x,y,w,h,flag)		:</b> crea una nuova entrata nello schermo s<br />
+<b>screencopy(n,x,y,w,h,nd,xd,yd)          :</b> copia una porzione di schermo da n a nd<br />
+<b>screenfade(n,t)				:</b> sfuma lo screen n in t time lavora in multitasking senza parametri rende 0 se a terminato<br />
+<b>screenfadeout(n,t)			:</b> sfuma lo screen n in t time lavora in multitasking senza parametri rende 0 se a terminato<br />
+<b>screenfadein(n,i,t)			:</b> sfuma lo screen n verso l'immagine i in t time lavora in multitasking senza parametri rende 0 se a terminato<br />
+<b>screencrossfade(n,i,t)			:</b> sfuma lo screen n verso dall'imagine correntel'immagine i in t time lavora in multitasking senza parametri rende 0 se a terminato<br />
+<b>screenalpha(n,a)			:</b> setta il parametro alpha(trasparenza) allo screen n<br />
+<b>screenlock(n)				:</b> blocca lo screen n per l'accesso diretto dai comandi grafici<br />
+<b>screenunlock(n)				:</b> sblocca lo screen n per l'accesso diretto dai comandi grafici<br />
+<br />
+<b>screenrect(x,y,w,h,flag)		:</b> modifica le coordinate di output sul display dello screen corrente<br />
+<b>screenviewport(x,y,w,h,flag)		:</b> modifica le coordinate di output sul display dello screen corrente<br />
+<b>xscreenrect				:</b> restituisce la coordinata x del rettangolo di output dello screen corrente<br />
+<b>screenviewportx				:</b> restituisce la coordinata x del rettangolo di output dello screen corrente<br />
+<b>yscreenrect				:</b> restituisce la coordinata y del rettangolo di output dello screen corrente<br />
+<b>screenviewporty				:</b> restituisce la coordinata y del rettangolo di output dello screen corrente<br />
+<b>wscreenrect				:</b> restituisce la coordinata w del rettangolo di output dello screen corrente<br />
+<b>screenviewportyw			:</b> restituisce la coordinata w del rettangolo di output dello screen corrente<br />
+<b>hscreenrect				:</b> restituisce la coordinata h del rettangolo di output dello screen corrente<br />
+<b>screenviewportyh			:</b> restituisce la coordinata h del rettangolo di output dello screen corrente<br />
+<b>flagscreenrect				:</b> restituisce lo stato del flag del rettangolo di output dello screen corrente<br />
+<b>screenviewportflag			:</b> restituisce lo stato del flag del rettangolo di output dello screen corrente<br />
+<br />
+<b>screenwidth				:</b> restituisce la larghezza dello screen corrente<br />
+<b>screenheight				:</b> restituisce l'altezza dello screen corrente<br />
+<br />
+<b>offset (x,y)				:</b> posiziona la posiziona di visione del display sullo schermo logico corrente<br />
+<b>screenoffset (x,y)			:</b> posiziona la posiziona di visione del display sullo schermo logico corrente<br />
+<b>xoffset					:</b> restituisce la coordinata x dell' offset dello screen corrente<br />
+<b>screenoffsetx				:</b> restituisce la coordinata x dell' offset dello screen corrente<br />
+<b>yoffset					:</b> restituisce la coordinata y dell' offset dello screen corrente<br />
+<b>screenoffsety				:</b> restituisce la coordinata y dell' offset dello screen corrente<br />
+<br />
+<b>cls 					:</b> cancella lo schermo logico corrente<br />
+<br />
+<b>screenswap				:</b> scambia lo schermo logico con quello fisico e aggiorna il bob system<br />
+<b>autoback setautoback(m)			:</b> attiva / disattiva lo screenswap automatico m=0 disattivato m>0 attende m millisecondi e performa lo screenswap m<0 esegue il comando screen swap solo se chiamato e dopo m millisecondi<br />
+<b>dualplayfield(optional m) 		:</b> attiva  / disattiva l'aggiornamento degli screen sopra al piano dei bob<br />
+<b>waitvbl					:</b> attende lo screenswap automatico<br />
+<b>fps(optional n)				:</b> attiva/disattiva o restituisce frame rate corrente (0/1/none)<br />
+<br />
+<hr /><br />
+<b> Graphics</b><br />
+<br />
+<b>rgb(r,g,b)				:</b> restituisce il colore corrente in formato Uint32<br />
+<b>enablepalette(optional state)		:</b> abilita disabilita e verifica il palettemode nel display a 256 colori<br />
+<b>color (c,optional v)			:</b> setta  il colore della paletta c con il valore v se mancante restituisce il colore c<br />
+<b>palette(optional 0-255 param)		:</b> setta l'intera paletta<br />
+<b>colorcycling(s,e,d=0|1,optional delay )	:</b> scorre la paletta dei colori un colore avanti o indietro. Lavora solo in modo 256 colori<br />
+                                          se si setta il delay funziona in multitasking senza parametri arresta il multitasking<br />
+<b>ink(c)					:</b> seleziona il colore corrente dal formato Uint32<br />
+<br />
+<b>point(x,y)				:</b> restituisce la componente  colore alla coordinata x,y<br />
+<b>getpixel(x,y)				:</b> restituisce la componente  colore alla coordinata x,y<br />
+<b>dot(x,y)				:</b> scrive un punto con il colore ink alla coordinata x,y<br />
+<b>setpixel(x,y)				:</b> scrive un punto con il colore ink alla coordinata x,y<br />
+<b>putpixel(x,y)				:</b> scrive un punto con il colore ink alla coordinata x,y<br />
+<b>plot(x,y,c)				:</b> scrive un punto con il colore c alla coordinata x,y<br />
+<b>line(x,y,x1,y1)				:</b> traccia una linea<br />
+<b>box(x,y,x1,y1)				:</b> traccia un rettangolo vuoto<br />
+<b>bar(x,y,x1,y1)				:</b> traccia un rettangolo pieno<br />
+<b>rectangle(x,y,w,h,mode)			:</b> disegna un rettangolo usando  w come larghezza e h come altezza il mode=0 e' il bordo 1=riempimento<br />
+<b>circle(x,y,r)				:</b> traccia un cerchio<br />
+<b>fillcircle(x,y,r)			:</b> traccia un cerchio pieno<br />
+<b>ellipse(x,y,rx,ry)			:</b> traccia un ellisse<br />
+<b>fillellipse(x,y,rx,ry)			:</b> traccia un ellisse piena<br />
+<b>paint(x,y)				:</b> riempie un area chiusa<br />
+<b>triangle(xa,ya,xb,yb,xc,yc)		:</b> disegna una triangolo pieno<br />
+<b>polyline(xa,ya,xb,yb,xc,yc,.....)	:</b> disegna il perimetro di un poligono<br />
+<b>polygon(xa,ya,xb,yb,xc,yc,.....)	:</b> disegna un poligono pieno<br />
+<br />
+<hr /><br />
+<b> File Graphics Input Output</b><br />
+ il numero max di images e' di 65536<br />
+il numero max di waves e' di 1024<br />
+<br />
+<b>loadimage(filename,optional n)		:</b> carica un imagine nel banco grafico n o uno libero. ritorna n<br />
+<b>loadzipimage(zipfile,filename,opt n)	:</b> carica un imagine nel banco grafico n o uno libero. ritorna n<br />
+<b>saveimage(filename,n)			:</b> salva il banco n nel file grafico (deve essere .bmp)<br />
+<b>loadsound(filename,n)			:</b> carica in un banco un file wav<br />
+<b>loadzipsound(zipfile,filename,opt n)	:</b> carica in un banco un file wav<br />
+<b><table bgcolor='#ffff00' width='100%'><tr><td>?savesound(filename,n)			:</b> salva in un banco un file wav</td></tr></table><br />
+<b>loadmusic(filename)			:</b> carica in un banco un file xm mod<br />
+<br />
+<hr /><br />
+<b> Image Manipulation</b><br />
+<br />
+<b>hotspot(n,x,y)				:</b> stabilisce il punto delle coordinate (n,0,0=alto sx | n,1,1=centro | n,2,2 =basso dx)n= image<br />
+<b>setcolorkey(c)				:</b> setta il colore trasparente con -1 (default) viene settato il colore dell'angolo sinistro in alto dell'immagine<br />
+<b>colorkey(c)				:</b> setta il colore trasparente con -1 (default) viene settato il colore dell'angolo sinistro in alto dell'immagine<br />
+<b>imageexists( n)				:</b> restituisce 1 se il banco n esiste 0 se vuoto<br />
+<b>imagewidth(n)				:</b> restituisce la larghezza dell'immagine n<br />
+<b>imageheight(n)				:</b> restituisce l'altezza dell'immagine n<br />
+<b>deleteimage(n)				:</b> cancella l'immagine n dalla memoria<br />
+<b>copyimage(s,d)  			:</b> copia l'immagine s nel banco d<br />
+<b>setalpha(n,a)				:</b> setta la trasparenza nell' immagine<br />
+<b>imagealpha(n,a)				:</b> setta la trasparenza nell' immagine<br />
+<b>zoomimage(n,zoomx.zoomy)		:</b> zoomma l'immagine<br />
+<b>rotateimage(n,angle)			:</b> ruota l'immagine<br />
+<b>rotozoomimage(n,angle,zoom)		:</b> ruota e zoomma l'imagine<br />
+<b>mirrorimage(n,x,y)			:</b> riflette in verticale-orizontale l'immagine<br />
+<br />
+<br />
+<hr /><br />
+<b> Blitting</b><br />
+<br />
+<b>blt(n,sx,sy,sw,sh,dx,dy)		:</b> copia un banco nello screen<br />
+<b>pastebob(x,y,n)				:</b> copia sullo schermo il banco n alle coordinate x,y ritagliando<br />
+<b>pasteicon(x,y,n)			:</b> copia sullo schermo il banco n alle coordinate x,y<br />
+<b>grab(n,x,y,w,h)				:</b> ritaglia dallo schermo corrente e copia nel banco<br />
+<br />
+<hr /><br />
+<b> Sprite System</b><br />
+<br />
+In questa implementazione ci sono 1024 sprite software che sono indipendenti degli screen<br />
+<br />
+<b>spriteclip(x,y,w,h)			:</b> imposta il clipping degli sprite<br />
+<b>sprite(n,x,y,fr)			:</b> attiva o sposta il sprite n alla coordinata x,y con l'immagine fr<br />
+<b>deletesprite(n)				:</b> disattiva il sprite n<br />
+<b>xsprite(n)				:</b> restituisce la coordinata x del sprite n<br />
+<b>spritex(n)				:</b> restituisce la coordinata x del sprite n<br />
+<b>ysprite(n)				:</b> restituisce la coordinata y del sprite n<br />
+<b>spritey(n)				:</b> restituisce la coordinata y del sprite n<br />
+<b>spritewidth(n)				:</b> restituisce la larghezza del sprite n<br />
+<b>spriteheight(n)				:</b> restituisce l'altezza del sprite n<br />
+<b>frsprite(n)				:</b> restituisce il frame del sprite n<br />
+<b>spriteimage(n)				:</b> restituisce il frame del sprite n<br />
+<b>livesprite(n)				:</b> restituisce 1 se il sprite n e' "vivo"<br />
+<b>spriteexist(n)				:</b> restituisce 1 se il sprite n e' "vivo"<br />
+<b>spritehit(n, optional x)		:</b> restituisce 1 se il sprite n collide con il sprite x se -1 con tutti<br />
+<b>spritez(n,z)				:</b> cambia lo zorder dello sprite se z e' omesso o e'-1 restituisce la z position attuale<br />
+<b>lastsprite				:</b> restituisce l'ultimo sprite attivo<br />
+<b>autoupdatesprite(m)			:</b> attiva  / disattiva l'aggiornamento automatico dei sprite allo screenswap<br />
+<b>updatesprite				:</b> attiva  un aggiornamento manuale degli sprite allo screenswap<br />
+<br />
+<hr /><br />
+<b> Bob System</b><br />
+<br />
+In questa implementazione ci sono 1024 bob software che sono dipendenti degli screen e attuano<br />
+il background preserve<br />
+<br />
+<b>setbob(n,scr)				:</b> assegna il bob n allo screen scr<br />
+<b>bob(n,x,y,fr)				:</b> attiva o sposta il bob n alla coordinata x,y con l'immagine fr<br />
+<b>deletebob(n)				:</b> disattiva il bob n<br />
+<b>xbob(n)					:</b> restituisce la coordinata x del bob n<br />
+<b>bobx(n)					:</b> restituisce la coordinata x del bob n<br />
+<b>ybob(n)					:</b> restituisce la coordinata y del bob n<br />
+<b>boby(n)					:</b> restituisce la coordinata y del bob n<br />
+<b>bobwidth(n)				:</b> restituisce la larghezza del bob n<br />
+<b>bobheight(n)				:</b> restituisce l'altezza del bob n<br />
+<b>frbob(n)				:</b> restituisce il frame del bob n<br />
+<b>bobimage(n)				:</b> restituisce il frame del bob n<br />
+<b>livebob(n)				:</b> restituisce 1 se il bob n e' "vivo"<br />
+<b>bobexist(n)				:</b> restituisce 1 se il bob n e' "vivo"<br />
+<b>bobhit(n,optional x)			:</b> restituisce 1 se il bob n collide con il bob x se -1 con tutti<br />
+<b>bobz(n,z)				:</b> setta lo zorder di un bob se  z =-1 restituisce la z position corrente<br />
+<b>lastbob					:</b> restituisce l'ultimo bob attivo<br />
+<b>autoupdatebob(m) 			:</b> attiva  / disattiva l'aggiornamento automatico dei bob allo screenswap<br />
+<b>updatebob  				:</b> attiva   un aggiornamento manuale dei bob allo screenswap<br />
+<br />
+<hr /><br />
+<b> Text Draw</b><br />
+<br />
+<b>text(x,y,s,testo,optional type)		:</b> stampa il testo sul video con s size. Il tipo di render puo essere default=solid 1,Shaded 2=Blended<br />
+<b>setfont(path)				:</b> seleziona il font d'uso<br />
+<b>getfont()				:</b> restituisce il font corrente<br />
+<b>textrender(testo,s,optional n)  	:</b> crea il bob n (se omesso restituisce usa e restituisce il primo libero) contenente il "testo" scritto con il font corrente con size s. Il tipo di render puo essere default=solid 1,Shaded 2=Blended<br />
+<br />
+<hr /><br />
+<b> Print Screen</b><br />
+<br />
+<b>pen(c)					:</b> setta il colore di print con -1 restituisce il colore corrente<br />
+<b>paper(c)				:</b> settail colore di sfondo del carattere con -1 restituisce il colore corrente<br />
+<b>fprints(testo)				:</b> stampa un testo monospace nella griglia senza il ritorna finale<br />
+<b>prints(testo)				:</b> stampa un testo monospace nella griglia<br />
+<b>locate(x,y)				:</b> muove il cursore di stampa alle coordinate x y<br />
+<b>atx					:</b> restituisce la coordinata x del cursore<br />
+<b>aty					:</b> restituisce la coordinata y del cursore<br />
+<b>curson					:</b> visualizza il cursore lampeggiante sul video alle coordinate (atx,aty)<br />
+<b>cursoff					:</b> spegne il cursore lampeggiante sul video<br />
+<b>inputs(prompt,defs)			:</b> raccoglie l'input da tastiera fino alla pressione di invio e lo restituisce<br />
+<b>zoneinputs(x,y,l,default)		:</b> raccoglie l'input da tastiera fino alla pressione nell'area specificata da x,y,l<br />
+<hr /><br />
+<b> Sounds and Music</b><br />
+<br />
+<b>isenabledsound()			:</b> restituisce 1 se sdlsound e'abilitato<br />
+<b>soundenabled()				:</b> restituisce 1 se sdlsound e'abilitato<br />
+<br />
+<b>soundexists( n)				:</b> restituisce 1 se il bancosonoro n esiste 0 se vuoto<br />
+<b>deletesound(n)				:</b> rimuove dalla memoria il suono n<br />
+<b>copysound(s,d)				:</b> copia il suono s in d<br />
+<br />
+<b>musicexists()				:</b> restituisce 1 se la musica e' caricata 0 se vuoto<br />
+<br />
+<b>playsound(n,c,optional l)		:</b> suona il suono n nel canale c l volte<br />
+<b>playfreqsound(n,c,pitch,optional l)	:</b> suona il suono n nel canale c con frequenza ricampionata a pitch l volte<br />
+<b>volumesound(c,optional v)		:</b> cambia il volume del canale c (-1 tutti) al valore v (0-128)<br />
+<b>soundvolume(c,optional v)		:</b> cambia il volume del canale c (-1 tutti) al valore v (0-128)<br />
+<b>stopsound(optional c)			:</b> ferma l'emissione del wav dal canale c (senza o -1 tutti)<br />
+<b>pausesound(optional c)			:</b> mette in pausa il canale c (senza o -1 tutti)<br />
+<b>resumesound(optional c)			:</b> sblocca dalla pausa il canale c (senza o -1 tutti)<br />
+<b><table bgcolor='#ffff00' width='100%'><tr><td>?vumetersound(optional c)                :</b> restituisce lo stato corrente del canale c(senza o -1 tutti)</td></tr></table><br />
+<b>sound3d(c,angle,dist)                   :</b> posiziona il suono<br />
+<b>positionsound(c,angle,dist)             :</b> posiziona il suono<br />
+<b>soundChannels(n)	                :</b> definisce dinamicamente il numero di canali<br />
+<br />
+<b>playmusic(n)				:</b> suona il track xm,mod,ogg,mp3 n e' l numero di volte (-1 continua)<br />
+<b>positionmusic(p)                        :</b> sposta l'esecuzione al secondo indicato<br />
+<b>stopmusic				:</b> termina la riproduzione del modulo musicale<br />
+<b>pausemusic                              :</b> mette in pausa la musica in esecuzione<br />
+<b>resumemusic                             :</b> riavvia la musica in pausa<br />
+<b>rewindmusic                             :</b> riavvolge la musica corrente<br />
+<b>fademusic(t)				:</b> esegue la dissolvenza progressiva della musica<br />
+<b>volumemusic(optional v)			:</b> cambia il volume della musica al valore v (0-128)<br />
+<b>musicvolume(optional v)			:</b> cambia il volume della musica al valore v (0-128)<br />
+<b>speedmusic(v)                           :</b> cambia la velocita di esecuzione della musica<br />
+<b>musicspeed(v)                           :</b> cambia la velocita di esecuzione della musica<br />
+<br />
+<hr /><br />
+<b> CD Support</b><br />
+<br />
+<b>numdrivescd() 				:</b> ritorna il numero di drive cd-rom nel sistema.<br />
+<b>countcddrives()				:</b> ritorna il numero di drive cd-rom nel sistema.<br />
+<b>namecd(drive)				:</b> ritorna un' etichetta identificatrice "human-readable", "system-dependent" del cd-rom.<br />
+<b>opencd(n,drive)				:</b> opre la connessione aun drive cd-rom per l'accesso.<br />
+<b>indrivecd(n)				:</b> ritorna 1 se il cd e' nel driver<br />
+<b>cdinserted(n)				:</b> ritorna 1 se il cd e' nel driver<br />
+<b>trackscd(n) 				:</b> ritorna il numero di tracce del cd<br />
+<b>countcdtracks(n)			:</b> ritorna il numero di tracce del cd<br />
+<b>curtrackcd(n)				:</b> ritorna la traccia corrente del cd<br />
+<b>cdcurtrack(n)				:</b> ritorna la traccia corrente del cd<br />
+<b>curframecd(n)				:</b> ritorna il frame corrente del cd<br />
+<b>cdcurframe(n)				:</b> ritorna il frame corrente del cd<br />
+<b>playcd(n,s,l) 				:</b> suona il cd dal frame s per l frames<br />
+<b>playtrackscd(n,trk1,fr1,ntrks,nfrs)	:</b> suona la traccia selezionata/e 0=tutte<br />
+<b>playtrackscd(n,trk1,ntrks)		:</b> suona tutta la/le traccia/e<br />
+<b>playtrackscd(n)				:</b> suona tutto il cd<br />
+<b>playcdtracks(n,trk1,fr1,ntrks,nfrs)	:</b> suona la traccia selezionata/e 0=tutte<br />
+<b>playcdtracks(n,trk1,ntrks)		:</b> suona tutta la/le traccia/e<br />
+<b>playcdtracks(n)				:</b> suona tutto il cd<br />
+<b>pausecd(n) 				:</b> mette in pausa il cdrom<br />
+<b>resumecd(n) 				:</b> fa riprendere il cdrom<br />
+<b>stopcd(n)				:</b> ferma il cdrom<br />
+<b>ejectcd(n) 				:</b> espelle il cdrom<br />
+<b>closecd(n) 				:</b> chiude la connessione al drive cd<br />
+<b>tracktypecd(n,t)			:</b> ritorna il tipo di traccia: SDL_AUDIO_TRACK(0...) or SDL_DATA_TRACK(1...)<br />
+<b>cdtracktype(n,t)			:</b> ritorna il tipo di traccia: SDL_AUDIO_TRACK(0...) or SDL_DATA_TRACK(1...)<br />
+<b>tracklengthcd(n,t)			:</b> ritorna la lunghezza della traccia t<br />
+<b>cdtracklength(n,t)			:</b> ritorna la lunghezza della traccia t<br />
+<b>trackoffsetcd(n,t)			:</b> ritorna l'offset dall'inizio della traccia t in frames<br />
+<b>cdtrackoffset(n,t)			:</b> ritorna l'offset dall'inizio della traccia t in frames<br />
+<br />
+<hr /><br />
+<b> Video Mpeg</b><br />
+<br />
+<b>loadmpeg(fname,usesound)		:</b> collega il video mpeg<br />
+<b>plaympeg(optional loop)			:</b> lancia un video mpeg: Attenzione non lavora a fullscreen<br />
+<b>stopmpeg()				:</b> ferma un video in corso<br />
+<b>deletempeg()				:</b> scollega il video mpeg<br />
+<b>pausempeg()				:</b> ferma /riprende il video<br />
+<b>rewindmpeg()				:</b> riavvolge il video all'inizio<br />
+<b>seekmpeg(p)				:</b> sposta al 'bytes' lo scorrimento del video<br />
+<b>skipmpeg(s)				:</b> salta s secondi del video<br />
+<b>statusmpeg()				:</b> restituisce 1 se plaympeg lavora o altrimenti 0<br />
+<br />
+<hr /><br />
+<b> Keyboard</b><br />
+<br />
+<b>key(keycode)				:</b> restitusce 1 se e' premuto il tasto keycode<br />
+<b>inkey					:</b> restituisce il codice ascii del tasto premuto<br />
+<b>waitkey(optional keycode)		:</b> attende la pressione di un tasto(0 qualsiasi)<br />
+<br />
+<hr /><br />
+<b> Mouse</b><br />
+<br />
+<b>xmouse					:</b> restituisce la coordinata x del mouse sul display<br />
+<b>ymouse					:</b> restituisce la coordinata y del mouse sul display<br />
+<b>mousex					:</b> restituisce la coordinata x del mouse sul display<br />
+<b>mousey					:</b> restituisce la coordinata y del mouse sul display<br />
+<b>xmousescreen(n)				:</b> restituisce la coordinata x del mouse sullo screen<br />
+<b>ymousescreen(n)				:</b> restituisce la coordinata y del mouse sullo screen<br />
+<b>mousescreenx(n)				:</b> restituisce la coordinata x del mouse sullo screen<br />
+<b>mousescreeny(n)				:</b> restituisce la coordinata y del mouse sullo screen<br />
+<b>bmouse 					:</b> restituisce il pulsante premuto del mouse<br />
+<b>mousebutton				:</b> restituisce il pulsante premuto del mouse<br />
+<b>changemouse(optional n)			:</b> cambia il cursore di default oì0 con i cursoi emulati su sprite 0 image 0 (1,2,3) se n e' omesso ritorna il cursore corrente<br />
+<b>mousepointer(optional n)		:</b> cambia il cursore di default oì0 con i cursoi emulati su sprite 0 image 0 (1,2,3) se n e' omesso ritorna il cursore corrente<br />
+<b>locatemouse(x,y)			:</b> sposta il mouse alle coordinate xy<br />
+<b>placemouse(x,y)				:</b> sposta il mouse alle coordinate xy<br />
+<b>mouseshow				:</b> visualizza il cursore del mouse<br />
+<b>showmouse				:</b> visualizza il cursore del mouse<br />
+<b>mousehide				:</b> nasconde il cursore del mouse<br />
+<b>hidemouse				:</b> nasconde il cursore del mouse<br />
+<b>mousezone(x,y,w,h)			:</b> restituisce 1 se il mouse occupa questa parte dello screen<br />
+<br />
+<hr /><br />
+<b> Joystick</b><br />
+<br />
+<b>numjoysticks 				:</b> retituisce il numero di joysticks presenti<br />
+<b>namejoystick(i)				:</b> retituisce la stringa identificativa del joystick<br />
+<b>numaxesjoystick(i) 			:</b> retituisce il numero di assi del joystick<br />
+<b>numballsjoystick(i) 			:</b> retituisce il numero di trackball del joystick<br />
+<b>numhatsjoystick(i) 			:</b> retituisce il numero di pulsanti direzionali del joystick<br />
+<b>numbuttonsjoystick(i) 			:</b> retituisce il numero di pulsanti del joysitck<br />
+<b>getaxisjoystick(i,a) 			:</b> retituisce lo stato corrente di un asse<br />
+<b>gethatjoystick(i,a)			:</b> retituisce lo stato corrente di un hat<br />
+<b>getbuttonjoystick(i,a) 			:</b> retituisce lo stato corrente di un pulsante<br />
+<b>xgetballjoystick(i,a) 			:</b> retituisce la posizione relativa x della trackball<br />
+<b>ygetballjoystick(i,a) 			:</b> retituisce la posizione relativa y della trackball<br />
+<b>joy(i)					:</b> retituisce la coordinata del joystick in formato booleano<br />
+<b>bjoy(i)					:</b> retituisce i pulsanti premuti del joystick in formato booleano<br />
+<b>joybuttons(i)				:</b> retituisce i pulsanti premuti del joystick in formato booleano<br />
+<b>fire(i)					:</b> retituisce i pulsanti premuti del joystick in formato booleano<br />
+<b>waitbjoy(b,optional i)			:</b> attende la pressione di un tasto del joystick<br />
+<hr /><br />
+<b> SDLtime</b><br />
+<br />
+<b>wait(t)					:</b> attende il trascorrere di t millisecondi<br />
+<b>timer					:</b> restituisce il tick corrente<br />
+<br />
+<hr /><br />
+<b> Socket</b><br />
+<br />
+<b>isenabledsock()				:</b> ritorna 1 se sdlnet e' abilitata<br />
+<br />
+<b>sock=getfreesock()			:</b> ritorna il primo sock libero nel banco sdlSocket<br />
+<b>sock=OpenSock(port) 			:</b> apre una sock in ascolto su una porta. In sdlBasic ci sono 256 stream e la<br />
+					  sintassi e' molto simile ai comandi file open close.<br />
+<b>clientsock=AcceptSock(serversock)	:</b> Accetta la connessione di un client<br />
+<b>IsServerReady(Sock)			:</b> ritorna True/False se il server manda dati    <br />
+<b>sock=ConnectSock(ServerName,port)	:</b> si connette a un server remoto<br />
+<b><table bgcolor='#ff0000' width='100%'><tr><td>*ConnectionReadySock(sock)		:</b> il server ha accettato la connessione</td></tr></table><br />
+<b>IsClientReady(Sock)			:</b> ritorna True/False se il client manda dati<br />
+<b>CloseSock(sock)				:</b> Chiude la connessione del socket. Funziona per client e server<br />
+<b><table bgcolor='#ff0000' width='100%'><tr><td>*PeekSock(Sock, NumBytes)		:</b> legge un dato ricevuto dal socket, ma non lo cancella dal buffer</td></tr></table><br />
+<b>ReadSock(Sock, NumBytes)		:</b> legge NumBytes bytes dal socket<br />
+<b>ReadByteSock(Sock)			:</b> legge un singolo byte      <br />
+<b>ReadLineSock(Sock)			:</b> legge una linea<br />
+<b>WriteSock(Sock, Message, NumBytes)	:</b> manda NumBytes della stringa Message al socket<br />
+<b>WriteByteSock(Sock, Byte)		:</b> manda un singolo byte<br />
+<b>WriteLineSock(Sock, Message)		:</b> manda la stringa Message<br />
+<b>getremoteip(sock)			:</b> ritorna l'indirizzo ip del client remoto connesso<br />
+<b>getremoteport(sock)			:</b> ritorna la porta di accesso del client remoto connesso<br />
+<b><table bgcolor='#ffff00' width='100%'><tr><td>?getlocalip()				:</b> ritorna l'indirizzo ip locale(solo linux/mac)</td></tr></table><br />
+<br />
+<hr /><br />
+<b>  Sqlite</b><br />
+<br />
+SqlOpen( filename, n )		:<br />
+SqlClose( n )				:<br />
+SqlPrepare( n, pnum, sql )<br />
+SqlFinalize( n )<br />
+SqlStep( n )<br />
+SqlGetRows( n )<br />
+SqlGetColumns( n )<br />
+SqlGetText( n, col )<br />
+SqlGetImage( n, col, imageslot )<br />
+<br />
+<hr /><br />
+<b></b><br />
+ to do:<br />
+<br />
+<br />
+ sprite editor<br />
+ ide scritta in sdlBasic<br />
+<br />
+<br />
+<hr/>
+<p align='right'>
+generated with <b>sdlbasic</b><br/>
+graphics <b>zoiba</b><br/>
+</p>
+</body>
+</html>

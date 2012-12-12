@@ -1,0 +1,160 @@
+' bind.sdlbas
+' bind a source file to sdlbasic executable
+' (c) 2002 david cuny >for sdlbasic make from __vroby__
+'
+' usage:  bind <sdlbrt binary> <sourcefile> <destfile>
+
+binfile = command(3)
+source  = command(4)
+dest    = left$(source,len(source)-7)
+if iswin32 then
+	dest    = dest+".exe"
+end if
+
+
+
+if dest = "" then
+	print "usage:"
+	print "bind <sdlbrt binary> <sourcefile> <destfile>"
+
+	else
+
+	print "binding "; source
+
+	filecopy (binfile,dest+"_tmp")
+
+	' open the source file
+	outfile = freefile()
+
+	open dest for output as #outfile
+
+	' first, copy sdlbasic executable
+	print "copying "; binfile; "..."
+	wxfile = freefile()
+	open dest+"_tmp" for input as #wxfile
+
+	sizeof = lof( wxfile )
+
+	' add the file
+	for i = 1 to lof( wxfile )
+		writebyte( outfile, readbyte( wxfile ) )
+		if i % 10000 = 0 then
+			print ".";
+		end if
+	end for
+	close #wxfile
+
+	kill(dest+"_tmp")
+	print
+
+	' next, copy destination file
+	print "copying "; source
+
+	infile = freefile()
+	open source for input as #infile
+	for i = 1 to lof( infile )
+		writebyte( outfile, readbyte( infile ) )
+	end for
+	close# infile
+
+	print "attaching tag..."
+
+	' convert to string
+	sizeof = "" & sizeof
+
+	' pad with zeros
+	while len( sizeof ) < 8
+		sizeof = "0" & sizeof
+	end while
+
+	' write additional information
+	print #outfile, "\n//"; sizeof; "   bind"
+
+	close# outfile
+
+	if islinux then
+		shell("chmod +x "+dest)
+	end if
+
+	print "created "; dest
+	print "offset:";sizeof
+
+	print
+	print
+
+
+
+	'gp2x binding
+	if iswin32 then
+		binfile=left$(binfile,len(binfile)-4)
+	end if
+	if fileexists(binfile+".gpe")  then
+
+	    dest=left$(source,len(source)-7)+".gpe"
+	    print "binding for gp2x "; source
+
+	    filecopy (binfile+".gpe",dest+"_tmp")
+
+	    ' open the source file
+	    outfile = freefile()
+
+	    open dest for output as #outfile
+
+	    ' first, copy sdlbasic executable
+	    print "copying "; binfile; "..."
+	    wxfile = freefile()
+	    open dest+"_tmp" for input as #wxfile
+
+	    sizeof = lof( wxfile )
+
+	    ' add the file
+	    for i = 1 to lof( wxfile )
+		    writebyte( outfile, readbyte( wxfile ) )
+		    if i % 10000 = 0 then
+			    print ".";
+		    end if
+	    end for
+	    close #wxfile
+
+	    kill(dest+"_tmp")
+	    print
+
+	    ' next, copy destination file
+	    print "copying "; source
+
+	    infile = freefile()
+	    open source for input as #infile
+	    for i = 1 to lof( infile )
+		    writebyte( outfile, readbyte( infile ) )
+	    end for
+	    close# infile
+
+	    print "attaching tag..."
+
+	    ' convert to string
+	    sizeof = "" & sizeof
+
+	    ' pad with zeros
+	    while len( sizeof ) < 8
+		    sizeof = "0" & sizeof
+	    end while
+
+	    ' write additional information
+	    print #outfile, "\n//"; sizeof; "   bind"
+
+	    close# outfile
+
+	    print "created "; dest
+	    print "offset:";sizeof
+
+	    print
+	    print
+
+
+
+	end if
+	'-----------------------------------
+
+	end
+
+end if

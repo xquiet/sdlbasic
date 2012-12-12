@@ -1,0 +1,116 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html style="direction: ltr;" lang="en">
+<head>
+
+
+
+
+  
+  
+  
+  <meta content="text/html; charset=ISO-8859-1" http-equiv="content-type">
+
+
+
+  
+
+
+  
+  
+  
+  
+  
+  <title>Dynamic Arrays</title>
+  <meta content="zoiba" name="author">
+
+
+
+
+  
+  
+  
+  <link rel="stylesheet" href="../style.css" type="text/css">
+</head>
+
+
+<body style="color: rgb(0, 0, 0);" alink="#ee0000" link="#0000ee" vlink="#551a8b">
+
+
+
+
+<div style="background-color: rgb(0, 0, 0); text-align: left;"><span class="title">Dynamic Arrays</span><span class="title"><br class="text">
+
+
+
+
+</span></div>
+
+
+
+
+<span class="text"><br>
+
+In addition to the standard declared arrays, sdlBasic supports dynamic
+arrays. If you declare an array without listing the indexes:<br>
+<br>
+
+</span>
+<div style="text-align: left; background-color: rgb(255, 255, 204);"><span class="code">Dim myArray[]</span><span class="text"></span><br>
+
+<span class="text"></span></div>
+
+<span class="text">&nbsp;<br>
+
+sdlBasic will treat it as a dynamic array. Dynamic arrays use strings as their indexes:<br>
+<br>
+
+</span>
+<div style="text-align: left; background-color: rgb(255, 255, 204);"><span class="code">myArray["cat"] = "Chester"</span><br>
+
+<span class="text"></span></div>
+
+<span class="text">&nbsp;<br>
+
+You can use numeric values for indexes, but they will be stored
+internally as strings. So the following declarations are equivalent:<br>
+<br>
+
+</span>
+<div style="text-align: left; background-color: rgb(255, 255, 204);"><span class="code">myArray[1,2,3] = 23</span><br class="code">
+
+<span class="code">myArray["1,2,3"] = 23</span><span class="text"></span><br>
+
+<span class="text"></span></div>
+
+<span class="text">&nbsp;<br>
+
+You can use the&nbsp; For Each&nbsp; construct to iterate through dynamic arrays:<br>
+<br>
+
+</span>
+<div style="text-align: left; background-color: rgb(255, 255, 204);"><span class="code">For Each key In myArray</span><br class="code">
+
+<span class="code">&nbsp;&nbsp;&nbsp; Print key, myArray[key]</span><br class="code">
+
+<span class="code">Next</span><br>
+
+<span class="text"></span></div>
+
+<span class="text"></span><span class="text"><br>
+
+
+
+
+</span>
+<div style="text-align: right;"><span class="text">&nbsp;</span></div>
+
+
+
+
+<div style="text-align: right;"><span class="text">&nbsp;</span></div>
+
+
+
+
+</body>
+</html>

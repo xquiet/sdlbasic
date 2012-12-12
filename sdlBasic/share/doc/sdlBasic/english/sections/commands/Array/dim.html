@@ -1,0 +1,321 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html style="direction: ltr;" lang="en">
+<head>
+
+  <meta content="text/html; charset=ISO-8859-1" http-equiv="content-type">
+  <title>dim</title>
+
+
+  <link rel="stylesheet" href="../../style.css" type="text/css">
+
+  <meta content="zoiba" name="author">
+
+</head>
+
+
+<body style="color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);" alink="#ee0000" link="#0000ee" vlink="#551a8b">
+
+<div style="text-align: left; background-color: rgb(204, 204, 255);">
+<span class="subTitle">dim<br>
+
+</span>
+</div>
+
+<span class="text"><br>
+
+Create an array or variable named name
+. Arrays can have up to 5 indexes, and are initialized to zeros.
+Variables can optionally be assigned by Dim statements.
+</span><span class="syntax2"><br>
+
+</span>
+<span class="smallTitle"><br>
+
+Syntax
+<br>
+
+</span>
+<div style="text-align: left; background-color: rgb(239, 239, 255);"><span class="syntax2">dim {Common|Shared} </span>
+<span class="syntax">name
+</span><span class="syntax2">[]
+<br>
+
+</span>
+</div>
+
+<div style="text-align: left; background-color: rgb(239, 239, 255);">
+<span class="syntax2">dim {Common|Shared} </span>
+<span class="syntax">name
+</span><span class="syntax2"> = </span>
+<span class="syntax">expression
+</span><span class="syntax2"><br>
+
+</span>
+</div>
+
+<div style="text-align: left; background-color: rgb(239, 239, 255);">
+<span class="syntax2">dim {Common|Shared} </span>
+<span class="syntax">name
+</span><span class="syntax2">[ </span>
+<span class="syntax">maxValue
+</span><span class="syntax2"> {,...} ]
+<br>
+
+</span>
+</div>
+
+<div style="text-align: left; background-color: rgb(239, 239, 255);">
+<span class="syntax2">dim {Common|Shared} </span>
+<span class="syntax">name
+</span><span class="syntax2">[ </span>
+<span class="syntax">minValue
+</span><span class="syntax2"> To </span>
+<span class="syntax">maxValue
+</span><span class="syntax2"> {,...} ] <br>
+
+</span>
+</div>
+
+<span class="text"><br>
+
+Common declares variables and arrays as global. These do not need to be
+declared as Shared when used in a Sub or Function
+. Common can only be used outside of Sub and Function
+.
+</span><br class="text">
+
+<span class="text">
+Shared declares variables and arrays defined outside the routine that
+has not been declared as Common
+. Shared can only be used inside a Sub or Function
+.
+</span><br class="text">
+
+<span class="text">
+You can write multiple variable and array declaration by separating
+them by commas.
+</span><span class="text"><br>
+
+</span>
+<span class="smallTitle"><br>
+
+Example:
+<br>
+
+</span>
+<div style="text-align: left; background-color: rgb(255, 255, 204);"><span class="code"><span style="font-weight: bold;">dim</span>
+a[1]
+, b[3,5]
+, counter
+, x
+, y
+</span><span class="syntax2"><br>
+
+</span>
+</div>
+
+<span class="text">
+If no indexes are specified, a dynamic array will be created. Indexes
+can be any value ( numeric or strings ) but they will be stored
+internally as strings. For example:
+<br>
+
+</span>
+<div style="text-align: left; background-color: rgb(255, 255, 204);"><span class="code">a[1] = "one"
+<br>
+
+</span>
+</div>
+
+<span class="text">
+and
+<br>
+
+</span>
+<div style="text-align: left; background-color: rgb(255, 255, 204);"><span class="code">a["1"] = "one"
+<br>
+
+</span>
+</div>
+
+<span class="text">
+are identical. You can have as many indexes as you wish, but the result
+is simply combined into a single string. For example:
+<br>
+
+</span>
+<div style="text-align: left; background-color: rgb(255, 255, 204);"><span class="code">a["this",22] = "some value"
+<br>
+
+</span>
+</div>
+
+<span class="text">
+is the same as writing:
+<br>
+
+</span>
+<div style="text-align: left; background-color: rgb(255, 255, 204);"><span class="code">a["this,22"] = "some value"
+<br>
+
+</span>
+</div>
+
+<span class="text">
+If you request an index from a dynamic array that has not been
+assigned, it will return an empty string "".
+<br>
+
+</span>
+<span class="text">Dynamic arrays also differ from static
+arrays in that that elements can only be passed by value, not by
+reference.
+<br>
+
+</span>
+<span class="smallTitle"><br>
+
+Example:
+<br>
+
+</span>
+<div style="text-align: left; background-color: rgb(255, 255, 204);"><span class="code">' Create an array
+<br>
+
+</span>
+</div>
+
+<div style="text-align: left; background-color: rgb(255, 255, 204);">
+<span class="code"><span style="font-weight: bold;">dim</span>
+a[3 To 10, 5]
+</span><br>
+
+</div>
+
+<span class="text">
+<br>
+
+</span>
+<div style="text-align: left; background-color: rgb(255, 255, 204);"><span class="code">' Create a variable and assign it
+<br>
+
+</span>
+</div>
+
+<div style="text-align: left; background-color: rgb(255, 255, 204);">
+<span class="code"><span style="font-weight: bold;">dim</span>
+myVar = 100
+</span><span class="syntax2"><br>
+
+</span>
+</div>
+
+<span class="smallTitle"><br>
+
+Example:
+<br>
+
+</span>
+<div style="text-align: left; background-color: rgb(255, 255, 204);"><span class="code"><span style="font-weight: bold;">dim
+</span>array$[100]
+</span><br>
+
+</div>
+
+<div style="text-align: left; background-color: rgb(255, 255, 204);">
+<span class="code">for i = 0 to 100
+<br>
+
+</span>
+</div>
+
+<div style="text-align: left; background-color: rgb(255, 255, 204);">
+<span class="code">array$[i]="record"+str$(i)
+<br>
+
+</span>
+</div>
+
+<div style="text-align: left; background-color: rgb(255, 255, 204);">
+<span class="code">next
+<br>
+
+</span>
+</div>
+
+<div style="text-align: left; background-color: rgb(255, 255, 204);">
+<span class="code">for i = 0 to 100
+<br>
+
+</span>
+</div>
+
+<div style="text-align: left; background-color: rgb(255, 255, 204);">
+<span class="code">print(array$[i])
+<br>
+
+</span>
+</div>
+
+<div style="text-align: left; background-color: rgb(255, 255, 204);">
+<span class="code">next
+<br>
+
+</span>
+</div>
+
+<div style="text-align: left; background-color: rgb(255, 255, 204);">
+<span class="code"><span style="font-weight: bold;">dim</span>
+array$[10 to 110]
+</span><span class="syntax2"><br>
+
+</span>
+</div>
+
+<div style="text-align: left; background-color: rgb(255, 255, 204);">
+<span class="code">for i = 10 to 110
+<br>
+
+</span>
+</div>
+
+<div style="text-align: left; background-color: rgb(255, 255, 204);">
+<span class="code">array$[i]="record"+str$(110-i)
+<br>
+
+</span>
+</div>
+
+<div style="text-align: left; background-color: rgb(255, 255, 204);">
+<span class="code">next
+<br>
+
+</span>
+</div>
+
+<div style="text-align: left; background-color: rgb(255, 255, 204);">
+<span class="code">for i = 10 to 110
+<br>
+
+</span>
+</div>
+
+<div style="text-align: left; background-color: rgb(255, 255, 204);">
+<span class="code">print(array$[i])
+<br>
+
+</span>
+</div>
+
+<div style="text-align: left; background-color: rgb(255, 255, 204);">
+<span class="code">next
+</span><span class="text code"><br>
+
+</span>
+</div>
+
+<br>
+
+<span class="text">See also <a href="erase.html"><span style="font-weight: bold;">erase</span></a> command.</span>
+</body>
+</html>

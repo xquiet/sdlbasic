@@ -1,0 +1,229 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html style="direction: ltr;" lang="en">
+<head>
+
+
+
+
+  
+  
+  
+  <meta content="text/html; charset=ISO-8859-1" http-equiv="content-type">
+
+
+
+  
+
+
+  
+  
+  
+  
+  
+  <title>Running sdlBasic Programs</title>
+  <meta content="zoiba" name="author">
+
+
+
+
+  
+  
+  
+  <link rel="stylesheet" href="../style.css" type="text/css">
+</head>
+
+
+<body style="color: rgb(0, 0, 0);" alink="#ee0000" link="#0000ee" vlink="#551a8b">
+
+
+<div style="text-align: left; background-color: rgb(0, 0, 0);"><span class="title">Running sdlBasic Programs</span><span class="title"></span><br class="text">
+
+
+<span class="title"></span></div>
+
+
+<span class="title">
+
+</span>
+
+<span class="text"><br>
+
+
+
+
+sdlBasic programs are written as plain text files. You can use any sort
+of editor, as long as you save in plain text (.TXT) format. To run a
+program written in sdlBasic, you only have to have the sdlBasic
+executable, sdlbasic.exe (in Linux, sdlBasic) in the current directory,
+or somewhere in your path. If there are any includefiles, they must be
+in the same directory as the source file.<br>
+
+
+<br>
+
+
+</span>
+<div style="text-align: left; background-color: rgb(255, 255, 255);"><span class="subTitle">Running sdlBasic from the Command Line</span><span class="text"></span><br>
+
+
+</div>
+
+
+<span class="text">If you use the Windows command line or Linux shell, you can simply type:<br>
+
+<br>
+
+
+</span>
+<div style="text-align: left; background-color: rgb(255, 255, 204);"><span class="code">sdlbasic filename</span><span class="text"></span><br>
+
+
+<span class="text"></span></div>
+
+
+<span class="text"><br>
+
+where filename is the name of the file you want to run. For example, to run a program<br>
+
+
+called myprog.sdlbas, you would write:<br>
+
+<br>
+
+
+</span>
+<div style="text-align: left; background-color: rgb(255, 255, 204);"><span class="code">sdlbasic myprog.sdlbas</span><span class="text"></span><br>
+
+
+<span class="text"></span></div>
+
+
+<span class="text"><br>
+
+There are some switch you can pass to the interpreter before it starts the program execution. They are: <br>
+
+<br>
+
+</span>
+<table style="text-align: left; width: 100%;" border="0" cellpadding="2" cellspacing="2">
+
+  <tbody>
+
+    <tr>
+
+      <td style="width: 110px;"><span class="text">
+--nosound</span></td>
+
+      <td style="width: 702px;"><span class="text">: prevents the starting of the SDL sound system</span></td>
+
+    </tr>
+
+    <tr>
+
+      <td style="width: 110px;"><span class="text">
+--nosocket</span></td>
+
+      <td style="width: 702px;"><span class="text">: prevents the starting of the SDL socket</span></td>
+
+    </tr>
+
+    <tr>
+
+      <td style="width: 110px;"><span class="text">
+--debug</span></td>
+
+      <td style="width: 702px;"><span class="text">: activate the debug mode</span></td>
+
+    </tr>
+
+    <tr>
+
+      <td style="width: 110px;"><span class="text">--nodefaults</span></td>
+
+      <td style="width: 702px;"><span class="text">: prevents the creation of default display when program starts</span></td>
+
+    </tr>
+
+    <tr>
+
+      <td style="width: 110px;"><span class="text">
+--version</span></td>
+
+      <td style="width: 702px;"><span class="text">: prints the sdlBasic release number</span></td>
+
+    </tr>
+
+    <tr>
+
+      <td style="width: 110px;"><span class="text">--help</span></td>
+
+      <td class="text" style="width: 702px;">: prints sdlBrt parameters list</td>
+
+    </tr>
+
+    <tr>
+
+      <td><span class="text">--copyright</span></td>
+
+      <td class="text">: prints copyright stuff</td>
+
+    </tr>
+
+    <tr>
+
+      <td><span class="text">--license</span></td>
+
+      <td class="text">: prints license stuff</td>
+
+    </tr>
+
+  
+  </tbody>
+</table>
+
+<span class="text"><br>
+
+
+so your command line would become:<br>
+
+<br>
+
+
+</span>
+<div style="text-align: left; background-color: rgb(255, 255, 204);"><span class="code">sdlbasic myprog.sdlbas --nosound</span><span class="text"></span><br>
+
+
+<span class="text"></span></div>
+
+
+<span class="text"><br>
+
+
+on
+some Linux machines you may experience trouble with sound device if
+other applications are using sound card capables. Try starting program
+as shown here below to fix the problem.<br>
+
+<br>
+
+
+</span>
+<div style="text-align: left; background-color: rgb(255, 255, 204);"><span class="code">artsdsp -m sdlbasic myprog.sdlbas</span><span class="text"></span><br>
+
+
+<span class="text"></span></div>
+
+
+<span class="text"></span><br>
+
+
+<span class="text"></span><span class="subTitle">Running sdlBasic programs from Windows or KDE<br>
+
+</span><span class="text"><br>
+
+The simplest method is just to associate an extension, such as .sdlbas
+with the sdlBrt.exe executable. Then you can just double-click files
+with that extension, and Windows or KDE will automatically launch the
+sdlBasic interpreter.</span>
+</body>
+</html>

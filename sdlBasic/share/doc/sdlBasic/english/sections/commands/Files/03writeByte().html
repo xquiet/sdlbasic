@@ -1,0 +1,96 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html style="direction: ltr;" lang="en">
+<head>
+
+  <meta content="text/html; charset=ISO-8859-1" http-equiv="content-type">
+  <title>writeByte()</title>
+
+
+  <link rel="stylesheet" href="../../style.css" type="text/css">
+
+  <meta content="zoiba" name="author">
+
+</head>
+
+
+<body style="background-color: rgb(255, 255, 255); color: rgb(0, 0, 0);" alink="#ee0000" link="#0000ee" vlink="#551a8b">
+
+<div style="text-align: left; background-color: rgb(204, 204, 255);">
+<span class="subTitle">writeByte()<br>
+
+</span>
+</div>
+
+<span class="text"><br>
+
+Write a byte in the file.<br>
+<br>
+
+</span>
+<span class="smallTitle">Syntax:
+<br>
+
+</span>
+<div style="text-align: left; background-color: rgb(239, 239, 255);"><span class="syntax2">
+writeByte( </span>
+<span class="syntax">stream
+</span><span class="syntax2">
+, </span>
+<span class="syntax">position
+</span><span class="syntax2"> )
+<br>
+
+</span>
+</div>
+
+<span class="smallTitle"><br>
+
+</span><span class="syntax">stream</span><span class="text"> is a file previously opened by the <a href="00open...For...As.html">open</a> command.</span><br>
+
+<span class="syntax">position</span><span class="text">&nbsp;represent the position where the byte
+will be wrote to, this position is measured in number of byte from file
+beginning.<br>
+<br>
+
+</span><span class="smallTitle">Example:
+<br>
+
+</span>
+<div style="text-align: left; background-color: rgb(255, 255, 204);"><span class="code">open "myfile.txt" for output as 1</span><br class="code">
+
+<span class="code"><span style="font-weight: bold;">writebyte(</span>
+1,asc("s") <span style="font-weight: bold;">)</span></span><br class="code">
+
+<span class="code"><span style="font-weight: bold;">writebyte(
+</span>1,asc("d") <span style="font-weight: bold;">)</span></span><br class="code">
+
+<span class="code"><span style="font-weight: bold;">writebyte(</span>
+1,asc("l") <span style="font-weight: bold;">)</span></span><br class="code">
+
+<span class="code"><span style="font-weight: bold;">writebyte(</span>
+1,asc("B") <span style="font-weight: bold;">)</span></span><br class="code">
+
+<span class="code"><span style="font-weight: bold;">writebyte(</span>
+1,asc("a") <span style="font-weight: bold;">)</span></span><br class="code">
+
+<span class="code"><span style="font-weight: bold;">writebyte(</span>
+1,asc("s") <span style="font-weight: bold;">)</span></span><br class="code">
+
+<span class="code"><span style="font-weight: bold;">writebyte(</span>
+1,asc("i") <span style="font-weight: bold;">)</span></span><br class="code">
+
+<span class="code"><span style="font-weight: bold;">writebyte(</span>
+1,asc("c") <span style="font-weight: bold;">)</span></span><br class="code">
+
+<span class="code"><span style="font-weight: bold;">writebyte(
+</span>1,13 <span style="font-weight: bold;">)</span></span><br class="code">
+
+<span class="code">close 1 </span><br>
+
+</div>
+
+<br>
+
+<span class="text">See also <a href="03readByte%28%29.html"><span style="font-weight: bold;">readByte()</span></a> command.</span>
+</body>
+</html>

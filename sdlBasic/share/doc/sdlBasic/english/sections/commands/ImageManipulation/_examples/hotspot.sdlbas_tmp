@@ -1,0 +1,21 @@
+'hotspot
+ink(rgb(255,0,0))
+line(0,2,4,2)
+line(2,0,2,4)
+grab(1,0,0,5,5)
+cls
+
+loadimage("bidone.bmp",0)
+while not key(K_esc)
+cls
+x=rnd(4)-1
+y=rnd(4)-1
+text(10,10,15,"hotspot(0,"&x&","&y&")")
+hotspot(0,x,y)
+bob( 1,100,100,0)
+bob(2,100,100,1)
+screenswap
+while(inkey=0):end while
+while(inkey<>0):end while
+wend
+

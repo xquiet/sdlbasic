@@ -1,0 +1,131 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html style="direction: ltr;" lang="en">
+<head>
+
+
+  
+  <meta content="text/html; charset=ISO-8859-1" http-equiv="content-type">
+
+  
+
+
+  
+  <title>argument$()</title>
+  <link rel="stylesheet" href="../../style.css" type="text/css">
+
+
+  
+  <meta content="zoiba" name="author">
+</head>
+
+
+<body style="background-color: rgb(255, 255, 255); color: rgb(0, 0, 0);" alink="#ee0000" link="#0000ee" vlink="#551a8b">
+
+
+<div style="text-align: left; background-color: rgb(204, 204, 255);">
+<span class="subTitle">argument$()<br>
+
+
+</span>
+</div>
+
+
+<br>
+
+
+<span class="text">Return arguments passed to a subroutine
+or a function by the caller line. Used with subroutines or functions
+that take variable numbers of parameters.
+This command replaces outdated <a href="_argC.html"><span style="font-weight: bold;">argC</span> </a>and <a href="_argV.html"><span style="font-weight: bold;">argV</span>
+</a>commands </span><span class="syntax2"><br>
+
+
+</span>
+<br>
+
+
+<span class="text"></span><span class="smallTitle">Syntax:
+<br>
+
+
+</span>
+<div style="text-align: left; background-color: rgb(239, 239, 255);"><span class="syntax2"></span><span class="syntax">numberOfArguments
+</span><span class="syntax2"> = argument$()
+<br>
+
+
+</span>
+</div>
+
+
+<div style="text-align: left; background-color: rgb(239, 239, 255);">
+<span class="syntax2"></span><span class="syntax">argument
+</span><span class="syntax2"> = argument$( n </span>
+<span class="syntax2">)
+</span><span class="syntax2"><br>
+
+
+</span>
+</div>
+
+
+<br>
+
+
+<span class="text"></span><span class="text">It
+return the total number of arguments passed from the caller command if
+called without parameter or returns argument number </span><span class="text" style="font-style: italic; font-weight: bold;">n</span><span class="text"> if called with parameter n
+, first argument starts at n = 1
+</span><br class="text">
+
+
+<span class="text">
+You can omit the dollar symbol and type it as </span><span style="font-weight: bold;" class="text">argument()
+</span><span class="syntax2"><br>
+
+
+<br>
+
+
+<span class="smallTitle">Example:&nbsp;</span><span class="text"></span></span>
+<div style="text-align: left; background-color: rgb(255, 255, 204);"><span class="code">sub mySub(...)</span><br class="code">
+
+
+<div style="margin-left: 40px;"><span class="code">for
+i= 1 to <span style="font-weight: bold;">argument</span></span><br class="code">
+
+
+<div style="margin-left: 40px;"><span class="code">prints(
+<span style="font-weight: bold;">argument(</span> i <span style="font-weight: bold;">)</span> )</span><br class="code">
+
+
+</div>
+
+
+<span class="code">next</span><br class="code">
+
+
+</div>
+
+
+<span class="code">end sub</span><br class="code">
+
+
+<span class="code">mySub("test1")</span><br class="code">
+
+
+<span class="code">mySub("test2","more arguments",1,9)</span><br class="code">
+
+
+<span class="code">waitkey</span><br>
+
+
+</div>
+
+
+<br>
+
+
+<span class="text">See also <a href="sub.html"><span style="font-weight: bold;">sub</span></a> and <a href="function.html"><span style="font-weight: bold;">function</span></a> commands</span>
+</body>
+</html>

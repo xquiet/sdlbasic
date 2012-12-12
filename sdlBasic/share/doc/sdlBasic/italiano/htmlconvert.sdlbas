@@ -1,0 +1,157 @@
+'
+' sdlbasic doc: html converter
+'
+'   name:      htmlconverter.sdlbas
+'   purpose:   generate a manual html page  of sdlbasic for send at sourceforge site
+'   author:   __vroby__
+'   licence:    lgpl
+'
+'   bugs:
+'
+'   todo:
+'
+'-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+makeexamples=1
+cleanapi=true
+apiFile="../../../sdlBasic/sdlBasic.api"
+	base$="examples"
+if makeexamples <> 0 then:
+	mkdir(base$)
+end if
+
+inputfile$="sdlBasic.txt"
+outputfile$="QuickHelp.html"
+keywordlist$="keywords.txt"
+
+open inputfile$ for input as 1
+open outputfile$ for output as 2
+open keywordlist$ for output as 3
+
+print #2,"<!doctype html public '-//w3c//dtd html 4.0 transitional//en'>"
+print #2,"<!-- $id: htmlconvert.sdlbas,v 1.2 2005/07/09 22:52:22 vroby exp $ -->"
+print #2,"<html>"
+print #2,"<head>"
+print #2,"<link href='style.css' rel='stylesheet' type='text/css'>"
+print #2,"<meta http-equiv='content-type' content='text/html; charset=iso-8859-1'>"
+print #2,"<title>sdlbasic quickhelp</title>"
+print #2,"</head>"
+print #2,""
+print #2,"<body bgcolor='#ffffff' background='pattern.png'>"
+print #2,"<a href='http://sourceforge.net/'><img src='motd.png' border=0 alt='[sourceforge]' align=left /></a>"
+print #2,"<a href='http://sdlbasic.sourceforge.net/'><img src='logo.jpg' border=0 alt='[sdlbasic]' align=middle /></a>"
+print #2,"<h1><center>sdlbasic quick help</center></h1>"
+print #2,"<hr>"
+
+l=1:c=0
+while eof(1)=0
+	a$=""
+	file input #1,a$
+
+	a$=replacesubstr(a$,"#","" )
+
+	'start section
+	if c=1 then: t$=trim(left$(a$,len(a$))):if makeexamples <> 0 then: mkdir(base$+"/"+t$) : end if : a$="<b>"+a$+"</b>": c=0: end if
+
+	if left$(a$,5)="_____" then: a$="<hr />": c=1: end if
+
+
+	if left$(trim$(a$),1)="*" and left$(trim$(a$),2)<>"**" then
+		a$="<table bgcolor='#ff0000' width='100%'><tr><td>"+a$+"</td></tr></table>"
+	end if
+
+	if left$(trim$(a$),2)="**" then
+		a$="<table bgcolor='#ff8000' width='100%'><tr><td>"+a$+"</td></tr></table>"
+	end if
+
+	if left$(trim$(a$),1)="?" then
+		a$="<table bgcolor='#ffff00' width='100%'><tr><td>"+a$+"</td></tr></table>"
+	end if
+
+	if left$(trim$(a$),2)="->" then
+		a$="<table bgcolor='#ff00ff' width='100%'><tr><td>"+a$+"</td></tr></table>"
+	end if
+
+
+	s=instr(a$,": ")
+	if s<>0 then
+		b$=left$(a$,s)
+		c$=mid$(a$,s+1)
+		a$="<b>"+b$+"</b>"+c$
+		com$=rtrim$(left$(b$,len(b$)-1))
+
+		if instr(com$,"[")then: com$=left$(com$,instr(com$,"[")-1):end if
+		if instr(com$,"(")then: com$=left$(com$,instr(com$,"(")-1):end if
+		com$=rtrim(com$)
+		com$=replacesubstr(com$,chr$(9),"")
+		com$=replacesubstr(com$,"?","")
+		com$=replacesubstr(com$,"--","<")
+
+		if left$(trim$(com$),1)<>"<" then
+			print #3,com$ &" \\"
+		end if
+
+		if makeexamples<>0 then
+			if not fileexists(base$+"/"+t$+"/"+replacesubstr$(com$,"*","")+".sdlbas") and left$(trim$(com$),1)<>"<" then
+				open (base$+"/"+t$+"/"+replacesubstr$(com$,"*","")+".sdlbas") for output as 4
+				print base$+"/"+t$+"/"+replacesubstr$(com$,"*","")+".sdlbas"
+				print #4,"'"
+				print #4,"' sdlbasic example "+t$+":"+com$
+				print #4,"'"
+				print #4,"'   name:      "+com$+".sdlbas"
+				print #4,"'   purpose:   "+c$
+				print #4,"'  author:     vroby    ( vroby.mail@gmail.com )"
+				print #4,"'  licence:    lgpl"
+				print #4,"'"
+				print #4,"'-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------"
+				close 4
+			end if
+		end if
+	end if
+
+	print #2,a$+"<br />"
+	locate(0,0)
+	prints("line"+str$(l)+"   ")
+	l=l+1
+	'waitvbl
+end while
+
+
+print #2,"<hr/>"
+print #2,"<p align='right'>"
+print #2,"generated with <b>sdlbasic</b><br/>"
+print #2,"graphics <b>zoiba</b><br/>"
+print #2,"</p>"
+
+print #2,"</body>"
+print #2,"</html>"
+
+close 2
+close 1
+
+-------------------------------------------------- making api file for ide
+if cleanapi=false then
+	filecopy("sdlBasic.txt",apiFile)
+else
+	------------------ cleanup sdlbasic.api while copying it
+	outputfile$=apiFile
+	open inputfile$ for input as 1
+	open outputfile$ for output as 2
+	while eof(1)=0
+		file input #1,a$
+		for n = 1 to 10
+			if instr( a$, chr(09) )<>0  then
+				a$=replacesubstr( a$,chr(09),"" )
+			end if
+		next
+		if  left$( a$, 1 )<>"#" then
+			file output #2,a$
+		end if
+	wend
+	close 2
+	close 1
+end if
+
+
+waitkey
+
+

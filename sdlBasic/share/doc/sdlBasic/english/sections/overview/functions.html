@@ -1,0 +1,144 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html style="direction: ltr;" lang="en">
+<head>
+
+  <meta content="text/html; charset=ISO-8859-1" http-equiv="content-type">
+  <title>Functions</title>
+
+
+  <meta content="zoiba" name="author">
+
+  <link rel="stylesheet" href="../style.css" type="text/css">
+
+</head>
+
+
+<body style="color: rgb(0, 0, 0);" alink="#ee0000" link="#0000ee" vlink="#551a8b">
+
+<div style="background-color: rgb(0, 0, 0); text-align: left;"><span class="title">Functions</span><span class="title"><br class="text">
+
+</span></div>
+
+<span class="text"><br>
+
+</span><span class="text">While writing programs you may
+need to repeat the same sequence of
+instructions in several parts of the program. sdlBasic offers you the
+chance of write the instruction sequence one time and then recall it
+from every part of the program may needs it.</span><br class="text">
+
+<span class="text">Variables used inside the function are
+local variables, that means they
+will not influence other variables that happens to use the same
+variable name in your main program or in any other function. This is
+valid for arrays too.</span><br class="text">
+
+<span class="text">See Global Shared Dim Commons statements
+for more details.</span><br class="text">
+
+<span class="text">You can pass to the function a list of
+parameters containing the
+informations to be processed from the function itself. Functions that
+do not require input parameters can be called from your main program
+without using brackets. Functions can optionally return
+values,specified by the Return statement.</span><br class="text">
+
+<span class="text">sdlBasic borrows the return statement from
+C. In addition to the
+standard method of returning values from functions:<br>
+<br>
+</span><span class="text">
+</span>
+<div style="text-align: left; background-color: rgb(255, 255, 204);"><span class="code">function add( a, b )</span><br class="code">
+
+<span class="code">&nbsp;&nbsp;&nbsp; add = a
++ b</span><br class="code">
+
+<span class="code">end function</span><br>
+
+<span class="text"></span></div>
+
+<span class="text"><br>
+you can also write:<br>
+<br>
+
+</span>
+<div style="text-align: left; background-color: rgb(255, 255, 204);"><span class="code">function add( a, b )</span><br class="code">
+
+<span class="code">&nbsp;&nbsp;&nbsp; Return a
++ b</span><br class="code">
+
+<span class="code">end function</span><br>
+
+<span class="text"></span></div>
+
+<span class="text"><br>
+sdlBasic exits the function at the
+point the return statement is executed. <br>
+<br>
+
+You can simply call the function by the following statement:<br>
+<br>
+
+</span>
+<div style="text-align: left; background-color: rgb(255, 255, 204);"><span class="code">newSumm= add( 3, 4)</span><br>
+
+<span class="text"></span></div>
+
+<span class="text"><br>
+in this example, variable newSumm will
+be set to 7 as returned buy function.<br>
+
+You can choose to simply ignore the result of a function, and treat it
+like a subroutine: <br>
+<br>
+
+</span>
+<div style="text-align: left; background-color: rgb(255, 255, 204);"><span class="code">' Ignore the return value of Len()</span><br class="code">
+
+<span class="code">len("123")</span><br>
+
+<span class="text"></span></div>
+
+<span class="text"><br>
+the returned value will be lost.<br>
+<br>
+Function name can't be the same of variables or arrays used in the
+program with the same scope. This mean you can't use the following code:<br>
+<br>
+
+</span>
+<div style="text-align: left; background-color: rgb(255, 255, 204);"><span class="code">myVariable = 1</span><br class="code">
+
+<span class="code">function myVariable()</span><br class="code">
+
+<span class="code">&nbsp;&nbsp; &nbsp;...</span><br class="code">
+
+<span class="code">end function</span><br>
+
+<span class="text"></span></div>
+
+<span class="text"><br>
+but you are allowed to use this:<br>
+<br>
+
+</span>
+<div style="text-align: left; background-color: rgb(255, 255, 204);"><span class="code">function myFuntion()</span><br class="code">
+
+<span class="code">&nbsp;&nbsp;
+&nbsp;myVariable=1</span><br class="code">
+
+<span class="code">end function<br>
+
+<br class="code">
+
+</span><span class="code">function myVariable()</span><br class="code">
+
+<span class="code">&nbsp;&nbsp; &nbsp;...</span><br class="code">
+
+<span class="code">end function</span><br>
+
+<span class="text"></span></div>
+
+</body>
+</html>

@@ -1,0 +1,193 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html style="direction: ltr;" lang="en">
+<head>
+
+
+  
+  
+  <meta content="text/html; charset=ISO-8859-1" http-equiv="content-type">
+
+
+  
+  
+  
+  
+  <title>setDefaults()</title>
+  <link rel="stylesheet" href="../../style.css" type="text/css">
+
+
+  
+  
+  <meta content="zoiba" name="author">
+</head>
+
+
+<body style="color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);" alink="#ee0000" link="#0000ee" vlink="#551a8b">
+
+
+<div style="text-align: left; background-color: rgb(204, 204, 255);">
+<span class="subTitle">
+setDefaults()<br>
+
+
+</span>
+</div>
+
+
+<span class="text"><br>
+
+Change display parameters, initialize fonts and cursor, sets default screens parameters.
+<br>
+This command is useful in conjunction with <span style="font-weight: bold;">--nodefaults</span>
+command line parameter, it avoid the creation of default display window
+when starting a .sdlbas program. This way you can open custom display
+without flashing windows at the beginning of the program . If you
+launch sdlBrt with <span style="font-weight: bold;">--nodefaults</span> option you must invoke <span style="font-weight: bold;">setDefaults()</span> command before accessing any sprites, bobs, graphic commands and all the commands involving screens and display.<br>
+
+
+</span>
+<span class="smallTitle"><br>
+
+Syntax:
+<br>
+
+
+</span>
+<div style="text-align: left; background-color: rgb(239, 239, 255);">
+<span class="syntax2">
+setDefaults( 
+</span>
+<span class="syntax">
+width
+</span>
+<span class="syntax2">
+, 
+</span>
+<span class="syntax">
+height
+</span>
+<span class="syntax2">
+, 
+</span>
+<span class="syntax">
+depth
+</span>
+<span class="syntax2">
+ , 
+</span>
+<span class="syntax">
+mode
+</span>
+<span class="syntax2">
+ )
+<br>
+
+
+</span>
+</div>
+
+
+<span class="text">
+</span>
+<span class="syntax"><br>
+
+width</span><span class="text">
+</span><span class="text">
+
+ is the display width.
+</span><span class="syntax2"><br>
+
+
+</span>
+<span class="text">
+</span>
+<span class="syntax">
+height</span><span class="text">
+</span><span class="text">
+
+ is the display height.
+</span><span class="syntax2"><br>
+
+
+</span>
+<span class="text">
+</span>
+<span class="syntax">
+depth</span><span class="text">
+</span><span class="text">
+
+ is display color depth. Commonly used values are:
+</span><span class="syntax2"><br>
+
+
+</span>
+<div style="margin-left: 40px;"><span class="text">
+8 = 256 mapped colors
+</span><br>
+
+<span class="text">
+</span><span class="text">
+16 = 65000 colors
+</span><br>
+
+<span class="text">
+</span><span class="text">
+32 = full colors
+</span><br>
+
+<span class="text"></span></div>
+
+
+
+<span class="text">
+</span>
+<span class="text">
+</span>
+<span class="syntax">
+mode</span><span class="text">
+</span><span class="text">
+
+ determine how display is opened. Possible values are:
+</span><span class="syntax2"><br>
+
+
+</span>
+<div style="margin-left: 40px;"><span class="text">
+0 = full screen
+</span><br>
+
+<span class="text">
+</span><span class="text">
+1 = fixed window
+</span><br>
+
+<span class="text">
+</span><span class="text">
+2 = re-sizable window
+</span><br>
+
+<span class="text"></span></div>
+
+
+
+<span class="text">
+</span>
+<span class="smallTitle"><br>
+
+Example:
+<br>
+
+
+</span>
+<div style="text-align: left; background-color: rgb(255, 255, 204);">
+<span class="text code"><span style="font-weight: bold;">
+setDefault(</span> 800, 600, 16, 1 <span style="font-weight: bold;">)</span>
+<br>
+
+
+</span>
+</div>
+
+
+</body>
+</html>

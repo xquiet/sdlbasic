@@ -1,0 +1,45 @@
+
+Amos to SdlBasic translation glossary
+
+• Dim
+    Amos:
+      Dim var(size) 
+    SdlBasic:
+      Dim var[size] 
+
+• GetBob/Grab
+    Amos:
+      Get Bob n,x,y To x+xs-1,y+ys-1
+    SdlBasic:
+      grab(n,x,y,xs,ys)
+
+• LoadIff/Loadimage
+    Amos:
+      Load Iff filename$,bank 
+    SdlBasic:
+      Loadimage(filename$,bank)
+
+• ProcedureEndProc/SubEndSub
+    Amos:
+      Procedure proc1[value1,value2]
+      End Proc
+    SdlBasic:
+      sub proc1(value1,value2)
+      End sub
+
+• ScreenOpen/SetDisplay
+    Amos:
+      Screen Open n,xsize,ysize,2^bitdepth,resolution 
+    SdlBasic:
+      setdisplay(xsize,ysize,bitdepth,displaymode)
+    (note: bitdepth and resolution issues seems to be different)
+
+• Plot/Dot
+    Amos:
+      Plot x,y 
+    SdlBasic:
+      Dot (x,y)
+
+
+
+

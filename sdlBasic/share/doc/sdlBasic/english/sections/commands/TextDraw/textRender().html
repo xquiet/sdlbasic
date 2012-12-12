@@ -1,0 +1,243 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html style="direction: ltr;" lang="en">
+<head>
+
+  
+  <meta content="text/html; charset=ISO-8859-1" http-equiv="content-type">
+
+  
+  
+  <title>textRender()</title>
+  <link rel="stylesheet" href="../../style.css" type="text/css">
+
+  
+  <meta content="zoiba" name="author">
+</head>
+
+
+<body style="background-color: rgb(255, 255, 255); color: rgb(0, 0, 0);" alink="#ee0000" link="#0000ee" vlink="#551a8b">
+
+<div style="text-align: left; background-color: rgb(204, 204, 255);">
+<span class="subTitle">
+textRender()<br>
+
+</span>
+</div>
+
+<span class="text"><br>
+Render given text into an image slot. It use current font at given
+size. If image slot number is omitted, it store rendered text into
+first free slot and return it's index number. You can specify render
+style option: 0(default) = solid, 1 = shaded and 2 = blended. Text
+color depend by current ink color. See <span style="font-weight: bold;">ink()</span>
+command.<br>
+<br>
+</span><span class="syntax2">
+</span>
+<span class="smallTitle">
+Syntax:
+<br>
+
+</span>
+<div style="text-align: left; background-color: rgb(239, 239, 255);">
+<span class="syntax2">
+</span>
+<span class="syntax">
+variable
+</span>
+<span class="syntax2">
+ = textRender( 
+</span>
+<span class="syntax">
+text
+</span>
+<span class="syntax2">
+, 
+</span>
+<span class="syntax">
+size
+</span>
+<span class="syntax2">
+ )
+<br>
+
+</span>
+</div>
+<div style="text-align: left;">
+<span class="syntax2"><br>
+</span><span class="text">In this case image slot is automatically assigned by sdlBasic and its number returned into </span><span class="syntax">variable</span><span class="syntax2"><br>
+</span><span class="syntax"></span><span class="syntax2"><br>
+</span><span class="smallTitle">
+Syntax:
+</span><br>
+
+
+<div style="background-color: rgb(239, 239, 255); text-align: left;">
+<span class="syntax2">
+textRender( 
+</span>
+<span class="syntax">
+text
+</span>
+<span class="syntax2">
+, 
+</span>
+<span class="syntax">
+size
+</span>
+<span class="syntax2">
+, 
+</span>
+<span class="syntax">
+slot
+</span>
+<span class="syntax2">
+ )
+<br>
+
+</span>
+</div>
+
+
+<div style="text-align: left; background-color: rgb(239, 239, 255);"><span class="syntax2">
+textRender( 
+</span>
+<span class="syntax">
+text
+</span>
+<span class="syntax2">
+, 
+</span>
+<span class="syntax">
+size
+</span>
+<span class="syntax2">
+, 
+</span>
+<span class="syntax">
+slot
+</span>
+<span class="syntax2">
+, 
+</span>
+<span class="syntax">
+style
+</span>
+<span class="syntax2">
+ )
+</span><span class="syntax2"></span><br>
+</div>
+<span class="syntax"><br>
+text </span><span class="text">is the text to be written.</span><span class="syntax2"><br>
+
+</span>
+<span class="text">
+</span>
+<span class="syntax">
+size
+</span>
+<span class="text">
+ is text size and is expressed in points.<br>
+</span><span class="syntax">
+slot
+</span>
+<span class="text">
+ is image slot number where generated image will be stored.</span><br>
+<span class="syntax2">
+</span>
+<span class="text">
+</span>
+<span class="syntax">
+style
+</span>
+<span class="text">
+ parameter can be: 0(default)= solid, 1= shaded, 2 = blended.</span><br>
+<span class="syntax2"><br>
+</span><span class="smallTitle">Example:
+</span><span class="syntax2"><br>
+
+</span>
+</div>
+
+<div style="text-align: left; background-color: rgb(255, 255, 204);">
+<span class="text code">
+a$=" 
+sdlBasic 
+"
+<br>
+
+</span>
+</div>
+
+<div style="text-align: left; background-color: rgb(255, 255, 204);">
+<span class="text code">
+ink(rgb(255,128,0))
+<br>
+
+</span>
+</div>
+
+<div style="text-align: left; background-color: rgb(255, 255, 204);">
+<span class="text code"><span style="font-weight: bold;">
+textrender(</span> a$, 16, 1 <span style="font-weight: bold;">)</span>
+<br>
+
+</span>
+</div>
+
+<div style="text-align: left; background-color: rgb(255, 255, 204);">
+<span class="text code">
+pastebob(100,200,1)
+<br>
+
+</span>
+</div>
+
+<div style="text-align: left; background-color: rgb(255, 255, 204);">
+<span class="text code">
+prints("press any key to exit")
+<br>
+
+</span>
+</div>
+
+<div style="text-align: left; background-color: rgb(255, 255, 204);">
+<span class="text code">
+while inkey=0
+<br>
+
+</span>
+</div>
+
+<div style="text-align: left; background-color: rgb(255, 255, 204);">
+<span class="text code">&nbsp;&nbsp;&nbsp; bob(1,xmouse,20,1)
+<br>
+
+</span>
+</div>
+
+<div style="text-align: left; background-color: rgb(255, 255, 204);">
+<span class="text code">&nbsp;&nbsp;&nbsp; sprite(1,20,ymouse,1)
+<br>
+
+</span>
+</div>
+
+<div style="text-align: left; background-color: rgb(255, 255, 204);">
+<span class="text code">
+end while
+<br>
+
+</span>
+</div>
+
+<div style="text-align: left; background-color: rgb(255, 255, 204);">
+<span class="text code">
+waitkey
+<br>
+
+</span>
+</div>
+
+</body>
+</html>

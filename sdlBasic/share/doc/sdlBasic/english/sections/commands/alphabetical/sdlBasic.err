@@ -1,0 +1,3 @@
+Runtime error on line number 249 of /home/zoiba/Lavoro/sdlBasic/docs/html/sections/commands/indexCreator.sdlbas
+pripts has not been defined yet
+	locate (1,10) : pripts("working on "&link$)

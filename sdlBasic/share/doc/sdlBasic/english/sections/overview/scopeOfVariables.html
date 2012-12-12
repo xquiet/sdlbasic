@@ -1,0 +1,302 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html style="direction: ltr;" lang="en">
+<head>
+
+
+
+  
+  
+  
+  <meta content="text/html; charset=ISO-8859-1" http-equiv="content-type">
+
+
+
+
+  
+  
+  
+  
+  <title>Scope Of Variables</title>
+  <meta content="zoiba" name="author">
+
+
+
+
+
+  
+  
+  
+  
+  <link rel="stylesheet" href="../style.css" type="text/css">
+</head>
+
+
+<body style="color: rgb(0, 0, 0);" alink="#ee0000" link="#0000ee" vlink="#551a8b">
+
+
+
+
+
+<div style="background-color: rgb(0, 0, 0); text-align: left;"><span class="title">Scope of Variables</span><span class="title"></span></div>
+
+
+
+
+
+<br class="text">
+
+
+<span class="text"></span><span class="text">When a variable is created, it is scoped to the current context. That mean it is visible to </span><span class="text">anything in the current scope or greater. The widest scope is the module:<br>
+
+<br class="text">
+
+</span>
+<div style="text-align: left; background-color: rgb(255, 255, 204);"><span class="code">Dim newVar = 12</span><br class="text">
+
+
+</div>
+
+
+<br class="text">
+
+
+<span class="text">The next scope is the routine:<br>
+
+<br class="text">
+
+</span>
+<div style="text-align: left; background-color: rgb(255, 255, 204);"><span class="code">Function myRoutine()</span><br class="code">
+
+
+<span class="code">&nbsp;&nbsp;&nbsp; Dim newVar = 12</span><br class="code">
+
+
+<span class="code">End Function</span><br class="text">
+
+
+</div>
+
+
+<br class="text">
+
+
+<span class="text">When sdlBasic encounters a variable in a routine, it checks to see if there is a variable </span><span class="text">scoped to the routine of the same name and use that.</span><br>
+
+<br class="text">
+
+
+<div style="text-align: left; background-color: rgb(255, 255, 204);"><span class="code">Dim myVar = "module variable"&nbsp;&nbsp;&nbsp;&nbsp; ' This is declared at the module level</span><br class="code">
+
+<span class="code">Function myRoutine()</span><br class="code">
+
+
+<span class="code">&nbsp;&nbsp; Dim myVar = "routine variable" ' This is declared at the routine level</span><br class="code">
+
+
+<span class="code">&nbsp;&nbsp; myVar = "new
+value"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; '
+Use the local routine version of myVar</span><br class="code">
+
+
+<span class="code">&nbsp;&nbsp; return myVar</span><br class="code">
+
+
+<span class="code">End Function</span><br class="code">
+
+
+<span class="code">print myRoutine()</span><br class="code">
+
+
+<span class="code">print myVar</span><br class="text">
+
+
+</div>
+
+
+<br class="text">
+
+
+<span class="text">If not, it checks to see if there is a module variable and uses that.</span><br class="text">
+
+
+<span class="text"></span><span class="text">&nbsp;</span><br class="text">
+
+
+<div style="text-align: left; background-color: rgb(255, 255, 204);"><span class="code">Dim myVar = "module variable" ' This is declared at the module level</span><br class="code">
+
+<span class="code">Function myRoutine()</span><br class="code">
+
+
+<span class="code">&nbsp;&nbsp; myVar = "new value"&nbsp;&nbsp; ' use the module version of myVar</span><br class="code">
+
+
+<span class="code">&nbsp;&nbsp; return myVar</span><br class="code">
+
+
+<span class="code">End Function</span><br class="code">
+
+
+<span class="code">print myRoutine()</span><br class="code">
+
+
+<span class="code">print myVar</span><br class="text">
+
+
+</div>
+
+
+<span class="text">&nbsp;</span><br class="text">
+
+
+<span class="text">If there is no routine or module version of the variable, one will be created in the current </span><span class="text">scope.<br>
+
+<br class="text">
+
+</span>
+<div style="text-align: left; background-color: rgb(255, 255, 204);"><span class="code">Function myRoutine()</span><br class="code">
+
+
+<span class="code">&nbsp;&nbsp; myVar = "new value"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ' create a variable scoped to the routine</span><br class="code">
+
+
+<span class="code">End Function</span><br class="text">
+
+
+</div>
+
+
+<span class="text">&nbsp;</span><br class="text">
+
+
+<span class="text">Variables scoped to routines are only visible within the routines that they are scoped to:<br>
+
+<br class="text">
+
+</span>
+<div style="text-align: left; background-color: rgb(255, 255, 204);"><span class="code">Function myRoutine()</span><br class="code">
+
+
+<span class="code">&nbsp;&nbsp; myVar = 12</span><br class="code">
+
+
+<span class="code">&nbsp;&nbsp; print myVar&nbsp;&nbsp; ' myVar is visible here</span><br class="code">
+
+
+<span class="code">End Function</span><br class="code">
+
+
+<br class="code">
+
+
+<span class="code">myRoutine()</span><br class="code">
+
+
+<span class="code">print myVar&nbsp; ' myVar is invisible here</span><br class="text">
+
+
+</div>
+
+
+<br class="text">
+
+
+<span class="text">You can prevent sdlBasic from creating variables with the <a href="../commands/Runtime/optionExplicit.html"><span style="font-weight: bold;">Option Explicit</span></a> statement.</span><br class="text">
+
+
+<span class="text">&nbsp;</span><br class="text">
+
+
+<span class="text">With&nbsp;<span style="font-weight: bold;">Option Explicit</span>&nbsp;you will need to declare your variables before use:<br>
+
+<br class="text">
+
+</span>
+<div style="text-align: left; background-color: rgb(255, 255, 204);"><span class="code">Option Explicit</span><br class="code">
+
+
+<span class="code">Dim newVar = "create me"</span><br class="text">
+
+
+</div>
+
+
+<span class="text">&nbsp;</span><br class="text">
+
+
+<span class="text">If you use&nbsp;<span style="font-weight: bold;">Option Explicit</span>&nbsp;your
+module level variables will be hidden from your routines unless you
+specifically declare them visible with the&nbsp;<a href="../commands/Array/shared.html"><span style="font-weight: bold;">Shared</span>&nbsp;</a>keyword
+or if they are declared as <a href="../commands/Array/common.html"><span style="font-weight: bold;">Common</span></a> ( or Global ):<br>
+
+<br class="text">
+
+</span>
+<div style="text-align: left; background-color: rgb(255, 255, 204);"><span class="code">Option Explicit</span><br class="code">
+
+
+<span class="code">Dim myVar = "module variable"</span><br class="code">
+
+
+<span class="code">&nbsp;</span><br class="code">
+
+
+<span class="code">Function myFunction()</span><br class="code">
+
+
+<span class="code">&nbsp;&nbsp; Shared myVar</span><br class="code">
+
+
+<span class="code">&nbsp;&nbsp; myVar = "new value"</span><br class="code">
+
+
+<span class="code">End Function</span><br class="text">
+
+
+</div>
+
+
+<span class="text">&nbsp;<br>
+
+or:<br>
+
+<br class="text">
+
+</span>
+<div style="text-align: left; background-color: rgb(255, 255, 204);"><span class="code">Option Explicit</span><br class="code">
+
+
+<span class="code">Dim Common myVar = "module variable"</span><br class="code">
+
+
+<span class="code">&nbsp;</span><br class="code">
+
+
+<span class="code">Function myFunction()</span><br class="code">
+
+
+<span class="code">&nbsp;&nbsp; myVar = "new value"</span><br class="code">
+
+
+<span class="code">End Function</span><br class="text">
+
+
+
+
+
+</div>
+
+
+<div class="text" style="text-align: right;">&nbsp;</div>
+
+
+
+
+
+<div style="text-align: right;"><span class="text">&nbsp;</span></div>
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,105 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html style="direction: ltr;" lang="en">
+<head>
+
+
+
+  
+  
+  
+  <meta content="text/html; charset=ISO-8859-1" http-equiv="content-type">
+
+
+
+  
+  
+  
+  
+  
+  
+  <title>exit do</title>
+  <link rel="stylesheet" href="../../style.css" type="text/css">
+
+
+
+  
+  
+  
+  <meta content="zoiba" name="author">
+</head>
+
+
+<body style="background-color: rgb(255, 255, 255); color: rgb(0, 0, 0);" alink="#ee0000" link="#0000ee" vlink="#551a8b">
+
+
+
+<div style="text-align: left; background-color: rgb(204, 204, 255);">
+<span class="subTitle">exit do<br>
+
+
+
+</span>
+</div>
+
+
+
+<span class="text"></span><span class="smallTitle"><br>
+</span><span class="text">Exit <span style="font-weight: bold;">do ... loop </span></span><span class="text">cycle </span><span class="text"><span style="font-weight: bold;"></span>continuing program execution from the command below the <span style="font-weight: bold;">loop</span><span style="font-weight: bold;"></span> statement, therefore skipping commands between statements <span style="font-weight: bold;">exit do</span> and <span style="font-weight: bold;">loop</span><span style="font-weight: bold;"></span>. </span><br>
+<span class="smallTitle">&nbsp;<br>
+</span><span class="smallTitle">
+Syntax:
+<br>
+
+
+
+</span>
+<div style="text-align: left; background-color: rgb(239, 239, 255);"><span class="syntax2">exit do
+</span><br>
+
+
+
+</div>
+
+
+
+<br>
+
+
+
+<span class="text"></span><span class="text"></span><span class="text">
+sdlBasic will continue program execution from the line below the <span style="font-weight: bold;">loop</span> statement.<br>
+<br>
+<br>
+</span><span class="smallTitle">
+Example:
+<br>
+</span>
+<div style="text-align: left; background-color: rgb(255, 255, 204);"><span class="code">n=0</span><br class="code">
+<span class="code">do</span><br class="code">
+<span class="code">&nbsp;&nbsp;&nbsp; n=n+1</span><br class="code">
+<span class="code">&nbsp;&nbsp;&nbsp; printS( n)</span><br class="code">
+<span class="code">&nbsp;&nbsp;&nbsp; for m = 1 to 10</span><br class="code">
+<span class="code">&nbsp;&nbsp;&nbsp; printS("&nbsp;&nbsp;&nbsp; "&amp;m)</span><br class="code">
+<span class="code">&nbsp;&nbsp;&nbsp; next</span><br class="code">
+<span class="code">&nbsp;&nbsp;&nbsp; wait(100)</span><br class="code">
+<span class="code">&nbsp;&nbsp;&nbsp; if n&gt;10 then</span><br class="code">
+<span class="code">&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;<span style="font-weight: bold;"> exit do</span>&nbsp;&nbsp;&nbsp; ' -----------------&gt; jumps &nbsp;down to the end of the loop...</span><br class="code">
+<span class="code">&nbsp;&nbsp;&nbsp; end if</span><br class="code">
+<span class="code">loop&nbsp;</span><span class="code"><br>
+</span><span class="code">waitKey&nbsp;&nbsp;&nbsp; ' &nbsp; &nbsp;&lt;------------------------ ...here</span><br>
+<span style="font-family: Arial,Helvetica,sans-serif;"></span></div>
+<span style="font-family: Arial,Helvetica,sans-serif;"><br>
+</span>
+
+
+<span class="text">See also <a href="60do-loop.html"><span style="font-weight: bold;">do ... loop</span></a> commands</span><span class="syntax2"></span><span class="syntax2"><br>
+
+
+
+</span><br>
+<span class="text">
+
+
+</span>
+</body>
+</html>

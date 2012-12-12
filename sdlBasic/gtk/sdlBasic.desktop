@@ -1,0 +1,21 @@
+[Desktop Entry]
+Categories=GNOME;Application;
+Comment=sdlBasic sdlBasic Editor
+Comment[it]=sdlBasic sdlBasic Editor
+Encoding=UTF-8
+Exec=/opt/sdlBasic/bin/sdlBasic
+GenericName=Editor for sdlBasic language
+GenericName[it]=Editor for sdlBasic language
+Icon=/home/zoiba/Lavoro/sdlBasic/sdlBIDE/scite/gtk/sdlBIDE48M.png
+MimeType=
+MultipleArgs=false
+Name=sdlBasic
+Name[it]=sdlBasic
+StartupNotify=true
+Terminal=false
+TerminalOptions=
+Type=Application
+Version=1.0
+X-DCOP-ServiceType=
+X-KDE-SubstituteUID=false
+X-KDE-Username=

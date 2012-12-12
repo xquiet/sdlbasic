@@ -1,0 +1,265 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html style="direction: ltr;" lang="en">
+<head>
+
+
+
+
+
+
+  
+  
+  
+  
+  
+  <meta content="text/html; charset=ISO-8859-1" http-equiv="content-type">
+
+
+
+
+
+  
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <title>Graphic Commands</title>
+  <meta content="zoiba" name="author">
+
+
+
+
+
+
+  
+  
+  
+  
+  
+  <link rel="stylesheet" href="../style.css" type="text/css">
+</head>
+
+
+<body style="color: rgb(0, 0, 0);" alink="#ee0000" link="#0000ee" vlink="#551a8b">
+
+
+
+
+
+
+<div style="background-color: rgb(0, 0, 0); text-align: left;"><span class="title">Graphic and Sound<br>
+
+
+
+</span><span class="title"></span></div>
+
+
+
+
+
+
+<span class="text"><br>
+
+</span>
+<div style="text-align: justify;"><span class="text">
+
+sdlBasic syntax follows the Amos/darkBasic philosophy. There are some
+data banks (slots), called by number, where&nbsp;sounds and images</span><span class="text"> are stored</span><span class="text">. </span><span class="text">Multimedia
+files are loaded from disk to slots by a specific set of commands,
+sdlBasic can handle different file formats for images, sound and music.
+Can be loaded and stored up to&nbsp;32768 </span><span class="text">images and</span><span class="text"> up to 1024 sounds files. Naturally is possible to change
+parameters values by writing on sources but, for ordinary use, current
+values should be quite enough.<br>
+
+<br>
+
+Specific commands allow you to play sounds stored in sound slots using
+computer sound card. Sounds can be&nbsp;played through different sound
+channels so several sounds may be played at the same time. You can
+dynamically change the</span><span class="text"> maximum</span><span class="text"> number of channels managed by sdlBasic for playing sounds.<br>
+
+</span><span class="text"></span><span class="text"></span><br>
+
+<span class="text">sdlBasic offer two set of instructions for
+displaying images, that are stored in image slots, on computer monitor: they are called Sprites and
+Bobs. You can use up to&nbsp;1024 sprites and 1024
+bobs simultaneously on display. Bob and Sprites can be moved around without destroying
+any existing graphics on background, so they are perfect for the moving
+objects required by video games. Sprites and Bobs are </span><span class="text">"refreshed"
+(re-painted on computer monitor) each time a "screen swap" is
+performed. By apposite commands is possible to check collisions </span><span class="text">between&nbsp;sprites or</span><span class="text"> </span><span class="text">between a bobs. </span><br>
+
+<span class="text">
+
+Sprites are completely independent from screens. If needed, they can be clipped by specific
+command within desired coordinates.</span><br>
+
+<span class="text">
+
+Bobs are very similar to sprites but, unlike them, they are relative </span><span class="text">to
+screens, that means that bob can't exist outside screen surface and
+that the bobs coordinate system is relative to its screen, so, if
+screen scrolls screen's bobs follow. You
+can decide on what screen a particular bob must operate.&nbsp;Bobs are
+perfect in program using large scrolling screens. <br>
+</span><br>
+
+<span class="text">
+
+</span><br>
+
+<span class="text">
+
+Display is where the graphical output is shown on computer monitor, it could be a window or
+the full screen. By default sdlBasic open a&nbsp;windows (</span><span class="text">640 x 480 pixels) </span><span class="text">with
+the&nbsp;desktop color depth. With the command
+setDisplay() you can change display parameters.
+Graphical output doesn't happen directly on display but it is executed
+into some virtual screens.&nbsp;</span><span class="text">sdlBasic allow 8
+(0-7) virtual screens. A virtual screen is&nbsp;a sort of digital canvas where all graphic operations </span><span class="text">are
+executed </span><span class="text">. Screen 0 is opened by default&nbsp;with
+the display
+dimensions</span><span class="text">, that way it
+cover all the display surface. Naturally it's possible to change this
+parameters and to open and to close more screens. </span><span class="text">In
+video games</span><span class="text"> it's common pratice to have a big screen for the game area and a smaller one for
+scores, lives etc.</span><br>
+
+<span class="text"></span></div>
+
+<span class="text">
+<br>
+
+
+
+</span><span class="smallTitle">Example: </span><span class="text"><br>
+
+
+
+</span>
+<div style="text-align: left; background-color: rgb(255, 255, 204);"><span class="code">screenOpen(0,640,400,0,0,640,400,0)</span><br class="code">
+
+
+
+<span class="code">screenOpen(1,640,80,0,400,640,80,0)</span><span class="text"></span><br>
+
+
+
+<span class="text"></span></div>
+
+
+
+<span class="text"><br>
+
+</span>
+<div style="text-align: justify;"><span class="text">
+This way screen 0 will have the size of 640x400
+pixels and it will be in the upper side of display, at the same time
+screen 1, that will be 640x80 pixels, will be shown in the lower side
+of display, under screen 0.</span><br>
+
+<span class="text">
+
+It's possible to open screens bigger than it's visible size by writing:</span><br>
+
+<span class="text"></span></div>
+
+<span class="text">
+<br>
+</span><span class="smallTitle">Example: </span><br>
+
+<div style="text-align: left; background-color: rgb(255, 255, 204);"><span class="code">screenOpen(0,6400,400,0,0,640,400,0)</span><span class="text"></span><br>
+
+
+
+<span class="text"></span></div>
+
+
+
+<span class="text"><br>
+
+</span>
+<div style="text-align: justify;"><span class="text">The above example open&nbsp;a&nbsp; viewport on display of&nbsp;</span><span class="text">640x400 pixels</span><span class="text"> but the screen is ten times wider and it contine outside the visible portion.</span><br>
+
+<span class="text">
+
+We can make it scroll by writing following command:&nbsp; </span><br>
+
+<span class="text"></span></div>
+
+<span class="text">
+<br>
+
+
+</span><span class="smallTitle">Example: </span><br>
+
+
+
+<div style="text-align: left; background-color: rgb(255, 255, 204);"><span class="code">offset(640,0)</span><br class="code">
+
+
+
+<span class="code">so the screen will move at the x coordinate 640. Therefore, with the following routine</span><br class="code">
+
+
+
+<span class="code">&nbsp;for i= 0 to 6400-640</span><br class="code">
+
+
+
+<span class="code">&nbsp;&nbsp; offset(i,0)</span><br class="code">
+
+
+
+<span class="code">&nbsp;&nbsp; screenSwap</span><br class="code">
+
+
+
+<span class="code">&nbsp;next</span><span class="text"></span><br>
+
+
+
+<span class="text"></span></div>
+
+
+
+<span class="text"><br>
+
+</span>
+<div style="text-align: justify;"><span class="text">This way we&nbsp;have a simple and efficient scrolling routine.</span><br>
+
+<span class="text">
+
+To switch from a screen to another, we will use the command screen(n), where n is the screen number&nbsp; </span><br>
+
+<span class="text">
+
+All graphical commands operate on the current screen, that, if not specified, is last opened.</span><br>
+
+<span class="text">
+
+If, for performance reasons, you want to remove support to screens, you
+can use command directScreen(). Naturally this choice may bring some
+unwanted side effects but it will speed up programs considerably,
+especially on older and slower PC.</span></div>
+
+
+<div style="text-align: right;"><span class="code"></span><span class="text"></span><span class="text"></span><span class="text"></span></div>
+
+
+
+
+
+
+
+
+
+</body>
+</html>

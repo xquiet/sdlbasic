@@ -1,0 +1,73 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html style="direction: ltr;" lang="en">
+<head>
+
+
+  
+  <meta content="text/html; charset=ISO-8859-1" http-equiv="content-type">
+
+  
+
+
+  
+  <title>Pass By Reference</title>
+  <meta content="zoiba" name="author">
+
+
+  
+  <link rel="stylesheet" href="../style.css" type="text/css">
+</head>
+
+
+<body style="color: rgb(0, 0, 0);" alink="#ee0000" link="#0000ee" vlink="#551a8b">
+
+
+<div style="background-color: rgb(0, 0, 0); text-align: left;"><span class="title">Pass By Reference</span><span class="title"><br class="text">
+
+
+</span></div>
+
+
+<span class="text"><br>
+
+
+All types are passed by reference, which means changing a parameter
+passed to a routine effects the value in the caller:<br>
+<br>
+</span><span class="smallTitle">Example: </span><br>
+
+<div style="text-align: left; background-color: rgb(255, 255, 204);"><span class="code">Function swap( a, b )</span><br class="code">
+
+
+<span class="code">&nbsp;&nbsp;&nbsp; tmp = a</span><br class="code">
+
+
+<span class="code">&nbsp;&nbsp;&nbsp; a = b</span><br class="code">
+
+
+<span class="code">&nbsp;&nbsp;&nbsp; b = tmp</span><br class="code">
+
+
+<span class="code">End Function</span><br class="code">
+
+
+<span class="code">v1=10</span><br class="code">
+
+
+<span class="code">v2=20</span><br class="code">
+
+
+<span class="code">print v1, v2</span><br class="code">
+
+
+<span class="code">swap( v1, v2 )</span><br class="code">
+
+
+<span class="code">print v1, v2<br>
+
+
+</span>
+</div>
+
+</body>
+</html>

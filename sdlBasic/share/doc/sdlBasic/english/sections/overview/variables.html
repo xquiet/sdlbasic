@@ -1,0 +1,242 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html style="direction: ltr;" lang="en">
+<head>
+
+
+
+
+
+  
+  
+  
+  
+  <meta content="text/html; charset=ISO-8859-1" http-equiv="content-type">
+
+
+
+
+  
+
+
+  
+  
+  
+  
+  
+  
+  
+  <title>Variables</title>
+  <meta content="zoiba" name="author">
+
+
+
+
+
+  
+  
+  
+  
+  <link rel="stylesheet" href="../style.css" type="text/css">
+</head>
+
+
+<body style="color: rgb(0, 0, 0);" alink="#ee0000" link="#0000ee" vlink="#551a8b">
+
+
+
+
+
+<div style="background-color: rgb(0, 0, 0); text-align: left;"><span class="title">Variables</span><span class="title"></span></div>
+
+
+
+
+
+<span class="text"><br>
+
+
+
+</span>
+<div style="text-align: justify;">
+<div style="text-align: justify;"><span class="text">You can imagine
+variables as containener of number or text (strings). You can assig
+values to variables, that are stored in computer memory, and later
+recall that values by simply type the variables names.<br>
+
+<br>
+
+</span><span class="smallTitle">For example: </span><br>
+
+
+
+
+
+<div style="text-align: left; background-color: rgb(255, 255, 204);"><span class="text"></span>
+
+<span class="code">' create variables</span><br class="code">
+
+<span class="code">
+
+a = 2</span><br class="code">
+
+<span class="code">
+
+b = 5</span><br class="code">
+
+<span class="code">' use the&nbsp;previuosly created variables</span><br class="code">
+
+<span class="code">
+
+c = a + b</span><br>
+
+</div>
+
+<span class="text"><br>
+
+Variable names can be any sequence of uppercase and lowercase letters and numbers.<br>
+
+There are only a few rules. Variable names must:<br>
+
+</span>
+<ul>
+
+  <li><span class="text">begin with a letter;</span></li>
+  <li><span class="text">be different from reserved words like commands and internal constants;<br>
+    </span></li>
+
+  <li><span class="text">do not contain any embedded space, if a space is required use underscore ( _ ) character instead;</span></li>
+
+</ul>
+
+<span class="smallTitle">Example:</span><span class="text"><br>
+</span>
+<div style="text-align: left; background-color: rgb(255, 0, 0);">
+<div style="margin-left: 40px;"><small style="color: rgb(255, 255, 255);"><span style="font-family: Helvetica,Arial,sans-serif;">1st_player = 1</span></small><span class="text"></span><br>
+</div>
+<span class="text"></span></div>
+<span class="text">is wrong because it starts with a number.&nbsp;</span><span class="text">Following examples are&nbsp;correct:</span>
+<div style="text-align: left; background-color: rgb(255, 255, 204);"><span class="code">player_1st = 1</span><br class="code">
+<span class="code">player1 = 1</span><span class="text"></span><br>
+<span class="text"></span></div>
+<span class="text"><br>
+</span><span class="smallTitle">Example:</span><br>
+<div style="text-align: left; background-color: rgb(255, 0, 0);">
+<div style="margin-left: 40px;"><small style="color: rgb(255, 255, 255);"><span style="font-family: Helvetica,Arial,sans-serif;">bin = &nbsp;"some text"</span></small><span class="text"></span><br>
+</div>
+<span class="text"></span></div>
+<span class="text">is wrong because bin is a command name. </span><span class="text">Following examples are&nbsp;correct:<br>
+</span>
+<div style="text-align: left; background-color: rgb(255, 255, 204);"><span class="code">bin2 = "some text"</span><br class="code">
+<span class="code">binary = "some text"</span><span class="text"></span><br>
+<span class="text"></span></div>
+<span class="text"><br>
+</span><span class="smallTitle">Example:</span><br>
+<div style="text-align: left; background-color: rgb(255, 0, 0);">
+<div style="margin-left: 40px;"><small style="color: rgb(255, 255, 255);"><span style="font-family: Helvetica,Arial,sans-serif;">alien x = 1oo</span></small><span class="text"></span><br>
+</div>
+<span class="text"></span></div>
+<span class="text">is wrong because variable name is not continuous and contain a space. </span><span class="text"></span><span class="text">Following examples are&nbsp;correct:</span>
+<div style="text-align: left; background-color: rgb(255, 255, 204);"><span class="code">alien_x = 100</span><br class="code">
+<span class="code">alienX = 100</span><br>
+<span class="text"></span></div>
+<span class="text"><br>
+
+There are no types in sdlBasic; all variables and arrays are variants. This means that they </span><span class="text">can hold either numeric or string values. In general, sdlBasic will attempt to </span><span class="text">automatically cast a variable to the correct type.<br>
+
+
+<br>
+
+
+</span><span class="smallTitle">For example: </span><br>
+
+
+
+</div>
+
+
+
+<span class="text"></span></div>
+
+
+
+<div style="text-align: left; background-color: rgb(255, 255, 204);"><span class="code">' create variables</span><br class="code">
+
+
+
+<span class="code">a = "123"</span><br class="code">
+
+
+
+<span class="code">b = 456</span><br class="code">
+
+
+
+<span class="code">&nbsp;</span><br class="code">
+
+
+
+<span class="code">' variable a is automatically converted to a number</span><br class="code">
+
+
+
+<span class="code">Print a + b</span><span class="text"></span><br>
+
+
+
+<span class="text"></span></div>
+
+
+
+<span class="text"><br>
+
+
+this means you can compare strings to numbers as the following example:<br>
+
+
+<br>
+
+
+
+</span>
+<div style="text-align: left; background-color: rgb(255, 255, 204);"><span class="code">a = "123"</span><br class="code">
+
+
+
+<span class="code">b = 123</span><br class="code">
+
+
+
+<span class="code">if a=b then : print &ldquo;they match&rdquo; : end if</span><span class="text"></span><br>
+
+
+
+<span class="text"></span></div>
+
+
+
+<div style="text-align: justify;"><span class="text"><br>
+
+
+Comparing stings
+to numbers may be particularly useful when you use dynamic array
+feature because its indexes are stored as strings.</span></div>
+
+
+
+<span class="text"></span><span class="text">
+
+</span>
+<div style="text-align: right;"><span class="text">&nbsp;</span></div>
+
+
+
+
+
+<div style="text-align: right;"><span class="text">&nbsp;</span></div>
+
+
+
+
+
+</body>
+</html>

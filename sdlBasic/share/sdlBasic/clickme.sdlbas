@@ -1,0 +1,360 @@
+'
+' sdlBasic presentation: clickme
+'
+'   Name:      clickme.sdlbas
+'   Purpose:   Official welcome to sdlBasic world
+'  Author:   __vroby__
+'  Licence:    LGPL
+'
+' Bugs:
+'
+' Todo:
+'
+' all contributed are welcome !!!
+' please parsimonius of space (to reduce the download size)
+'
+'
+'-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+declare sub updatestelle
+
+
+setdisplay(640,480,32,1)
+setalphachannel(0)
+'directscreen
+autoback(-15)
+loadmusic("lizard.mod")
+playmusic(-1)
+setcolorkey(-1)
+loadimage("sdlBasic.png",100)
+'loadimage("sdlnow.gif",100)
+hotspot (100,1,1)
+loadimage("sdlnow.gif",101)
+hotspot(101,1,1)
+
+
+common numstars=200
+common x[numstars]
+common y[numstars]
+common s[numstars]
+'__________________________________________________________________________________________________________________
+
+sub updatestelle
+	screen(0)
+	cls
+	screenlock(0)
+	for st= 1 to numstars
+	    x[st]=x[st]-s[st]
+	    if x[st]<0 then
+		x[st]=x[st]+800
+	    end if
+	    'ink(rgb(s[st]*32,s[st]*32,255))
+	    dot(x[st],y[st])
+	next
+	screenunlock(0)
+	x[0]=x[0]-0.5
+	if x[0]<-100 then
+	    x[0]=900
+	end if
+	sprite(10,x[0],340,101)
+end sub
+'__________________________________________________________________________________________________________________
+
+sub italiano
+
+    for i=320 to -320 step -5
+	updatestelle
+	zoomimage(100,0.9,0.9)
+
+        sprite(1,320,220,100)
+        sprite(3,i,180,11)
+        sprite(4,640-i,220,2)
+        sprite(5,i,260,3)
+		sprite(6,640-i,300,4)
+        screenswap
+    next
+    deletesprite(2)
+
+    screenopen(2,540,400,60,480,540,400,2)
+
+
+    prints( "ben venuti in sdlBasic!!")
+    prints( "")
+    prints( "questo basic e' gratuito e distribuito come software libero")
+    prints( "tu puoi usarlo studiarlo modificarlo e farne copie ")
+    prints( "per i tuoi amici. Questo software non vuole soldi")
+    prints( "ma regala emozioni istruzione e divertimento")
+    prints( "Collabora con noi allo sviluppo!! ")
+    prints( "visita  sdlbasic.sourceforge.net")
+    prints( "")
+    prints( "premi un tasto per uscire")
+
+
+    for i=480 to 50 step -1
+	updatestelle
+	screen(2)
+	screenrect(60,i,540,400,2)
+	screenswap
+    next
+
+    while inkey=0
+	updatestelle
+	screenswap
+    end while
+
+	screenfade(0,3)
+	screenfade(2,2)
+	deletesprite(10)
+    for i =255 to 0 step -5
+	volumemusic(i/2)
+	wait(100)
+        screenswap
+    next
+    end
+end sub
+'__________________________________________________________________________________________________________________
+
+sub english
+    for i=320 to -320 step -5
+	updatestelle
+	zoomimage(100,0.9,0.9)
+
+        sprite(1,320,220,100)
+        sprite(3,i,180,1)
+        sprite(4,640-i,220,12)
+        sprite(5,i,260,3)
+		sprite(6,640-i,300,4)
+        screenswap
+    next
+    deletesprite(2)
+
+
+    screenopen(2,540,400,60,480,540,400,2)
+    prints( "Welcome to sdlBasic!")
+    prints( "")
+    prints( "This basic is free and distributed as free software.")
+    prints( "You may study and modify it and give copies")
+    prints( "to your friends. This software doesn't want your money")
+    prints( "but present emotions instructions and amusement.")
+    prints( "All contributions are welcome!!!")
+    prints( "visit sdlbasic.sourceforge.net")
+    prints( "")
+    prints( "Press any key to exit")
+
+    for i=480 to 50 step -1
+	updatestelle
+	screen(2)
+	screenrect(60,i,540,400,2)
+	screenswap
+    next
+
+    while inkey=0
+	updatestelle
+	screenswap
+    end while
+
+	screenfade(0,2)
+	screenfade(2,3)
+	deletesprite(10)
+    for i =255 to 0 step -5
+	volumemusic(i/2)
+	wait(100)
+        screenswap
+    next
+    end
+end sub
+'__________________________________________________________________________________________________________________
+
+sub portugues
+
+    for i=320 to -320 step -5
+	updatestelle
+	zoomimage(100,0.9,0.9)
+
+        sprite(1,320,220,100)
+        sprite(3,i,180,1)
+        sprite(4,640-i,220,2)
+        sprite(5,i,260,13)
+		sprite(6,640-i,300,4)
+        screenswap
+    next
+    deletesprite(2)
+
+    screenopen(2,540,400,60,480,540,400,2)
+
+    prints( "Bem vindo ao sdlBasic!!")
+    prints( "")
+    prints( "Este basic é livre, e distribuido como software livre.")
+    prints( "Tu podes usá-lo, estudá-lo, modificá-lo, e fazer cópias para os teus amigos. ")
+    prints( "Este software não pede dinheiro, mas regala emoções, instruções e divertimento")
+    prints( "Colabora conosco no desenvolvimento!!")
+    prints( "visita sdlbasic.sourceforge.net")
+    prints( "")
+    prints( "Aperta uma tecla para sair")
+
+
+    for i=480 to 50 step -1
+	updatestelle
+	screen(2)
+	screenrect(60,i,540,400,2)
+	screenswap
+    next
+
+    while inkey=0
+	updatestelle
+	screenswap
+    end while
+
+	screenfade(0,3)
+	screenfade(2,2)
+	deletesprite(10)
+    for i =255 to 0 step -5
+	volumemusic(i/2)
+	wait(100)
+        screenswap
+    next
+    end
+end sub
+'__________________________________________________________________________________________________________________
+
+sub deutsch
+
+    for i=320 to -320 step -5
+	updatestelle
+	zoomimage(100,0.9,0.9)
+
+        sprite(1,320,220,100)
+        sprite(3,i,180,1)
+        sprite(4,640-i,220,2)
+        sprite(5,i,260,3)
+        sprite(6,640-i,300,14)
+	  screenswap
+    next
+    deletesprite(2)
+
+    screenopen(2,540,400,60,480,540,400,2)
+
+
+    prints( "Willkommen bei sdlBasic!!")
+    prints( "")
+    prints( "Dieses Basic ist kostenlos und wird als freie Software      vertrieben.")
+    prints( "Sie können es sich ansehen und verändern und Kopien")
+    prints( "an Ihre Freunde weiter geben. Diese Software kostet Sie")
+    prints( "kein Geld, sondern bietet Ihnen Anleitung und Unterhaltung.")
+    prints( "Alle Beiträge sind willkommen!!!")
+    prints( "Besuchen Sie sdlbasic.sourceforge.net")
+    prints( "")
+    prints( "Drücken Sie eine beliebige Taste, um zu beenden.")
+
+
+    for i=480 to 50 step -1
+	updatestelle
+	screen(2)
+	screenrect(60,i,540,400,2)
+	screenswap
+    next
+
+    while inkey=0
+	updatestelle
+	screenswap
+    end while
+
+	screenfade(0,3)
+	screenfade(2,2)
+	deletesprite(10)
+    for i =255 to 0 step -5
+	volumemusic(i/2)
+	wait(100)
+        screenswap
+    next
+    end
+end sub
+
+'-------------------------------------------------------------------------------------------------------------------
+
+
+
+sub main
+
+    for i =0 to numstars
+	x[i]=rnd(800)
+	y[i]=rnd(600)
+	s[i]=rnd(4)+1
+    next
+    x[0]=900
+
+    screenopen (1,640,480,0,0,640,480,2)
+    cls
+    ink(rgb(255,255,255))
+    textrender("1 - Italiano",32,1)
+    hotspot(1,1,1)
+    textrender("2 - English",32,2)
+    hotspot(2,1,1)
+    textrender("3 - Portugues",32,3)
+    hotspot(3,1,1)
+	textrender ("4 - Deutsch",32,4)
+	hotspot(4,1,1)
+
+    ink(rgb(255,255,0))
+    textrender("1 - Italiano",32,11)
+    hotspot(11,1,1)
+    textrender("2 - English",32,12)
+    hotspot(12,1,1)
+    textrender("3 - Portugues",32,13)
+    hotspot(13,1,1)
+	textrender ("4 - Deutsch",32,14)
+	hotspot(14,1,1)
+
+    ink(color(15))
+
+    for i=0 to 320 step 1
+	updatestelle
+        sprite(1,320,i-80,100)
+        sprite(3,i,180,1)
+        sprite(4,640-i,220,2)
+        sprite(5,i,260,3)
+        sprite(6,640-i,300,4)
+		screenswap
+    next
+    while 0=0
+	screen(1)
+        a=inkey
+	if a<>0 then
+	    if a=asc("1") then
+		italiano
+	    end if
+	    if a=asc("2") then
+		english
+	    end if
+	    if a=asc("3") then
+		portugues
+	    end if
+		if a=asc("4") then
+		deutsch
+	    end if
+	    if a=27 then
+		exit while
+	    end if
+	end if
+	if bmouse=1 then
+	    if mousezone(240,160,180,40) then
+		    italiano
+	    end if
+	    if mousezone(240,200,180,40) then
+		english
+	    end if
+	    if mousezone(240,240,180,40) then
+		portugues
+	    end if
+		if mousezone(240,300,180,40) then
+		deutsch
+	    end if
+	end if
+	updatestelle
+	screenswap
+
+    end while
+end sub
+'__________________________________________________________________________________________________________________
+
+main

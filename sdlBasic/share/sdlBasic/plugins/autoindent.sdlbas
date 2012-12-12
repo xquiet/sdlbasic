@@ -1,0 +1,60 @@
+------------------------------------------------------------------------------------------------------------
+--				autoindentation utility
+--				author: zoiba
+------------------------------------------------------------------------------------------------------------
+--paper(0xaaaaaa) : cls
+tab=0
+
+--prints("indent:" & command$(3))
+rename(command$(3), command$(3)&"_tmp" )
+
+open command$(3)& "_tmp" for input as 1
+open command$(3)  for output as 2
+
+while not eof( 1 )
+	' read a line from the file and print it
+	file input #1, l$
+	ll$= ltrim$(lcase$( l$ ))
+
+	if left$(ll$,4)="next" then : tab=tab-1 :end if
+	if left$(ll$,4)="wend" then : tab=tab-1 :end if
+	if left$(ll$,6)="end if"  then : tab=tab-1 :end if
+	if left$(ll$,4)="else"  then : tab=tab-1 :end if
+	if left$(ll$,7)="end for"  then : tab=tab-1 :end if
+	if left$(ll$,9)="end while"  then : tab=tab-1 :end if
+	if left$(ll$,4)="loop"  then : tab=tab-1 :end if
+	if left$(ll$,10)="end select"  then : tab=tab-1 :end if
+
+	if left$(ll$,7)="end sub"  then : tab=tab-1 :end if
+	if left$(ll$,12)="end function"  then : tab=tab-1 :end if
+
+	tabs$=""
+	for n=1 to tab
+		tabs$=tabs$+chr$(9)
+	next
+	--fprints( tabs$ + ll$)
+	file output #2, tabs$ +ll$
+
+	if left$(ll$,4)="sub " then : tab=tab+1 :end if
+	if left$(ll$,9)="function " then : tab=tab+1 :end if
+
+	if left$(ll$,4)="for " and instr(ll$,"end for")=0 then : tab=tab+1 :end if
+	if left$(ll$,6)="while " and instr(ll$,"end while")=0 then : tab=tab+1 :end if
+	if left$(ll$,3)="if " and instr(ll$,"end if")=0 then : tab=tab+1 :end if
+	if left$(ll$,5)="else "  and instr(ll$,"end if")=0 then : tab=tab+1 :end if
+	if left$(ll$,4)="else" then : tab=tab+1 :end if
+	if left$(ll$,3)="do " and instr(ll$,"loop")=0 or left$(ll$,2)="do" then : tab=tab+1 :end if
+	if left$(ll$,12)="select case " and instr(ll$,"end select")=0 then : tab=tab+1 :end if
+
+	if left$(ll$,4)="sub(" then : tab=tab+1 :end if
+	if left$(ll$,9)="function(" then : tab=tab+1 :end if
+
+	if left$(ll$,4)="for(" and instr(ll$,"end for")=0 then : tab=tab+1 :end if
+	if left$(ll$,6)="while(" and instr(ll$,"end while")=0 then : tab=tab+1 :end if
+	if left$(ll$,3)="if(" and instr(ll$,"end if")=0 then : tab=tab+1 :end if
+end while
+close 2
+close 1
+wait(25)
+kill( command$(3)&"_tmp" )
+--waitkey
